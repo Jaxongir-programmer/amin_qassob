@@ -29,7 +29,7 @@ class MakeOrderViewModel extends BaseViewModel {
   void makeOrder(MakeOrderModel orderModel) async {
     progressOrderData = true;
     notifyListeners();
-    final data = await  api.makeOrder(orderModel, _errorStream);
+    final data = await api.makeOrder(orderModel, _errorStream);
     if (data!=null) {
       _makeOrderData.sink.add(data);
     }

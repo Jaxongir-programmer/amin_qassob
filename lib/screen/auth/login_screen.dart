@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
 
   TextEditingController userNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
-  TextEditingController phoneController = TextEditingController(text: "+998");
+  TextEditingController phoneController = TextEditingController();
   TextEditingController addresController = TextEditingController();
 
   final smsController = TextEditingController();
@@ -39,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
   final formKey = GlobalKey<FormState>();
   final _formkey = GlobalKey<FormState>();
 
+  // var phoneFormatter = MaskTextInputFormatter(mask: '010 (##) ### ## ##', type: MaskAutoCompletionType.eager);
   var phoneFormatter = MaskTextInputFormatter(mask: '+998 (##) ### ## ##', type: MaskAutoCompletionType.eager);
 
   AnimationController? _animationController;
@@ -83,7 +84,6 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
         border: Border.all(color: borderColor),
       ),
     );
-
 
     final userNameField = TextFormField(
       controller: userNameController,
@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
       decoration: const InputDecoration(
         hintStyle: TextStyle(color: Colors.grey),
         prefixIcon: Icon(Icons.phone),
-        hintText: '+998 9X XXX XX XX',
+        hintText: '010 XXXX XXXX',
       ),
     );
 
@@ -208,6 +208,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                           child: Directionality(
                                             textDirection: TextDirection.ltr,
                                             child: Pinput(
+                                              length: 6,
                                               controller: smsController,
                                               focusNode: focusNode,
                                               // androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsUserConsentApi,
@@ -283,7 +284,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                                       reSend = false;
                                                       viewModel.smsCheck(
                                                         phoneController.text
-                                                            .replaceAll("+", "")
+                                                            // .replaceAll("+", "")
                                                             .replaceAll(" ", "")
                                                             .replaceAll("(", "")
                                                             .replaceAll(")", ""),
@@ -340,9 +341,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                                     Text(
                                                       "Telefon raqam: ${phoneController.text}",
                                                       style: const TextStyle(
-                                                          fontWeight: FontWeight.w500,
-                                                          fontSize: 16,
-                                                          fontFamily: "regular"),
+                                                          fontWeight: FontWeight.w500, fontSize: 16, fontFamily: "regular"),
                                                     ),
                                                     const SizedBox(
                                                       height: 16,
@@ -356,6 +355,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                                 child: Directionality(
                                                   textDirection: TextDirection.ltr,
                                                   child: Pinput(
+                                                    length: 6,
                                                     controller: smsController,
                                                     focusNode: focusNode,
                                                     // androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsUserConsentApi,
@@ -431,7 +431,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                                             reSend = false;
                                                             viewModel.smsCheck(
                                                               phoneController.text
-                                                                  .replaceAll("+", "")
+                                                                  // .replaceAll("+", "")
                                                                   .replaceAll(" ", "")
                                                                   .replaceAll("(", "")
                                                                   .replaceAll(")", ""),
@@ -490,12 +490,10 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {
                                             // _isActiveButton = _getActiveButton();
-                                            Navigator.push(
-                                                context, MaterialPageRoute(builder: (context) => OffertaScreen()));
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => OffertaScreen()));
                                           }),
                                     const TextSpan(
-                                        text: "  bilan tanishib chiqdim",
-                                        style: TextStyle(fontWeight: FontWeight.w500)),
+                                        text: "  bilan tanishib chiqdim", style: TextStyle(fontWeight: FontWeight.w500)),
                                   ])),
                                 ],
                               ),
@@ -517,7 +515,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                   } else {
                                     viewModel.smsCheck(
                                       phoneController.text
-                                          .replaceAll("+", "")
+                                          // .replaceAll("+", "")
                                           .replaceAll(" ", "")
                                           .replaceAll("(", "")
                                           .replaceAll(")", ""),
@@ -534,13 +532,10 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                     });
                                   }
                                 } else if (state == AuthState.login) {
-                                  if (smsController.text.length < 4) return;
-                                  viewModel.registration(
+                                  if (smsController.text.length < 6) return;
+                                  viewModel.login(
                                     phoneController.text.replaceAll(" ", "").replaceAll("(", "").replaceAll(")", ""),
-                                    "",
-                                    "",
                                     smsController.text,
-                                    "",
                                   );
                                 } else {
                                   if (smsController.text == "") {
@@ -600,7 +595,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
         );
       },
       onViewModelReady: (viewModel) {
-        viewModel.getPublicOffer();
+        // viewModel.getPublicOffer();
 
         viewModel.errorData.listen((event) {
           showError(context, event);

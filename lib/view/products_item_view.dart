@@ -33,14 +33,16 @@ class ProductsItemViewState extends State<ProductsItemView> {
 
   @override
   void initState() {
-    addCount = widget.item.sht;
+    // addCount = widget.item.sht;
+    addCount = 1;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<Providers>(builder: (context, provider, child) {
-      widget.item.cartPrice = widget.item.price - (widget.item.price * (widget.item.skidka ?? 0) / 100);
+      // widget.item.cartPrice = widget.item.price - (widget.item.price * (widget.item.skidka ?? 0) / 100);
+      widget.item.cartPrice = widget.item.price;
       widget.item.cartCount = provider.productCount(widget.item.id);
       return InkWell(
         onTap: () {
@@ -64,15 +66,14 @@ class ProductsItemViewState extends State<ProductsItemView> {
                 ),
               ],
               color: Colors.white,
-              border: Border.all(color: Colors.greenAccent.withOpacity(0.2)),
+              border: Border.all(color: BACKGROUND_COLOR),
               borderRadius: const BorderRadius.all(Radius.circular(12))),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 4),
               Container(
-                decoration:
-                    const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(12))),
+                decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(12))),
                 child: Stack(
                   children: [
                     Align(
@@ -88,8 +89,8 @@ class ProductsItemViewState extends State<ProductsItemView> {
                                 width: getScreenWidth(context),
                                 height: 120,
                                 alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.4), borderRadius: BorderRadius.circular(6)),
+                                decoration:
+                                    BoxDecoration(color: Colors.black.withOpacity(0.4), borderRadius: BorderRadius.circular(6)),
                                 child: const Text(
                                   "Hozirda mavjud emas !",
                                   textAlign: TextAlign.center,
@@ -100,20 +101,20 @@ class ProductsItemViewState extends State<ProductsItemView> {
                         ),
                       ),
                     ),
-                    if (widget.item.status != "")
-                      Positioned(
-                          bottom: 0,
-                          left: 0,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                            decoration: BoxDecoration(
-                                color: setColor(widget.item.status_color ?? ""),
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Text(
-                              widget.item.status ?? "Yangilik",
-                              style: const TextStyle(fontSize: 12, color: Colors.white),
-                            ),
-                          )),
+                    // if (widget.item.status != "")
+                    //   Positioned(
+                    //       bottom: 0,
+                    //       left: 0,
+                    //       child: Container(
+                    //         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                    //         decoration: BoxDecoration(
+                    //             color: setColor(widget.item.status_color ?? ""),
+                    //             borderRadius: BorderRadius.circular(8)),
+                    //         child: Text(
+                    //           widget.item.status ?? "Yangilik",
+                    //           style: const TextStyle(fontSize: 12, color: Colors.white),
+                    //         ),
+                    //       )),
                     Padding(
                       padding: const EdgeInsets.all(0.0),
                       child: Align(
@@ -137,37 +138,37 @@ class ProductsItemViewState extends State<ProductsItemView> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.item.name,
+                    Text(widget.item.title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           fontSize: 13,
                           overflow: TextOverflow.ellipsis,
                         )),
-                    Text(widget.item.unity, style: const TextStyle(color: Colors.grey, fontSize: 12)),
-                    if (widget.item.skidka != 0 && widget.item.skidka != null)
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(6)),
-                              color: Colors.yellow,
-                            ),
-                            child: Text(
-                              "-${widget.item.skidka} %",
-                              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            "${widget.item.price.formattedAmountString()} so'm",
-                            style: const TextStyle(fontSize: 13, decoration: TextDecoration.lineThrough),
-                          )
-                        ],
-                      ),
+                    Text(widget.item.unit, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                    // if (widget.item.skidka != 0 && widget.item.skidka != null)
+                    //   Row(
+                    //     children: [
+                    //       Container(
+                    //         padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                    //         decoration: const BoxDecoration(
+                    //           borderRadius: BorderRadius.all(Radius.circular(6)),
+                    //           color: Colors.yellow,
+                    //         ),
+                    //         child: Text(
+                    //           "-${widget.item.skidka} %",
+                    //           style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                    //         ),
+                    //       ),
+                    //       const SizedBox(
+                    //         width: 8,
+                    //       ),
+                    //       Text(
+                    //         "${widget.item.price.formattedAmountString()} so'm",
+                    //         style: const TextStyle(fontSize: 13, decoration: TextDecoration.lineThrough),
+                    //       )
+                    //     ],
+                    //   ),
                     FittedBox(
                       child: Row(
                         children: [
@@ -180,11 +181,11 @@ class ProductsItemViewState extends State<ProductsItemView> {
                             width: 4,
                           ),
                           Text(
-                            widget.item.cartPrice.formattedAmountString(),
+                            "${widget.item.cartPrice.formattedAmountString()} ₩",
                             style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14),
                           ),
                           Text(
-                            "${"Uzs"}/${widget.item.unity}",
+                            "${" "}/${widget.item.unit}",
                             style: const TextStyle(color: Colors.black, fontSize: 13),
                           ),
                         ],
@@ -203,8 +204,8 @@ class ProductsItemViewState extends State<ProductsItemView> {
                       widget.item.cartCount += addCount;
 
                       if (widget.item.cartCount > widget.item.limit) {
-                        showWarning(context,
-                            "Omborda mahsulot kam!.\n Qoldiq : ${widget.item.limit.formattedAmountString()} dona");
+                        showWarning(
+                            context, "Omborda mahsulot kam!.\n Qoldiq : ${widget.item.limit.formattedAmountString()} dona");
                         widget.item.cartCount -= addCount;
                       } else {
                         provider.addToCart = widget.item;
@@ -263,7 +264,7 @@ class ProductsItemViewState extends State<ProductsItemView> {
                                   const SizedBox(
                                     width: 6,
                                   ),
-                                  Text(widget.item.unity,
+                                  Text(widget.item.unit,
                                       style: const TextStyle(
                                         fontWeight: FontWeight.normal,
                                         color: PRIMARY_COLOR,

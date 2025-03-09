@@ -175,7 +175,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 setData(viewModel, keyword);
               },
               decoration: InputDecoration(
-                hintText: "amin_qassob'dan izlang...",
+                hintText: "AMIN QASSOB dan izlang...",
                 prefixIcon: Image.asset(
                   Assets.profileSearch,
                   color: PRIMARY_COLOR,

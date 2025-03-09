@@ -176,7 +176,7 @@ class PrefUtils {
     return (jsonDecode(json) as List<dynamic>).map((js) => ProductModel.fromJson(js)).toList();
   }
 
-  static double getCartCount(String id) {
+  static double getCartCount(int id) {
     final items = PrefUtils.getCartList().where((element) => element.id == id).toList();
     return items.isNotEmpty ? items.first.cartCount : 0.0;
   }

@@ -27,14 +27,15 @@ class _TopProductItemViewState extends State<TopProductItemView> {
 
   @override
   void initState() {
-    addCount = widget.item.sht;
+    // addCount = widget.item.sht;
+    addCount = 1;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<Providers>(builder: (context, provider, child) {
-      widget.item.cartPrice = widget.item.price - (widget.item.price * (widget.item.skidka ?? 0) / 100);
+      widget.item.cartPrice = widget.item.price;
       widget.item.cartCount = provider.productCount(widget.item.id);
       return InkWell(
         borderRadius: borderRadius,
@@ -61,20 +62,20 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                 child: Stack(
                   children: [
                     asCachedNetworkImage(widget.item.image, fit: BoxFit.contain, width: 123, height: 75),
-                    if (widget.item.status != "" && widget.item.status != null)
-                      Positioned(
-                          bottom: 0,
-                          left: 0,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                            decoration: BoxDecoration(
-                                color: setColor(widget.item.status_color ?? ""),
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Text(
-                              widget.item.status ?? "",
-                              style: const TextStyle(fontSize: 10, color: Colors.white),
-                            ),
-                          )),
+                    // if (widget.item.status != "" && widget.item.status != null)
+                    //   Positioned(
+                    //       bottom: 0,
+                    //       left: 0,
+                    //       child: Container(
+                    //         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                    //         decoration: BoxDecoration(
+                    //             color: setColor(widget.item.status_color ?? ""),
+                    //             borderRadius: BorderRadius.circular(8)),
+                    //         child: Text(
+                    //           widget.item.status ?? "",
+                    //           style: const TextStyle(fontSize: 10, color: Colors.white),
+                    //         ),
+                    //       )),
                     if (widget.item.limit <= 0)
                       Positioned(
                           child: Container(
@@ -105,7 +106,7 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                 ),
               ),
               Text(
-                widget.item.name,
+                widget.item.title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
@@ -116,18 +117,18 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Text(widget.item.unity, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+              Text(widget.item.unit, style: const TextStyle(color: Colors.grey, fontSize: 12)),
               const SizedBox(
                 height: 4,
               ),
               Row(
                 children: [
                   Text(
-                    widget.item.price.formattedAmountString(),
+                    "${widget.item.price.formattedAmountString()} ₩",
                     style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFF212121)),
                   ),
                   Text(
-                    "Uzs/${widget.item.unity}",
+                    " (${widget.item.unit})",
                     style: const TextStyle(fontSize: 13, color: Color(0xFF212121)),
                   ),
                 ],
@@ -198,7 +199,7 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                                     ),
                                   ),
                                   TextSpan(
-                                    text: widget.item.unity,
+                                    text: widget.item.unit,
                                     style: const TextStyle(color: GREY, fontSize: 14),
                                   ),
                                 ],

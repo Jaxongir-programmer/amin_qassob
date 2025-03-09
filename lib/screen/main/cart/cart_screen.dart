@@ -33,6 +33,7 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   StreamSubscription? _busEventListener;
+  double deliverSumma = PrefUtils.getUser()?.dostavkaSumma ?? 0;
 
   @override
   void dispose() {
@@ -68,8 +69,7 @@ class _CartScreenState extends State<CartScreen> {
                                         child: Text(
                                           'Savatdagi tovarlar',
                                           textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                              color: COLOR_PRIMARY, fontSize: 20, fontWeight: FontWeight.w500),
+                                          style: TextStyle(color: COLOR_PRIMARY, fontSize: 20, fontWeight: FontWeight.w500),
                                         ),
                                       ),
                                       ListView.builder(
@@ -123,31 +123,30 @@ class _CartScreenState extends State<CartScreen> {
               showWarning(context, "${"Iltimos mahsulotlar miqdorini tekshiring"}!");
               provider.notifyListeners();
             } else {
-              PrefUtils.getToken().isNotEmpty
-                  ? PrefUtils.getCartList().isEmpty
-                      ? showWarning(context, "${"Savat boʻsh"}!")
-                      : startScreenF(
-                          context,
-                          MakeOrderScreen(MakeOrderModel(
-                              PrefUtils.getUser()?.id ?? "",
-                              PrefUtils.getUser()?.store_id ?? "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              provider.getTotalCashback(),
-                              deliverSumma,
-                              provider.cartSumma - provider.getTotalCashback() + deliverSumma,
-                              3,
-                              1,
-                              "",
-                              "",
-                              provider.getCartList
-                                  .map((e) => MakeOrderProduct(e.id, e.cartCount, e.cartCount / e.sht, e.cartPrice,
-                                      e.cartCashback, e.kash_back_foiz, e.kash_back_blok))
-                                  .toList())))
-                  : startScreenF(context, LoginScreen());
+              // PrefUtils.getToken().isNotEmpty
+              //     ? PrefUtils.getCartList().isEmpty
+              //         ? showWarning(context, "${"Savat boʻsh"}!")
+              //         : startScreenF(
+              //             context,
+              //             MakeOrderScreen(MakeOrderModel(
+              //                 PrefUtils.getUser()?.id ?? "",
+              //                 PrefUtils.getUser()?.store_id ?? "",
+              //                 "",
+              //                 "",
+              //                 "",
+              //                 "",
+              //                 "",
+              //                 provider.getTotalCashback(),
+              //                 deliverSumma,
+              //                 provider.cartSumma - provider.getTotalCashback() + deliverSumma,
+              //                 3,
+              //                 1,
+              //                 "",
+              //                 "",
+              //                 provider.getCartList
+              //                     .map((e) => MakeOrderProduct(e.id, e.cartCount, e.cartCount, e.cartPrice))
+              //                     .toList())))
+              //     : startScreenF(context, LoginScreen());
             }
           });
         },
@@ -204,8 +203,28 @@ class _CartScreenState extends State<CartScreen> {
               : ElevatedButton(
                   style: ButtonStyle(backgroundColor: MaterialStateProperty.all(PRIMARY_DARK_COLOR)),
                   onPressed: () {
-                    viewModel.getProductsByIds(
-                        ProductByIdModel(PrefUtils.getCartList().map((e) => ProductIdModel(e.id)).toList()));
+                    PrefUtils.getToken().isNotEmpty
+                        ? PrefUtils.getCartList().isEmpty
+                            ? showWarning(context, "${"Savat boʻsh"}!")
+                            : startScreenF(
+                                context,
+                                MakeOrderScreen(
+                                  MakeOrderModel(
+                                      PrefUtils.getUser()?.id ?? "1",
+                                      "",
+                                      "",
+                                      "",
+                                      "",
+                                      "",
+                                      deliverSumma,
+                                      1,
+                                      "",
+                                      provider.getCartList.map((e) => MakeOrderProduct(e.id, e.cartCount, e.cartPrice)).toList()),
+                                ))
+                        : startScreenF(context, LoginScreen());
+
+                    // viewModel.getProductsByIds(
+                    //     ProductByIdModel(PrefUtils.getCartList().map((e) => ProductIdModel(e.id)).toList()));
                   },
                   child: Text(
                     "${"Tasdiqlash"} (${provider.getCartList.length})",

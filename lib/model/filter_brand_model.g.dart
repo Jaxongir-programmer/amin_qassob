@@ -10,7 +10,7 @@ FilterBrandModel _$FilterBrandModelFromJson(Map<String, dynamic> json) =>
     FilterBrandModel(
       json['checked'] as bool,
       json['show'] as bool,
-      json['id'] as String,
+      (json['id'] as num).toInt(),
       json['text'] as String,
       (json['children'] as List<dynamic>)
           .map((e) => FilterBrandModel.fromJson(e as Map<String, dynamic>))

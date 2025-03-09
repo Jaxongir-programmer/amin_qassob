@@ -26,7 +26,7 @@ import '../extensions/extensions.dart';
    Color STATUS_CANCELED = HexColor.fromHex("#6AD50000");
    Color TRANSPARENT = Color(0x00000000);
 
-const Color COLOR_PRIMARY = Color.fromRGBO(5, 139, 128, 1);
+const Color COLOR_PRIMARY = Color(0xFFFF9800);
 const Color COLOR_PRIMARY3 = Color.fromRGBO(37, 41, 46, 1);
 const Color COLOR_PRIMARY2 = Color.fromRGBO(57, 62, 70, 1);
 

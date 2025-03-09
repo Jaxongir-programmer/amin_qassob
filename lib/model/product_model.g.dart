@@ -17,76 +17,52 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ProductModel(
-      fields[0] as String,
+      fields[0] as int,
       fields[1] as String,
-      fields[2] as int,
+      fields[2] as double,
       fields[3] as double,
-      fields[4] as double,
-      fields[5] as double,
-      fields[6] as String,
-      fields[7] as String,
+      fields[4] as int,
+      fields[7] as int,
+      fields[6] as String?,
+      fields[9] as String?,
+      fields[5] as String,
       fields[8] as String,
-      fields[9] as double,
-      fields[10] as bool,
-      fields[11] as double,
-      fields[12] as String,
-      fields[13] as String,
-      fields[14] as String,
-      fields[15] as String,
-      (fields[16] as List).cast<Images>(),
-      fields[17] as String?,
-      fields[18] as String?,
-      fields[19] as double?,
-      fields[20] as String?,
+      fields[10] as double?,
+      fields[11] as bool?,
+      (fields[12] as List).cast<String?>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, ProductModel obj) {
     writer
-      ..writeByte(21)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.name)
+      ..write(obj.title)
       ..writeByte(2)
-      ..write(obj.code)
-      ..writeByte(3)
       ..write(obj.limit)
-      ..writeByte(4)
+      ..writeByte(3)
       ..write(obj.price)
-      ..writeByte(5)
-      ..write(obj.minimum_price)
-      ..writeByte(6)
+      ..writeByte(4)
       ..write(obj.category_id)
-      ..writeByte(7)
-      ..write(obj.unity)
-      ..writeByte(8)
+      ..writeByte(5)
+      ..write(obj.unit)
+      ..writeByte(6)
       ..write(obj.image)
-      ..writeByte(9)
-      ..write(obj.kash_back_foiz)
-      ..writeByte(10)
-      ..write(obj.kash_back_blok)
-      ..writeByte(11)
-      ..write(obj.sht)
-      ..writeByte(12)
+      ..writeByte(7)
       ..write(obj.brend_id)
-      ..writeByte(13)
-      ..write(obj.tavsif)
-      ..writeByte(14)
-      ..write(obj.tip_id)
-      ..writeByte(15)
-      ..write(obj.size_id)
-      ..writeByte(16)
-      ..write(obj.images)
-      ..writeByte(17)
+      ..writeByte(8)
+      ..write(obj.description)
+      ..writeByte(9)
       ..write(obj.status)
-      ..writeByte(18)
-      ..write(obj.country)
-      ..writeByte(19)
-      ..write(obj.skidka)
-      ..writeByte(20)
-      ..write(obj.status_color);
+      ..writeByte(10)
+      ..write(obj.discount)
+      ..writeByte(11)
+      ..write(obj.top)
+      ..writeByte(12)
+      ..write(obj.photos);
   }
 
   @override
@@ -139,29 +115,19 @@ class ImagesAdapter extends TypeAdapter<Images> {
 // **************************************************************************
 
 ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
-      json['id'] as String,
-      json['name'] as String,
-      (json['code'] as num).toInt(),
+      (json['id'] as num).toInt(),
+      json['title'] as String,
       (json['limit'] as num).toDouble(),
       (json['price'] as num).toDouble(),
-      (json['minimum_price'] as num).toDouble(),
-      json['category_id'] as String,
-      json['unity'] as String,
-      json['image'] as String,
-      (json['kash_back_foiz'] as num).toDouble(),
-      json['kash_back_blok'] as bool,
-      (json['sht'] as num).toDouble(),
-      json['brend_id'] as String,
-      json['tavsif'] as String,
-      json['tip_id'] as String,
-      json['size_id'] as String,
-      (json['images'] as List<dynamic>)
-          .map((e) => Images.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      (json['category_id'] as num).toInt(),
+      (json['brend_id'] as num).toInt(),
+      json['image'] as String?,
       json['status'] as String?,
-      json['country'] as String?,
-      (json['skidka'] as num?)?.toDouble(),
-      json['status_color'] as String?,
+      json['unit'] as String,
+      json['description'] as String,
+      (json['discount'] as num?)?.toDouble(),
+      json['top'] as bool?,
+      (json['photos'] as List<dynamic>).map((e) => e as String?).toList(),
       (json['cartCount'] as num?)?.toDouble() ?? 0,
       (json['cartPrice'] as num?)?.toDouble() ?? 0,
       (json['cartCashback'] as num?)?.toDouble() ?? 0,
@@ -170,26 +136,18 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'name': instance.name,
-      'code': instance.code,
+      'title': instance.title,
       'limit': instance.limit,
       'price': instance.price,
-      'minimum_price': instance.minimum_price,
       'category_id': instance.category_id,
-      'unity': instance.unity,
+      'unit': instance.unit,
       'image': instance.image,
-      'kash_back_foiz': instance.kash_back_foiz,
-      'kash_back_blok': instance.kash_back_blok,
-      'sht': instance.sht,
       'brend_id': instance.brend_id,
-      'tavsif': instance.tavsif,
-      'tip_id': instance.tip_id,
-      'size_id': instance.size_id,
-      'images': instance.images,
+      'description': instance.description,
       'status': instance.status,
-      'country': instance.country,
-      'skidka': instance.skidka,
-      'status_color': instance.status_color,
+      'discount': instance.discount,
+      'top': instance.top,
+      'photos': instance.photos,
       'cartCount': instance.cartCount,
       'cartPrice': instance.cartPrice,
       'cartCashback': instance.cartCashback,

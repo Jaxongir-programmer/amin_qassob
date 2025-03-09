@@ -51,7 +51,7 @@ Future<void> main() async {
   Hive.registerAdapter(BrandModelAdapter());
   Hive.registerAdapter(SizeModelAdapter());
   Hive.registerAdapter(TipModelAdapter());
-  Hive.registerAdapter(ImagesAdapter());
+  // Hive.registerAdapter(ImagesAdapter());
   // Opening the box
   await Hive.openBox<ProductModel>('products_table');
   await Hive.openBox<BrandModel>('brands_table');

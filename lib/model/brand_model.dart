@@ -9,7 +9,7 @@ part 'brand_model.g.dart';
 @JsonSerializable()
 class BrandModel {
   @HiveField(0)
-  final String id;
+  final int id;
   @HiveField(1)
   final String brendName;
   @HiveField(2)

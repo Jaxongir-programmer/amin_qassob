@@ -15,6 +15,7 @@ import '../../auth/login_screen.dart';
 import '../cart/makeorder/map/yandex_map.dart';
 import '../favorites/favorites_screen.dart';
 import '../message/message_screen.dart';
+import '../search/search_screen.dart';
 
 class HomeAppBar extends StatefulWidget {
   const HomeAppBar({super.key});
@@ -37,7 +38,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
               CircleAvatar(
                 backgroundColor: Colors.grey.shade300,
                 child: Image.asset(
-                  Assets.imagesBLogo,
+                  Assets.imagesAppLogo,
                   width: 40,
                   height: 40,
                 ),
@@ -92,7 +93,19 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   ),
                 ),
               ),
-
+              InkWell(
+                onTap: () {
+                  startScreenF(context, SearchScreen());
+                },
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Image.asset(
+                    Assets.profileSearch,
+                    width: 26,
+                    height: 26,
+                  ),
+                ),
+              ),
               InkWell(
                 onTap: () {
                   startScreenF(context, FavoritesScreen());

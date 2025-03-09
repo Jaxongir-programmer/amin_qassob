@@ -154,7 +154,7 @@ void loadData(HomeViewModel viewModel){
                 // filterData(viewModel);
               },
               decoration: InputDecoration(
-                hintText: "amin_qassob'dan izlang...",
+                hintText: "AMIN QASSOB dan izlang...",
                 prefixIcon: Image.asset(
                   Assets.profileSearch,
                   color: PRIMARY_COLOR,

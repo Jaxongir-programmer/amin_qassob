@@ -50,7 +50,7 @@ class Providers extends ChangeNotifier {
     return PrefUtils.getCartList();
   }
 
-  double productCount(String id) {
+  double productCount(int id) {
     ProductModel? item = getCartList.firstWhereOrNull((element) => element.id == id);
     double count = (item != null) ? item.cartCount : 0;
     return count;
@@ -89,7 +89,7 @@ class Providers extends ChangeNotifier {
     return PrefUtils.getFavoriteList();
   }
 
-  bool isFavorite(String tovarId) {
+  bool isFavorite(int tovarId) {
     return getFavoriteList.where((element) => element.id == tovarId).isNotEmpty;
   }
 

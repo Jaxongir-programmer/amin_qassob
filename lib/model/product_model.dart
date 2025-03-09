@@ -7,47 +7,32 @@ part 'product_model.g.dart';
 @JsonSerializable()
 class ProductModel {
   @HiveField(0)
-  final String id;
+  final int id;
   @HiveField(1)
-  final String name;
+  final String title;
   @HiveField(2)
-  final int code;
-  @HiveField(3)
   double limit;
-  @HiveField(4)
+  @HiveField(3)
   double price;
+  @HiveField(4)
+  final int category_id;
   @HiveField(5)
-  final double minimum_price;
+  final String unit;
   @HiveField(6)
-  final String category_id;
+  final String? image;
   @HiveField(7)
-  final String unity;
+  final int brend_id;
   @HiveField(8)
-  final String image;
+  final String description;
   @HiveField(9)
-  final double kash_back_foiz;
-  @HiveField(10)
-  final bool kash_back_blok;
-  @HiveField(11)
-  final double sht;
-  @HiveField(12)
-  final String brend_id;
-  @HiveField(13)
-  final String tavsif;
-  @HiveField(14)
-  final String tip_id;
-  @HiveField(15)
-  final String size_id;
-  @HiveField(16)
-  final List<Images> images;
-  @HiveField(17)
   final String? status;
-  @HiveField(18)
-  final String? country;
-  @HiveField(19)
-  final double? skidka;
-  @HiveField(20)
-  final String? status_color;
+  @HiveField(10)
+  final double? discount;
+  @HiveField(11)
+  final bool? top;
+  @HiveField(12)
+  final List<String?> photos;
+
 
   var cartCount = 0.0;
   var cartPrice = 0.0;
@@ -55,26 +40,13 @@ class ProductModel {
 
   ProductModel(
       this.id,
-      this.name,
-      this.code,
+      this.title,
       this.limit,
       this.price,
-      this.minimum_price,
       this.category_id,
-      this.unity,
-      this.image,
-      this.kash_back_foiz,
-      this.kash_back_blok,
-      this.sht,
       this.brend_id,
-      this.tavsif,
-      this.tip_id,
-      this.size_id,
-      this.images,
-      this.status,
-      this.country,
-      this.skidka,
-      this.status_color,
+      this.image,
+      this.status, this.unit, this.description, this.discount, this.top, this.photos,
       [this.cartCount = 0,
       this.cartPrice = 0,
       this.cartCashback = 0]);

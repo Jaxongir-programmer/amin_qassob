@@ -38,10 +38,10 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
 
   @override
   void initState() {
-    widget.item.cartPrice = widget.item.price - (widget.item.price * (widget.item.skidka ?? 0) / 100);
+    widget.item.cartPrice = widget.item.price;
     cartCount = PrefUtils.getCartCount(widget.item.id);
     totalPrice = cartCount * widget.item.cartPrice;
-    addCount = widget.item.sht;
+    addCount = 1;
     super.initState();
   }
 
@@ -85,17 +85,19 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                     height: 400,
                                     child: PageView.builder(
                                       physics: const ClampingScrollPhysics(),
-                                      itemCount: widget.item.images.length,
+                                      // itemCount: widget.item.images.length,
+                                      itemCount: 1,
                                       onPageChanged: (int page) {
                                         getChangedPageAndMoveBar(page);
                                       },
                                       controller: controller,
                                       itemBuilder: (context, index) {
-                                        var item = widget.item.images[index];
-                                        return CustomViews.buildNetworkImage(item.image, fit: BoxFit.contain);
+                                        var item = widget.item.photos[index];
+                                        return CustomViews.buildNetworkImage(item, fit: BoxFit.contain);
                                       },
                                     ),
                                   ),
+                                  if(widget.item.photos.isNotEmpty)
                                   Positioned(
                                     right: 10,
                                     left: 10,
@@ -104,7 +106,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                       mainAxisSize: MainAxisSize.min,
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
-                                        for (int i = 0; i < widget.item.images.length; i++)
+                                        for (int i = 0; i < widget.item.photos.length; i++)
                                           if (i == currentPageValue) ...[IndicatorBar(true)] else IndicatorBar(false),
                                       ],
                                     ),
@@ -173,9 +175,9 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                     TextSpan(
                       children: [
                         TextSpan(
-                            text: widget.item.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                            text: widget.item.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                         TextSpan(
-                            text: "  ${widget.item.unity}",
+                            text: "  ${widget.item.unit}",
                             style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 18)),
                       ],
                     ),
@@ -197,39 +199,6 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                 ),
               ],
             ),
-            if (widget.item.country != "" || widget.item.status != "") const SizedBox(height: 12),
-            Row(
-              children: [
-                if (widget.item.country != "")
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
-                      color: PRIMARY_COLOR,
-                    ),
-                    child: Text(
-                      widget.item.country ?? "Uzbekistan",
-                      style: const TextStyle(fontSize: 10, color: Colors.white, fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                const SizedBox(
-                  width: 16,
-                  height: 0,
-                ),
-                if (widget.item.status != "")
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(6)),
-                      color: setColor(widget.item.status_color ?? ""),
-                    ),
-                    child: Text(
-                      widget.item.status ?? "",
-                      style: const TextStyle(fontSize: 10, color: Colors.white, fontWeight: FontWeight.w500),
-                    ),
-                  ),
-              ],
-            ),
           ],
         ),
       )
@@ -245,29 +214,29 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          if (widget.item.skidka != 0 && widget.item.skidka != null)
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(6)),
-                    color: Colors.redAccent,
-                  ),
-                  child: Text(
-                    "-${widget.item.skidka} %",
-                    style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
-                  ),
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "${widget.item.price.formattedAmountString()} so'm",
-                  style: const TextStyle(fontSize: 18, color: Colors.redAccent, decoration: TextDecoration.lineThrough),
-                )
-              ],
-            ),
+          // if (widget.item.skidka != 0 && widget.item.skidka != null)
+          //   Row(
+          //     children: [
+          //       Container(
+          //         padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+          //         decoration: const BoxDecoration(
+          //           borderRadius: BorderRadius.all(Radius.circular(6)),
+          //           color: Colors.redAccent,
+          //         ),
+          //         child: Text(
+          //           "-${widget.item.skidka} %",
+          //           style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
+          //         ),
+          //       ),
+          //       const SizedBox(
+          //         width: 16,
+          //       ),
+          //       Text(
+          //         "${widget.item.price.formattedAmountString()} so'm",
+          //         style: const TextStyle(fontSize: 18, color: Colors.redAccent, decoration: TextDecoration.lineThrough),
+          //       )
+          //     ],
+          //   ),
           const SizedBox(
             height: 6,
           ),
@@ -286,7 +255,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
               ),
               Text(
-                "${"so'm"}/${widget.item.unity}",
+                "${" "}/${widget.item.unit}",
                 style: const TextStyle(color: Colors.black, fontSize: 18),
               ),
             ],
@@ -297,7 +266,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
   }
 
   Widget _buildDescription() {
-    if (widget.item.tavsif != "") {
+    if (widget.item.description != "") {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
@@ -306,7 +275,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
             const Text('Mahsulot tavsifi', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             ExpandableText(
-              widget.item.tavsif,
+              widget.item.description,
               expandText: "ko'proq ko'rish",
               collapseText: "kamroq ko'rsatish",
               linkStyle: const TextStyle(color: Color(0xFF424242), fontWeight: FontWeight.bold),
@@ -429,7 +398,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
                                   )),
-                              Text(widget.item.unity,
+                              Text(widget.item.unit,
                                   style: const TextStyle(
                                     fontWeight: FontWeight.normal,
                                     color: PRIMARY_COLOR,

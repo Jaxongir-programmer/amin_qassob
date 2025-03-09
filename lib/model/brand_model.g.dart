@@ -17,7 +17,7 @@ class BrandModelAdapter extends TypeAdapter<BrandModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return BrandModel(
-      fields[0] as String,
+      fields[0] as int,
       fields[1] as String,
       fields[2] as String,
       fields[3] as String,
@@ -63,7 +63,7 @@ class BrandModelAdapter extends TypeAdapter<BrandModel> {
 // **************************************************************************
 
 BrandModel _$BrandModelFromJson(Map<String, dynamic> json) => BrandModel(
-      json['id'] as String,
+      (json['id'] as num).toInt(),
       json['brendName'] as String,
       json['image'] as String,
       json['category_id'] as String,

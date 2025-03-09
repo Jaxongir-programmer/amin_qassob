@@ -32,7 +32,7 @@ class SearchField extends StatelessWidget {
                 enabled: false,
                 onChanged: (value) => log(value),
                 decoration: InputDecoration(
-                  hintText: "amin_qassob'dan izlang...",
+                  hintText: "AMIN QASSOB dan izlang...",
                   prefixIcon: Image.asset(
                     Assets.profileSearch,
                     color: PRIMARY_COLOR,

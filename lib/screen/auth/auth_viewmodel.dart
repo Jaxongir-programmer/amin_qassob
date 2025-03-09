@@ -39,7 +39,7 @@ class AuthViewModel extends BaseViewModel {
   void smsCheck(String phone) async {
     progressData = true;
     notifyListeners();
-    final data = await api.smsCheck(phone, _errorStream);
+    final data = await api.checkPhone(phone, _errorStream);
     progressData = false;
     notifyListeners();
     if (data != null) {
@@ -54,8 +54,16 @@ class AuthViewModel extends BaseViewModel {
     progressData = false;
     notifyListeners();
     if (data != null) {
-       PrefUtils.setToken(data);
-      // PrefUtils.setUser(data);
+      tokenStream.sink.add(data);
+    }
+  }
+  void login(String phone, String code) async {
+    progressData = true;
+    notifyListeners();
+    final data = await api.login(phone,code, _errorStream);
+    progressData = false;
+    notifyListeners();
+    if (data != null) {
       tokenStream.sink.add(data);
     }
   }

@@ -51,25 +51,25 @@ class SearchViewModel extends BaseViewModel {
 
     if (keywords.length == 1) {
       productList =
-          box.values.where((element) => (element.name.toLowerCase().contains(keyword.toLowerCase()))).toList();
+          box.values.where((element) => (element.title.toLowerCase().contains(keyword.toLowerCase()))).toList();
     } else if (keywords.length == 2) {
       productList = box.values
           .where((element) =>
-              (element.name.toLowerCase().contains(keywords.first.toLowerCase())) &&
-              (element.name.toLowerCase().contains(keywords[1].toLowerCase())))
+              (element.title.toLowerCase().contains(keywords.first.toLowerCase())) &&
+              (element.title.toLowerCase().contains(keywords[1].toLowerCase())))
           .toList();
     } else {
       productList = box.values
           .where((element) =>
-              (element.name.toLowerCase().contains(keywords.first.toLowerCase())) &&
-              (element.name.toLowerCase().contains(keywords[1].toLowerCase())) &&
-              (element.name.toLowerCase().contains(keywords[2].toLowerCase())))
+              (element.title.toLowerCase().contains(keywords.first.toLowerCase())) &&
+              (element.title.toLowerCase().contains(keywords[1].toLowerCase())) &&
+              (element.title.toLowerCase().contains(keywords[2].toLowerCase())))
           .toList();
     }
     notifyListeners();
   }
 
-  void getProductsByBrand(String keyword, String brandId) async {
+  void getProductsByBrand(String keyword, int brandId) async {
     notifyListeners();
 
     List<String> keywords = keyword.split(" ");
@@ -84,22 +84,22 @@ class SearchViewModel extends BaseViewModel {
     if (keywords.length == 1) {
       productList = box.values
           .where((element) =>
-              ((element.brend_id == brandId) && element.name.toLowerCase().contains(keyword.toLowerCase())))
+              ((element.brend_id == brandId) && element.title.toLowerCase().contains(keyword.toLowerCase())))
           .toList();
     } else if (keywords.length == 2) {
       productList = box.values
           .where((element) =>
               (element.brend_id == brandId) &&
-              (element.name.toLowerCase().contains(keywords.first.toLowerCase())) &&
-              (element.name.toLowerCase().contains(keywords[1].toLowerCase())))
+              (element.title.toLowerCase().contains(keywords.first.toLowerCase())) &&
+              (element.title.toLowerCase().contains(keywords[1].toLowerCase())))
           .toList();
     } else {
       productList = box.values
           .where((element) =>
               (element.brend_id == brandId) &&
-              (element.name.toLowerCase().contains(keywords.first.toLowerCase())) &&
-              (element.name.toLowerCase().contains(keywords[1].toLowerCase())) &&
-              (element.name.toLowerCase().contains(keywords[2].toLowerCase())))
+              (element.title.toLowerCase().contains(keywords.first.toLowerCase())) &&
+              (element.title.toLowerCase().contains(keywords[1].toLowerCase())) &&
+              (element.title.toLowerCase().contains(keywords[2].toLowerCase())))
           .toList();
     }
     notifyListeners();

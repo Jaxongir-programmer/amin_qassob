@@ -6,7 +6,7 @@ part 'filter_brand_model.g.dart';
 class FilterBrandModel {
    bool checked;
    bool show;
-   String id;
+   int id;
    String text;
    List<FilterBrandModel> children;
 

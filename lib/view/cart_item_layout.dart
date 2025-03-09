@@ -28,7 +28,8 @@ class _CartItemLayoutState extends State<CartItemLayout> {
 
   @override
   void initState() {
-    addCount = widget.item.sht;
+    // addCount = widget.item.sht;
+    addCount = 1;
     super.initState();
   }
 
@@ -73,9 +74,9 @@ class _CartItemLayoutState extends State<CartItemLayout> {
                           child: Text.rich(
                         TextSpan(
                           children: [
-                            TextSpan(text: widget.item.name, style: const TextStyle(fontSize: 14)),
+                            TextSpan(text: widget.item.title, style: const TextStyle(fontSize: 14)),
                             TextSpan(
-                                text: " ${widget.item.unity}",
+                                text: " ${widget.item.unit}",
                                 style: const TextStyle(color: Colors.grey, fontSize: 14)),
                           ],
                         ),
@@ -128,7 +129,7 @@ class _CartItemLayoutState extends State<CartItemLayout> {
                                   widget.item.cartCount-=addCount;
                                   if (widget.item.cartCount > 0) {
                                     cashback =
-                                        widget.item.cartCount * widget.item.cartPrice * widget.item. kash_back_foiz / 100;
+                                        widget.item.cartCount * widget.item.cartPrice;
                                   } else {
                                     widget.item.cartCount = 0.0;
                                   }
@@ -163,7 +164,7 @@ class _CartItemLayoutState extends State<CartItemLayout> {
                                     width: 4,
                                   ),
                                   Text(
-                                    widget.item.unity,
+                                    widget.item.unit,
                                     style: const TextStyle(color: GREY_TEXT_COLOR, fontSize: 12),
                                   ),
                                 ],
@@ -179,7 +180,7 @@ class _CartItemLayoutState extends State<CartItemLayout> {
                                     widget.item.cartCount-=addCount;
                                   } else {
                                     cashback =
-                                        widget.item.cartCount * widget.item.cartPrice * widget.item.kash_back_foiz / 100;
+                                        widget.item.cartCount * widget.item.cartPrice;
                                   }
                                 });
                                 provider.addToCart = widget.item;
@@ -221,7 +222,7 @@ class _CartItemLayoutState extends State<CartItemLayout> {
                           width: 4,
                         ),
                         Text(
-                          widget.item.unity,
+                          widget.item.unit,
                           style: const TextStyle(color: RED_COLOR, fontSize: 12),
                         ),
                       ],

@@ -17,11 +17,10 @@ Color cyanColor = Color(0xFF6D7E6E);
 
 const kAnimationDuration = Duration(milliseconds: 200);
 
-// const SECRET_NAME = "ArnestParfum";
 const SECRET_NAME = "TestGSMMobiles";
 const APP_TYPE = "client";
-const BASE_URL = "http://onstudy.uz/api/v1/";
-const BASE_IMAGE_URL = "http://192.168.88.17:8080/images/";
+const BASE_URL = "https://onstudy.uz/api/";
+const BASE_IMAGE_URL = "https://onstudy.uz/";
 
 // const UZ_LANG_KEY = "en";
 const UZ_LANG_KEY = "uz";
@@ -46,10 +45,10 @@ class Constants {
   static List<OrderModel> orderList = [];
 
   static List<OfferModel> photosList = [
-    OfferModel("1", "", "", Assets.imagesAppLogo),
-    OfferModel("1", "", "", Assets.imagesAppLogo),
-    OfferModel("1", "", "", Assets.imagesAppLogo),
-    OfferModel("1", "", "", Assets.imagesAppLogo),
-    OfferModel("1", "", "", Assets.imagesAppLogo),
+    OfferModel(1, "", "", Assets.imagesAppLogo),
+    OfferModel(2, "", "", Assets.imagesAppLogo),
+    OfferModel(3, "", "", Assets.imagesAppLogo),
+    OfferModel(4, "", "", Assets.imagesAppLogo),
+    OfferModel(5, "", "", Assets.imagesAppLogo),
   ];
 }

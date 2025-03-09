@@ -2,26 +2,20 @@ import 'dart:async';
 import 'package:amin_qassob/model/brand_model.dart';
 import 'package:amin_qassob/model/filter_brand_model.dart';
 import 'package:amin_qassob/model/phone_number_model.dart';
-import 'package:amin_qassob/model/products_by_id_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 
 import '../../../model/cashback_model.dart';
 import '../../../model/category_model.dart';
-import 'package:event_bus/event_bus.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../api/api_service.dart';
 import '../../../model/event_model.dart';
 import '../../../model/offer_model.dart';
 import '../../../model/order_model.dart';
-import '../../../model/product_id_model.dart';
 import '../../../model/product_model.dart';
-import '../../../provider/providers.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/pref_utils.dart';
 import '../../../service/eventbus.dart';
-
 
 class HomeViewModel extends BaseViewModel {
   final api = ApiService();
@@ -74,20 +68,20 @@ class HomeViewModel extends BaseViewModel {
     return _productsByIdStream.stream;
   }
 
-
-
   bool progressData = false;
   bool topTovarProgress = false;
   bool skidkaTovarProgress = false;
   bool categoriesProgress = false;
   bool orderProgress = false;
   bool progressCartData = false;
-  List<String> offerList =[];
+  List<String> offerList = [];
 
   List<CategoryModel> categoryList = [];
-  OfferModel? offer  ;
-  CashBackModel? cashback;
+  OfferModel? offer;
+
   List<ProductModel> productList = [];
+  List<ProductModel> productByCategoryList = [];
+  List<ProductModel> productByBrandList = [];
   List<FilterBrandModel> filterBrandList = [];
   List<PhoneNumberModel> phoneList = [];
   List<OrderModel> orderList = [];
@@ -102,7 +96,7 @@ class HomeViewModel extends BaseViewModel {
   void getUser() async {
     progressData = true;
     notifyListeners();
-    final data = await api.getUser(_errorStream,_errorCodeStream);
+    final data = await api.getUser(_errorStream, _errorCodeStream);
     progressData = false;
     notifyListeners();
 
@@ -110,17 +104,8 @@ class HomeViewModel extends BaseViewModel {
       PrefUtils.setUser(data);
       getProductList();
       getCategoryList();
-      getCashback();
       eventBus.fire(EventModel(event: EVENT_UPDATE_MESSAGE_BADGE, data: data.message_count));
     }
-  }
-
-  void getCashback() async {
-    // progressData = true;
-    notifyListeners();
-    cashback = await api.getCashBack(_errorStream);
-    // progressData = false;
-    notifyListeners();
   }
 
   void getOffer() async {
@@ -188,16 +173,32 @@ class HomeViewModel extends BaseViewModel {
     }
   }
 
-  void getFilterBrands() async {
+  void getProductByCategory(int catId) async {
     progressData = true;
     notifyListeners();
-    filterBrandList = await api.getFilterBrands(_errorStream);
-    if (filterBrandList.isNotEmpty) {
-      _allFilterBrandStream.sink.add(filterBrandList);
-    }
+    productByCategoryList = await api.getProductByCategory(catId, _errorStream);
     progressData = false;
     notifyListeners();
   }
+
+  void getProductByBrand(int catId, int brandId) async {
+    progressData = true;
+    notifyListeners();
+    productByBrandList = await api.getProductByBrand(catId, brandId, _errorStream);
+    progressData = false;
+    notifyListeners();
+  }
+
+  // void getFilterBrands() async {
+  //   progressData = true;
+  //   notifyListeners();
+  //   filterBrandList = await api.getFilterBrands(_errorStream);
+  //   if (filterBrandList.isNotEmpty) {
+  //     _allFilterBrandStream.sink.add(filterBrandList);
+  //   }
+  //   progressData = false;
+  //   notifyListeners();
+  // }
 
   void getAdminPhones() async {
     progressData = true;
@@ -210,7 +211,6 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-
   void getOrderList() async {
     orderProgress = true;
     notifyListeners();
@@ -219,17 +219,17 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void getProductsByIds(productsById) async{
+  void getProductsByIds(productsById) async {
     progressCartData = true;
     notifyListeners();
-    final data = await api.getProductsByIds(productsById,_errorStream);
+    final data = await api.getProductsByIds(productsById, _errorStream);
     progressCartData = false;
     notifyListeners();
 
     if (data.isNotEmpty) {
       _productsByIdStream.sink.add(data);
     }
-}
+  }
 
   @override
   void dispose() {

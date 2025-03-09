@@ -246,11 +246,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
                   children: [
-                    Image.asset(
-                      Assets.imagesBLogo,
-                      width: 30,
-                      height: 30,
-                    ),
+                    // Image.asset(
+                    //   Assets.imagesAppLogo,
+                    //   width: 30,
+                    //   height: 30,
+                    // ),
                     const SizedBox(width: 8),
                     const Expanded(
                       child: Text('Profil', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),

@@ -10,6 +10,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
@@ -39,6 +40,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
   var commentController = TextEditingController();
   var orientrController = TextEditingController();
   var phoneFormatter = MaskTextInputFormatter(mask: '+998 (##) ### ## ##', type: MaskAutoCompletionType.eager);
+
+  DateFormat format = DateFormat("dd.MM.yyyy HH:mm");
 
   final List<PaymentModel> paymentTypes = [
     PaymentModel("click", 1),
@@ -95,10 +98,10 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                                   height: 20,
                                 ),
                                 addressWidget(provider),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                genderWidget(),
+                                // const SizedBox(
+                                //   height: 20,
+                                // ),
+                                // genderWidget(),
                                 const SizedBox(
                                   height: 10,
                                 ),
@@ -117,27 +120,28 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                               child: !viewModel.progressOrderData
                                   ? ElevatedButton(
                                       onPressed: () {
-                                        if (deliverDate == "") {
-                                          showWarning(context, "Yetkazib berish vaqtini tanlang !");
-                                        } else if (selectedPayment == null) {
+                                        // if (deliverDate == "") {
+                                        //   showWarning(context, "Yetkazib berish vaqtini tanlang !");
+                                        // } else
+                                          if (selectedPayment == null) {
                                           showWarning(context, "To'lov turini tanlang");
-                                        } else if (provider.getSelectAdres == null) {
-                                          showWarning(context, "Yetkazib berish manzilini tanlang !");
-                                        } else if (selectedGender == null) {
-                                          showWarning(context, "Yetkazib beruvchining jinsini tanlang !");
-                                        } else {
+                                        }
+                                        // else if (provider.getSelectAdres == null) {
+                                        //   showWarning(context, "Yetkazib berish manzilini tanlang !");
+                                        // }
+                                        else {
                                           widget.orderModel.phone2 = extraPhoneController.text
                                               .replaceAll(" ", "")
                                               .replaceAll("(", "")
                                               .replaceAll(")", "");
                                           widget.orderModel.comment = commentController.text;
-                                          widget.orderModel.orderTime = deliverDate ?? "";
-                                          widget.orderModel.lat = provider.getSelectAdres?.lat.toString() ?? "";
-                                          widget.orderModel.lon = provider.getSelectAdres?.long.toString() ?? "";
-                                          widget.orderModel.address = provider.getSelectAdres?.name ?? "";
-                                          widget.orderModel.orientr = orientrController.text;
-                                          widget.orderModel.paymentType = paymentId ?? 3;
-                                          widget.orderModel.deliver_gender = genderId ?? 3;
+                                          // widget.orderModel.order_time = (format.parse(deliverDate).millisecondsSinceEpoch/1000).toString();
+                                          widget.orderModel.order_time = "";
+                                          // widget.orderModel.order_time = "2025-03-09T12:00:00Z";
+                                          widget.orderModel.lat = provider.getSelectAdres?.lat.toString() ?? "41.2995";
+                                          widget.orderModel.lon = provider.getSelectAdres?.long.toString() ?? "69.2401";
+                                          widget.orderModel.address = orientrController.text;
+                                          widget.orderModel.payment_type = paymentId ?? 3;
                                           viewModel.makeOrder(widget.orderModel);
                                         }
                                       },
@@ -259,41 +263,41 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                   ))
             ],
           ),
-          const SizedBox(
-            height: 6,
-          ),
-          Divider(
-            color: Colors.grey.shade300,
-          ),
-          InkWell(
-              onTap: () async {
-                hourPicer();
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 6.0),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.access_time_rounded,
-                      size: 20,
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Expanded(
-                      child: Text(
-                        deliverDateForLabel ?? "Yetkazib berish vaqti",
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios_outlined,
-                      size: 20,
-                      color: Colors.grey.shade500,
-                    )
-                  ],
-                ),
-              ))
+          // const SizedBox(
+          //   height: 6,
+          // ),
+          // Divider(
+          //   color: Colors.grey.shade300,
+          // ),
+          // InkWell(
+          //     onTap: () async {
+          //       hourPicer();
+          //     },
+          //     child: Padding(
+          //       padding: const EdgeInsets.symmetric(vertical: 6.0),
+          //       child: Row(
+          //         children: [
+          //           const Icon(
+          //             Icons.access_time_rounded,
+          //             size: 20,
+          //           ),
+          //           const SizedBox(
+          //             width: 8,
+          //           ),
+          //           Expanded(
+          //             child: Text(
+          //               deliverDateForLabel ?? "Yetkazib berish vaqti",
+          //               style: const TextStyle(fontSize: 16),
+          //             ),
+          //           ),
+          //           Icon(
+          //             Icons.arrow_forward_ios_outlined,
+          //             size: 20,
+          //             color: Colors.grey.shade500,
+          //           )
+          //         ],
+          //       ),
+          //     ))
         ],
       ),
     );
@@ -458,7 +462,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                 style: TextStyle(fontSize: 16),
               ),
               Text(
-                "${(widget.orderModel.total_amount).formattedAmountString()} UZS",
+                "${(Providers().cartSumma).formattedAmountString()} UZS",
                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               )
             ],
@@ -597,7 +601,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
             radius: 15,
             backgroundColor: Colors.grey.shade300,
             child: Image.asset(
-              Assets.imagesBLogo,
+              Assets.imagesAvatar,
               width: 25,
               height: 25,
             ),
@@ -611,7 +615,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
             style: TextStyle(fontSize: 16),
           )),
           Text(
-            "${widget.orderModel.total_cashback.formattedAmountString()} UZS",
+            // "${widget.orderModel.total_cashback.formattedAmountString()} UZS",
+            "",
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           )
         ],

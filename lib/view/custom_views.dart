@@ -203,7 +203,7 @@ extension CustomViews on Widget {
           child: Container(
               color: Colors.white,
               child: Center(
-                  child: Image.asset(Assets.imagesAppLogo,
+                  child: Image.asset(Assets.imagesPlaceholder,
               )))),
       height: height,
       width: width,

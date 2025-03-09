@@ -5,8 +5,8 @@ import 'dart:io';
 import 'package:amin_qassob/model/brand_model.dart';
 import 'package:amin_qassob/model/phone_number_model.dart';
 import 'package:amin_qassob/utils/constants.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
-import '../model/cashback_model.dart';
 import '../model/category_model.dart';
 import '../model/filter_brand_model.dart';
 import '../model/make_order_model.dart';
@@ -42,7 +42,7 @@ class ApiService {
   }
 
   BaseModel wrapResponse(Response response) {
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       final data = BaseModel.fromJson(response.data);
       if (!data.error) {
         return data;
@@ -82,21 +82,59 @@ class ApiService {
     return error.message.toString();
   }
 
-  Future<String?> registration(
-      String phone, String code, String name, String surName, String address, StreamController<String> errorStream) async {
+  Future<bool?> checkPhone(String phone, StreamController<String> errorStream) async {
     try {
-      final response = await dio.post("RegistryClient",
+      final response = await dio.post("v3/check-phone/", data: jsonEncode({"phone_number": phone}));
+      final baseData = wrapResponse(response);
+      if (!baseData.error) {
+        return baseData.data["is_register"];
+      } else {
+        errorStream.sink.add(baseData.message ?? "Error");
+      }
+    } on DioError catch (e) {
+      errorStream.sink.add(wrapError(e));
+    }
+    return null;
+  }
+
+  Future<String?> registration(
+      String phone, String code, String firstName, String lastName, String address, StreamController<String> errorStream) async {
+    try {
+      final response = await dio.post("v3/register/",
           data: jsonEncode({
-            "phone": phone,
-            "code": code,
-            "name": name,
-            "surName": surName,
+            "phone_number": phone,
+            "confirm_code": code,
+            "first_name": firstName,
+            "last_name": lastName,
             "address": address,
           }));
       final baseData = wrapResponse(response);
       if (!baseData.error) {
-        PrefUtils.setToken(baseData.data["token"]);
-        return baseData.data["token"];
+        Map<String, dynamic> decodedToken = JwtDecoder.decode(baseData.data["access_token"]);
+        PrefUtils.setToken(decodedToken['user_id']);
+        return decodedToken['user_id'];
+      } else {
+        errorStream.sink.add(baseData.message ?? "Error");
+      }
+    } on DioError catch (e) {
+      errorStream.sink.add(wrapError(e));
+    }
+    return null;
+  }
+
+  Future<String?> login(
+      String phone, String code, StreamController<String> errorStream) async {
+    try {
+      final response = await dio.post("v3/login/",
+          data: jsonEncode({
+            "phone_number": phone,
+            "confirm_code": code,
+          }));
+      final baseData = wrapResponse(response);
+      if (!baseData.error) {
+        Map<String, dynamic> decodedToken = JwtDecoder.decode(baseData.data["access_token"]);
+        PrefUtils.setToken(decodedToken['user_id']);
+        return decodedToken['user_id'];
       } else {
         errorStream.sink.add(baseData.message ?? "Error");
       }
@@ -108,7 +146,7 @@ class ApiService {
 
   Future<List<CategoryModel>> getCategoryList(StreamController<String> errorStream) async {
     try {
-      final response = await dio.get("all-category");
+      final response = await dio.get("v1/categories");
       final baseData = wrapResponse(response);
       if (!baseData.error) {
         return (baseData.data as List<dynamic>).map((json) => CategoryModel.fromJson(json)).toList();
@@ -151,24 +189,24 @@ class ApiService {
     return [];
   }
 
-  Future<List<FilterBrandModel>> getFilterBrands(StreamController<String> errorStream) async {
-    try {
-      final response = await dio.get("clientGetforFilter");
-      final baseData = wrapResponse(response);
-      if (!baseData.error) {
-        return (baseData.data as List<dynamic>).map((json) => FilterBrandModel.fromJson(json)).toList();
-      } else {
-        errorStream.sink.add(baseData.message ?? "Error");
-      }
-    } on DioError catch (e) {
-      errorStream.sink.add(wrapError(e));
-    }
-    return [];
-  }
+  // Future<List<FilterBrandModel>> getFilterBrands(StreamController<String> errorStream) async {
+  //   try {
+  //     final response = await dio.get("clientGetforFilter");
+  //     final baseData = wrapResponse(response);
+  //     if (!baseData.error) {
+  //       return (baseData.data as List<dynamic>).map((json) => FilterBrandModel.fromJson(json)).toList();
+  //     } else {
+  //       errorStream.sink.add(baseData.message ?? "Error");
+  //     }
+  //   } on DioError catch (e) {
+  //     errorStream.sink.add(wrapError(e));
+  //   }
+  //   return [];
+  // }
 
   Future<List<OfferModel>> getOffer(StreamController<String> errorStream) async {
     try {
-      final response = await dio.get("getOffers");
+      final response = await dio.get("v2/offers");
       final baseData = wrapResponse(response);
       if (!baseData.error) {
         return (baseData.data as List<dynamic>).map((json) => OfferModel.fromJson(json)).toList();
@@ -179,36 +217,6 @@ class ApiService {
       errorStream.sink.add(wrapError(e));
     }
     return [];
-  }
-
-  Future<CashBackModel?> getCashBack(StreamController<String> errorStream) async {
-    try {
-      final response = await dio.get("ClientKashBack", queryParameters: {"store_id": PrefUtils.getUser()?.store_id ?? ""});
-      final baseData = wrapResponse(response);
-      if (!baseData.error) {
-        return CashBackModel.fromJson(baseData.data);
-      } else {
-        errorStream.sink.add(baseData.message ?? "Error");
-      }
-    } on DioError catch (e) {
-      errorStream.sink.add(wrapError(e));
-    }
-    return null;
-  }
-
-  Future<bool?> smsCheck(String phone, StreamController<String> errorStream) async {
-    try {
-      final response = await dio.get("SmsCheck", queryParameters: {"telephone": phone});
-      final baseData = wrapResponse(response);
-      if (!baseData.error) {
-        return baseData.data["isRegistered"];
-      } else {
-        errorStream.sink.add(baseData.message ?? "Error");
-      }
-    } on DioError catch (e) {
-      errorStream.sink.add(wrapError(e));
-    }
-    return null;
   }
 
   Future<List<OrderModel>> getOrderList(StreamController<String> errorStream) async {
@@ -229,7 +237,7 @@ class ApiService {
 
   Future<List<ProductModel>> getTopTovar(StreamController<String> errorStream) async {
     try {
-      final response = await dio.get("getTopTovar", queryParameters: {"store_id": PrefUtils.getUser()?.store_id ?? ""});
+      final response = await dio.get("v1/top");
       final baseData = wrapResponse(response);
       if (!baseData.error) {
         try {
@@ -248,7 +256,7 @@ class ApiService {
 
   Future<List<ProductModel>> getSkidkaTovar(StreamController<String> errorStream) async {
     try {
-      final response = await dio.get("getskidkaprodukts", queryParameters: {"store_id": PrefUtils.getUser()?.store_id ?? ""});
+      final response = await dio.get("v1/discount");
       final baseData = wrapResponse(response);
       if (!baseData.error) {
         try {
@@ -267,7 +275,39 @@ class ApiService {
 
   Future<List<ProductModel>> getProductList(StreamController<String> errorStream) async {
     try {
-      final response = await dio.get("clientGetProducts", queryParameters: {"store_id": PrefUtils.getUser()?.store_id ?? ""});
+      final response = await dio.get("v1/all-products");
+      final baseData = wrapResponse(response);
+      if (!baseData.error) {
+        var items = (baseData.data as List<dynamic>).map((json) => ProductModel.fromJson(json)).toList();
+        return items;
+      } else {
+        errorStream.sink.add(baseData.message ?? "Error");
+      }
+    } on DioError catch (e) {
+      errorStream.sink.add(wrapError(e));
+    }
+    return [];
+  }
+
+  Future<List<ProductModel>> getProductByCategory(int catId,StreamController<String> errorStream) async {
+    try {
+      final response = await dio.get("v1/category/${catId}");
+      final baseData = wrapResponse(response);
+      if (!baseData.error) {
+        var items = (baseData.data as List<dynamic>).map((json) => ProductModel.fromJson(json)).toList();
+        return items;
+      } else {
+        errorStream.sink.add(baseData.message ?? "Error");
+      }
+    } on DioError catch (e) {
+      errorStream.sink.add(wrapError(e));
+    }
+    return [];
+  }
+
+  Future<List<ProductModel>> getProductByBrand(int catId,int brandId,StreamController<String> errorStream) async {
+    try {
+      final response = await dio.get("v1/category/$catId//brend/$brandId/");
       final baseData = wrapResponse(response);
       if (!baseData.error) {
         var items = (baseData.data as List<dynamic>).map((json) => ProductModel.fromJson(json)).toList();
@@ -300,7 +340,7 @@ class ApiService {
 
   Future<dynamic> makeOrder(MakeOrderModel orderModel, StreamController<String> errorStream) async {
     try {
-      final response = await dio.post("clientMakeOrder", data: jsonEncode(orderModel));
+      final response = await dio.post("v4/order_model/", data: jsonEncode(orderModel));
       final baseData = wrapResponse(response);
       if (!baseData.error) {
         return baseData.data;

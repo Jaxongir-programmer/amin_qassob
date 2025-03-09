@@ -85,7 +85,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                                       }
                                     }
                                     Navigator.push(
-                                        context, MaterialPageRoute(builder: (_) => BrandsScreen(data, items)));
+                                        context, MaterialPageRoute(builder: (_) => BrandsScreen(data)));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
@@ -133,7 +133,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
           },
           onViewModelReady: (viewModel) {
             viewModel.getCategoryList();
-            viewModel.getFilterBrands();
+            // viewModel.getFilterBrands();
 
             viewModel.allFilterBranData.listen((event) async {
               filterBrandList = event;

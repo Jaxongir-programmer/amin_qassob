@@ -11,7 +11,7 @@ class BrandsViewModel extends BaseViewModel {
 
   var progressData = false;
 
-  void getBrandList(String categoryId, String keyword) {
+  void getBrandList(int categoryId, String keyword) {
     progressData = true;
     notifyListeners();
       brandList = boxGroup.values

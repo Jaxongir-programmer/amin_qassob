@@ -7,7 +7,6 @@ class Assets {
   static const String fontsSFProTextRegular = 'assets/fonts/SF-Pro-Text-Regular.otf';
   static const String imagesAppLogo = 'assets/images/app_logo.png';
   static const String imagesAvatar = 'assets/images/avatar.png';
-  static const String imagesBLogo = 'assets/images/b_logo.png';
   static const String imagesChecked = 'assets/images/checked.png';
   static const String imagesEmpty = 'assets/images/empty.png';
   static const String imagesEmptyCart = 'assets/images/empty_cart.png';

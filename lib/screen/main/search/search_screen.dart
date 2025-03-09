@@ -7,15 +7,11 @@ import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../generated/assets.dart';
-import '../../../model/brand_model.dart';
 import '../../../model/product_model.dart';
-import '../../../model/size_model.dart';
-import '../../../model/tip_model.dart';
 import '../../../provider/providers.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/pref_utils.dart';
 import '../../../utils/utils.dart';
-import '../../../view/custom_views.dart';
 import '../../../view/products_item_view.dart';
 import '../../auth/login_screen.dart';
 import '../main_screen.dart';
@@ -61,7 +57,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     setData(viewModel, keyword);
                   },
                   decoration: InputDecoration(
-                    hintText: "amin_qassob'dan izlang...",
+                    hintText: "AMIN QASSOBdan izlang...",
                     prefixIcon: Image.asset(
                       Assets.profileSearch,
                       color: PRIMARY_COLOR,
