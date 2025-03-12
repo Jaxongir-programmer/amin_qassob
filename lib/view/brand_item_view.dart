@@ -36,29 +36,29 @@ class BrandItemViewState extends State<BrandItemView> {
       margin: const EdgeInsets.all(6),
       child: Stack(
         children: [
-          ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: CustomViews.buildNetworkImage(widget.brand.image)),
+          // ClipRRect(
+          //     borderRadius: BorderRadius.circular(12),
+          //     child: CustomViews.buildNetworkImage(widget.brand.image)),
           Container(
               decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.3),
             border: Border.all(color: Colors.greenAccent.withOpacity(0.2)),
             borderRadius: const BorderRadius.all(Radius.circular(12)),
           )),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 4, left: 4, right: 4),
-              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-              child: Text(
-                widget.brand.brendName,
-                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
-                maxLines: 2,
-
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          )
+          // Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: Container(
+          //     margin: const EdgeInsets.only(bottom: 4, left: 4, right: 4),
+          //     padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+          //     child: Text(
+          //       widget.brand.brendName,
+          //       style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+          //       maxLines: 2,
+          //
+          //       overflow: TextOverflow.ellipsis,
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );

@@ -85,8 +85,8 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                     height: 400,
                                     child: PageView.builder(
                                       physics: const ClampingScrollPhysics(),
-                                      // itemCount: widget.item.images.length,
-                                      itemCount: 1,
+                                      itemCount: widget.item.photos.length,
+                                      // itemCount: 1,
                                       onPageChanged: (int page) {
                                         getChangedPageAndMoveBar(page);
                                       },

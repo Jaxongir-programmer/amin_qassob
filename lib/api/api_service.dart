@@ -159,9 +159,9 @@ class ApiService {
     return [];
   }
 
-  Future<List<BrandModel>> getBrandList(StreamController<String> errorStream) async {
+  Future<List<BrandModel>> getBrandList(int catId,StreamController<String> errorStream) async {
     try {
-      final response = await dio.get("clientGetBrend");
+      final response = await dio.get("v1/category/$catId/brends/");
       final baseData = wrapResponse(response);
       if (!baseData.error) {
         return (baseData.data as List<dynamic>).map((json) => BrandModel.fromJson(json)).toList();

@@ -82,7 +82,7 @@ class ProductsItemViewState extends State<ProductsItemView> {
                         borderRadius: BorderRadius.circular(12),
                         child: Stack(
                           children: [
-                            CustomViews.buildNetworkImage(widget.item.image,
+                            CustomViews.buildNetworkImage(widget.item.photos[0]??"",
                                 fit: BoxFit.contain, width: getScreenWidth(context), height: 110),
                             if (widget.item.limit <= 0)
                               Container(

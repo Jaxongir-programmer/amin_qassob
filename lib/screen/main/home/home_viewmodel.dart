@@ -50,11 +50,11 @@ class HomeViewModel extends BaseViewModel {
     return _phoneListStream.stream;
   }
 
-  StreamController<List<BrandModel>> _allBrandsStream = StreamController();
-
-  Stream<List<BrandModel>> get allBrandsData {
-    return _allBrandsStream.stream;
-  }
+  // StreamController<List<BrandModel>> _allBrandsStream = StreamController();
+  //
+  // Stream<List<BrandModel>> get allBrandsData {
+  //   return _allBrandsStream.stream;
+  // }
 
   StreamController<List<BrandModel>> _allGroupsStream = StreamController();
 
@@ -77,6 +77,7 @@ class HomeViewModel extends BaseViewModel {
   List<String> offerList = [];
 
   List<CategoryModel> categoryList = [];
+  List<BrandModel> brandList = [];
   OfferModel? offer;
 
   List<ProductModel> productList = [];
@@ -143,12 +144,13 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void getBrandList() async {
+  void getBrandList(int catId) async {
     notifyListeners();
-    final data = await api.getBrandList(_errorStream);
+    final data = await api.getBrandList(catId,_errorStream);
+    brandList = data;
     notifyListeners();
     if (data.isNotEmpty) {
-      _allBrandsStream.sink.add(data);
+      // _allBrandsStream.sink.add(data);
     }
   }
 

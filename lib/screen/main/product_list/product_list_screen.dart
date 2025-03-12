@@ -31,9 +31,8 @@ import '../main_screen.dart';
 
 class ProductListScreen extends StatefulWidget {
   BrandModel brand;
-  final List<FilterBrandModel> filterList;
 
-  ProductListScreen({required this.brand, Key? key, required this.filterList}) : super(key: key);
+  ProductListScreen({required this.brand, Key? key}) : super(key: key);
 
   @override
   _ProductListScreenState createState() => _ProductListScreenState();
@@ -49,7 +48,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   @override
   void initState() {
-    appBarTitle = widget.brand.brendName;
+    appBarTitle = widget.brand.title;
     super.initState();
   }
 
@@ -64,12 +63,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
         children: List.from((data.children ?? []).map((x) => mapServerDataToTreeData(x))),
       );
     }
-
-// Generate tree data
-    treeData = List.generate(
-      widget.filterList.length,
-      (index) => mapServerDataToTreeData(widget.filterList[index]),
-    );
 
     return ViewModelBuilder<SearchViewModel>.reactive(
       viewModelBuilder: () {
@@ -191,25 +184,25 @@ class _ProductListScreenState extends State<ProductListScreen> {
               ),
             ),
           ),
-          const SizedBox(
-            width: 8,
-          ),
-          MaterialButton(
-            minWidth: 50,
-            onPressed: () {
-              clearFocus(context);
-              showFilterDialog(viewModel);
-            },
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-            color: PRIMARY_COLOR,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            child: Image.asset(
-              Assets.profileFilter2x,
-              width: 26,
-              height: 26,
-              color: Colors.white,
-            ),
-          ),
+          // const SizedBox(
+          //   width: 8,
+          // ),
+          // MaterialButton(
+          //   minWidth: 50,
+          //   onPressed: () {
+          //     clearFocus(context);
+          //     showFilterDialog(viewModel);
+          //   },
+          //   padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+          //   color: PRIMARY_COLOR,
+          //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          //   child: Image.asset(
+          //     Assets.profileFilter2x,
+          //     width: 26,
+          //     height: 26,
+          //     color: Colors.white,
+          //   ),
+          // ),
         ],
       ),
     );

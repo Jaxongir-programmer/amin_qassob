@@ -48,7 +48,6 @@ Future<void> main() async {
   await Hive.initFlutter();
   // Registering the adapter
   Hive.registerAdapter(ProductModelAdapter());
-  Hive.registerAdapter(BrandModelAdapter());
   Hive.registerAdapter(SizeModelAdapter());
   Hive.registerAdapter(TipModelAdapter());
   // Hive.registerAdapter(ImagesAdapter());

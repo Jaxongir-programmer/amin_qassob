@@ -190,7 +190,8 @@ extension CustomViews on Widget {
 
   static Widget buildNetworkImage(String? url, {double? height, double? width, BoxFit? fit}) {
     return CachedNetworkImage(
-      imageUrl: PrefUtils.getBaseImageUrl() + (url ?? ""),
+      // imageUrl: PrefUtils.getBaseImageUrl() + (url ?? ""),
+      imageUrl: BASE_IMAGE_URL + (url ?? ""),
       placeholder: (context, url) => Center(
           child: Container(
               height: 20,

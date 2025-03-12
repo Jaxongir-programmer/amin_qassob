@@ -1,30 +1,15 @@
-import 'dart:async';
-import 'package:amin_qassob/model/filter_brand_model.dart';
-import 'package:amin_qassob/screen/main/brands_screen/brands_view_model.dart';
 import 'package:amin_qassob/screen/main/home/home_viewmodel.dart';
-import 'package:amin_qassob/screen/main/product_list/product_list_screen.dart';
-import 'package:amin_qassob/utils/pref_utils.dart';
 import 'package:amin_qassob/utils/utils.dart';
 
-// import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tree/flutter_tree.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
-import '../../../generated/assets.dart';
-import '../../../model/brand_model.dart';
 import '../../../model/category_model.dart';
 import '../../../model/product_model.dart';
 import '../../../provider/providers.dart';
-import '../../../utils/app_colors.dart';
-import '../../../view/brand_item_view.dart';
-import '../../../view/category_circle_item_view.dart';
-import '../../../view/custom_views.dart';
 import '../../../view/empty_widget.dart';
 import '../../../view/products_item_view.dart';
-import '../home/search_field.dart';
-import '../search/search_screen.dart';
+import '../product_list/product_list_screen.dart';
 
 class BrandsScreen extends StatefulWidget {
   final CategoryModel category;
@@ -65,39 +50,39 @@ class BrandsScreenState extends State<BrandsScreen> {
                       //   },
                       // ),
                       SizedBox(
-                        height: 130,
+                        height: 48,
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                           scrollDirection: Axis.horizontal,
                           // primary: false,
                           padding: const EdgeInsets.only(left: 16, right: 0, top: 0, bottom: 0),
                           // shrinkWrap: true,
-                          itemCount: viewModel.categoryList.length,
+                          itemCount: viewModel.brandList.length,
                           itemBuilder: (context, index) {
-                            final data = viewModel.categoryList[index];
+                            final item = viewModel.brandList[index];
                             return InkWell(
                                 onTap: () async {
                                   Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (_) => ProductListScreen(
-                                                                  brand: brand,
-                                                                  filterList: widget.filterList,
-                                                                )));
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => ProductListScreen(
+                                                brand: item,
+                                              )));
                                 },
-                                child: CategoryItemView(
-                                  item: data,
-                                  index: index,
-                                ));
+                                child: Container(
+                                    alignment: Alignment.center,
+                                    margin: EdgeInsets.symmetric(horizontal: 4),
+                                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.shade200,
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.8))),
+                                    child: Text(item.title)));
                           },
                         ),
                       ),
                       Expanded(
-                        child: viewModel.progressData
-                            ? const Center(
-                                child: CircularProgressIndicator(),
-                              )
-                            : viewModel.productByCategoryList.isNotEmpty
+                        child: viewModel.productByCategoryList.isNotEmpty
                                 ? GridView.builder(
                                     shrinkWrap: true,
                                     primary: false,
@@ -191,6 +176,7 @@ class BrandsScreenState extends State<BrandsScreen> {
   void loadData(HomeViewModel viewModel, categoryId) {
     // viewModel.getBrandList(categoryId, keyword);
 
+    viewModel.getBrandList(categoryId);
     viewModel.getProductByCategory(categoryId);
   }
 

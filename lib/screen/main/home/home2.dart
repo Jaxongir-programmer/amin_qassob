@@ -200,10 +200,10 @@ class _HomeScreen2State extends State<HomeScreen2> {
               await box.addAll(event);
             });
 
-            viewModel.allBrandsData.listen((event) async {
-              await brandsBox.clear();
-              await brandsBox.addAll(event);
-            });
+            // viewModel.allBrandsData.listen((event) async {
+            //   await brandsBox.clear();
+            //   await brandsBox.addAll(event);
+            // });
 
             viewModel.allGroupsData.listen((event) async {
               await groupsBox.clear();
@@ -241,65 +241,65 @@ class _HomeScreen2State extends State<HomeScreen2> {
     print("TAG2: " + "${brandsBox.values.toList().length}");
   }
 
-  void showFilterDialog() {
-    showModalBottomSheet(
-        isScrollControlled: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(18.0)),
-        ),
-        backgroundColor: Colors.white,
-        context: context,
-        builder: (context) {
-          return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-            return DraggableScrollableSheet(
-                initialChildSize: 0.7,
-                maxChildSize: 0.96,
-                expand: false,
-                builder: (BuildContext context, ScrollController scrollController) {
-                  return SingleChildScrollView(
-                    controller: scrollController,
-                    child: Column(
-                      // mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        dialogRoundedShapeB(),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(),
-                          child: Column(
-                            children: [
-                              TreeView(
-                                data: treeData ?? [],
-                                onTap: (treeData) {
-                                  if (treeData.children.isEmpty) {
-                                    Timer(const Duration(milliseconds: 100), () {
-                                      Navigator.pop(context);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => ProductListScreen(
-                                                    brand: BrandModel((treeData.extra as FilterBrandModel).id,
-                                                        (treeData.extra as FilterBrandModel).text, "", "", [], [], 0),
-                                                    filterList: filterBrandList,
-                                                  )));
-                                    });
-                                  }
-                                },
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                });
-          });
-        });
-  }
+  // void showFilterDialog() {
+  //   showModalBottomSheet(
+  //       isScrollControlled: true,
+  //       shape: const RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.vertical(top: Radius.circular(18.0)),
+  //       ),
+  //       backgroundColor: Colors.white,
+  //       context: context,
+  //       builder: (context) {
+  //         return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+  //           return DraggableScrollableSheet(
+  //               initialChildSize: 0.7,
+  //               maxChildSize: 0.96,
+  //               expand: false,
+  //               builder: (BuildContext context, ScrollController scrollController) {
+  //                 return SingleChildScrollView(
+  //                   controller: scrollController,
+  //                   child: Column(
+  //                     // mainAxisSize: MainAxisSize.min,
+  //                     children: <Widget>[
+  //                       const SizedBox(
+  //                         height: 10,
+  //                       ),
+  //                       dialogRoundedShapeB(),
+  //                       const SizedBox(
+  //                         height: 10,
+  //                       ),
+  //                       Padding(
+  //                         padding: const EdgeInsets.symmetric(),
+  //                         child: Column(
+  //                           children: [
+  //                             TreeView(
+  //                               data: treeData ?? [],
+  //                               onTap: (treeData) {
+  //                                 if (treeData.children.isEmpty) {
+  //                                   Timer(const Duration(milliseconds: 100), () {
+  //                                     Navigator.pop(context);
+  //                                     Navigator.push(
+  //                                         context,
+  //                                         MaterialPageRoute(
+  //                                             builder: (context) => ProductListScreen(
+  //                                                   brand: BrandModel((treeData.extra as FilterBrandModel).id,
+  //                                                       (treeData.extra as FilterBrandModel).text, "",  [], [], 0),
+  //                                                   filterList: filterBrandList,
+  //                                                 )));
+  //                                   });
+  //                                 }
+  //                               },
+  //                             )
+  //                           ],
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 );
+  //               });
+  //         });
+  //       });
+  // }
 
   Widget _buildBody(BuildContext context, Providers provider, HomeViewModel viewModel) {
     return Column(
@@ -570,7 +570,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
     return viewModel.categoriesProgress
         ? categoriesShimmer(context: context)
         : SizedBox(
-            height: 130,
+            height: 135,
             child: ListView.builder(
               physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
               scrollDirection: Axis.horizontal,

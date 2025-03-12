@@ -61,7 +61,7 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                 width: 123,
                 child: Stack(
                   children: [
-                    asCachedNetworkImage(widget.item.image, fit: BoxFit.contain, width: 123, height: 75),
+                    asCachedNetworkImage(widget.item.photos[0]??"", fit: BoxFit.contain, width: 123, height: 75),
                     // if (widget.item.status != "" && widget.item.status != null)
                     //   Positioned(
                     //       bottom: 0,

@@ -5,26 +5,13 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'brand_model.g.dart';
 
-@HiveType(typeId: 2)
 @JsonSerializable()
 class BrandModel {
-  @HiveField(0)
   final int id;
-  @HiveField(1)
-  final String brendName;
-  @HiveField(2)
-  final String image;
-  @HiveField(3)
-  final String category_id;
-  @HiveField(4)
-  final List<TipModel> tip;
-  @HiveField(5)
-  final List<SizeModel> size;
-  @HiveField(6)
-  final int? childCount;
+  final String title;
+  final int category;
 
-  BrandModel(this.id, this.brendName, this.image, this.category_id, this.tip,
-      this.size, this.childCount);
+  BrandModel(this.id, this.title, this.category);
 
   factory BrandModel.fromJson(Map<String, dynamic> json) =>
       _$BrandModelFromJson(json);

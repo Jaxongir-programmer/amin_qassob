@@ -13,6 +13,8 @@ import '../generated/assets.dart';
 import '../utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import 'constants.dart';
+
 void hideKeyboard(BuildContext context) {
   FocusScope.of(context).requestFocus(FocusNode());
 }
@@ -390,7 +392,8 @@ Widget asCachedNetworkImage(String? url, {double? height, double? width, BoxFit?
   return ClipRRect(
     borderRadius: borderRadius ?? BorderRadius.circular(0),
     child: CachedNetworkImage(
-      imageUrl: PrefUtils.getBaseImageUrl() + (url ?? ""),
+      // imageUrl: PrefUtils.getBaseImageUrl() + (url ?? ""),
+      imageUrl: BASE_IMAGE_URL + (url ?? ""),
       placeholder: (context, url) => const Center(
           child: SizedBox(
               height: 20,

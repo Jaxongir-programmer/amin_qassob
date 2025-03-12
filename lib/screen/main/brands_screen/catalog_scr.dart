@@ -99,11 +99,11 @@ class _CatalogScreenState extends State<CatalogScreen> {
                                                     text: data.title,
                                                     style: const TextStyle(
                                                         color: TEXT_COLOR2, fontSize: 16, fontWeight: FontWeight.w500)),
-                                                TextSpan(
-                                                  text:
-                                                      ' (${(data.childCount != 0 && data.childCount != null) ? data.childCount : 0})',
-                                                  style: const TextStyle(color: GREY),
-                                                ),
+                                                // TextSpan(
+                                                //   text:
+                                                //       ' (${(data.childCount != 0 && data.childCount != null) ? data.childCount : 0})',
+                                                //   style: const TextStyle(color: GREY),
+                                                // ),
                                               ],
                                             ),
                                             maxLines: 2,
@@ -182,19 +182,19 @@ class _CatalogScreenState extends State<CatalogScreen> {
                               TreeView(
                                 data: treeData ?? [],
                                 onTap: (treeData) {
-                                  if (treeData.children.isEmpty) {
-                                    Timer(const Duration(milliseconds: 100), () {
-                                      Navigator.pop(context);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => ProductListScreen(
-                                                    brand: BrandModel((treeData.extra as FilterBrandModel).id,
-                                                        (treeData.extra as FilterBrandModel).text, "", "", [], [], 0),
-                                                    filterList: filterBrandList,
-                                                  )));
-                                    });
-                                  }
+                                  // if (treeData.children.isEmpty) {
+                                  //   Timer(const Duration(milliseconds: 100), () {
+                                  //     Navigator.pop(context);
+                                  //     Navigator.push(
+                                  //         context,
+                                  //         MaterialPageRoute(
+                                  //             builder: (context) => ProductListScreen(
+                                  //                   brand: BrandModel((treeData.extra as FilterBrandModel).id,
+                                  //                       (treeData.extra as FilterBrandModel).text, "", "", [], [], 0),
+                                  //                   filterList: filterBrandList,
+                                  //                 )));
+                                  //   });
+                                  // }
                                 },
                               )
                             ],
