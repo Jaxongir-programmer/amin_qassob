@@ -7,8 +7,10 @@ import 'package:amin_qassob/screen/main/orders/orders_screen.dart';
 import 'package:amin_qassob/screen/main/product_list/skidka_product_list_screen.dart';
 import 'package:amin_qassob/screen/main/search/search_screen.dart';
 import 'package:amin_qassob/view/category_circle_item_view.dart';
+import 'package:amin_qassob/view/products_item_view.dart';
 import 'package:amin_qassob/view/top_product_item_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ficonsax/ficonsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_tree/flutter_tree.dart';
@@ -113,10 +115,10 @@ class _HomeScreen2State extends State<HomeScreen2> {
                     },
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
-                      child: Image.asset(
-                        Assets.profileSearch,
-                        width: 26,
-                        height: 26,
+                      child: Icon(
+                        IconsaxOutline.search_normal_1,
+                        size: 26,
+                        color: BLACK,
                       ),
                     ),
                   ),
@@ -126,10 +128,10 @@ class _HomeScreen2State extends State<HomeScreen2> {
                     },
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
-                      child: Image.asset(
-                        Assets.profileFavorite,
-                        width: 26,
-                        height: 26,
+                      child: Icon(
+                        IconsaxOutline.heart,
+                        size: 26,
+                        color: BLACK,
                       ),
                     ),
                   ),
@@ -165,8 +167,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
                       //   ),
                       //   scrolledUnderElevation: 0,
                       // ),
-                      if (viewModel.photosList.isNotEmpty)
-                        CarouselWidget(photosList: viewModel.photosList),
+                      if (viewModel.photosList.isNotEmpty) CarouselWidget(photosList: viewModel.photosList),
                       _buildBody(context, provider, viewModel)
                     ],
                   ),
@@ -353,23 +354,23 @@ class _HomeScreen2State extends State<HomeScreen2> {
               children: [
                 const Expanded(
                   child: Text('Top Mahsulotlar',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFF212121))),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xFF212121))),
                 ),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "Ko'proq ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Color(0xFF212121),
-                    ),
-                  ),
-                ),
-                const Icon(
-                  Icons.keyboard_arrow_right,
-                  size: 20,
-                )
+                // TextButton(
+                //   onPressed: () {},
+                //   child: const Text(
+                //     "Ko'proq ",
+                //     style: TextStyle(
+                //       fontWeight: FontWeight.bold,
+                //       fontSize: 16,
+                //       color: Color(0xFF212121),
+                //     ),
+                //   ),
+                // ),
+                // const Icon(
+                //   Icons.keyboard_arrow_right,
+                //   size: 20,
+                // )
               ],
             )
           : Container(
@@ -417,23 +418,23 @@ class _HomeScreen2State extends State<HomeScreen2> {
               children: [
                 const Expanded(
                   child: Text('Chegirma Mahsulotlar',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFF212121))),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xFF212121))),
                 ),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "Ko'proq ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Color(0xFF212121),
-                    ),
-                  ),
-                ),
-                const Icon(
-                  Icons.keyboard_arrow_right,
-                  size: 20,
-                )
+                // TextButton(
+                //   onPressed: () {},
+                //   child: const Text(
+                //     "Ko'proq ",
+                //     style: TextStyle(
+                //       fontWeight: FontWeight.bold,
+                //       fontSize: 16,
+                //       color: Color(0xFF212121),
+                //     ),
+                //   ),
+                // ),
+                // const Icon(
+                //   Icons.keyboard_arrow_right,
+                //   size: 20,
+                // )
               ],
             )
           : Container(
@@ -478,10 +479,12 @@ class _HomeScreen2State extends State<HomeScreen2> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Expanded(
-            child: Text('Kategoriyalar', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFF212121))),
+            child: Text('Kategoriyalar', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xFF212121))),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+            //
+            },
             child: const Text(
               "Ko'proq ",
               style: TextStyle(
@@ -510,23 +513,23 @@ class _HomeScreen2State extends State<HomeScreen2> {
               children: [
                 const Expanded(
                   child: Text('Barcha Mahsulotlar',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFF212121))),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xFF212121))),
                 ),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "Ko'proq ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Color(0xFF212121),
-                    ),
-                  ),
-                ),
-                const Icon(
-                  Icons.keyboard_arrow_right,
-                  size: 20,
-                )
+                // TextButton(
+                //   onPressed: () {},
+                //   child: const Text(
+                //     "Ko'proq ",
+                //     style: TextStyle(
+                //       fontWeight: FontWeight.bold,
+                //       fontSize: 16,
+                //       color: Color(0xFF212121),
+                //     ),
+                //   ),
+                // ),
+                // const Icon(
+                //   Icons.keyboard_arrow_right,
+                //   size: 20,
+                // )
               ],
             )
           : Container(
@@ -536,28 +539,27 @@ class _HomeScreen2State extends State<HomeScreen2> {
   }
 
   Widget _buildProducts(HomeViewModel viewModel) {
-    return viewModel.topTovarProgress
+    return viewModel.progressData
         ? topProductShimmer(context: context)
         : viewModel.productList.isNotEmpty
-            ? SizedBox(
-                height: 200,
-                child: ListView.separated(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  itemCount: viewModel.productList.length,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (ctx, index) {
-                    var item = viewModel.productList[index];
-                    return TopProductItemView(
-                      item: item,
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(
-                      width: 15,
-                    );
-                  },
-                ),
+            ? GridView.builder(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                itemCount: viewModel.productList.length,
+                shrinkWrap: true,
+                primary: false,
+                scrollDirection: Axis.vertical,
+                itemBuilder: (ctx, index) {
+                  var item = viewModel.productList[index];
+                  return ProductsItemView(
+                    item: item,
+                  );
+                },
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisSpacing: 0, // horizontal
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.67,
+                    mainAxisSpacing: 4 // vertical
+                    ),
               )
             : Container(
                 height: 0,

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:amin_qassob/screen/auth/offerta_screen.dart';
+import 'package:ficonsax/ficonsax.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -60,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           SliverList.list(children: [
             if (PrefUtils.getToken() != "")
-              _buildOption("Buyurtmalar", Assets.profileBag, 1.1, COLOR_PRIMARY, () {
+              _buildOption("Buyurtmalar", IconsaxOutline.bag_2, 1.1, BLACK, () {
                 startScreenF(context, const OrdersScreen());
               }),
             // if (PrefUtils.getToken() != "")
@@ -81,29 +82,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
             //                   reportType: REPORT_CASHBACK,
             //                 )));
             //   }),
-            if (PrefUtils.getToken() != "")
-              _buildOption("Hisobotlar", Assets.profileFilter2x, 2, COLOR_PRIMARY, () {
-                if (PrefUtils.getToken().isEmpty) {
-                  startScreenF(context, LoginScreen());
-                  return;
-                }
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => ReportScreen(
-                              reportType: REPORT_LIST,
-                            )));
-              }),
-            _buildOption("Ommaviy Offerta", Assets.profileLanguage, 1.1, COLOR_PRIMARY, () {
+
+            // if (PrefUtils.getToken() != "")
+            //   _buildOption("Hisobotlar", Assets.profileFilter2x, 2, COLOR_PRIMARY, () {
+            //     if (PrefUtils.getToken().isEmpty) {
+            //       startScreenF(context, LoginScreen());
+            //       return;
+            //     }
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (_) => ReportScreen(
+            //                   reportType: REPORT_LIST,
+            //                 )));
+            //   }),
+            _buildOption("Ommaviy Offerta", IconsaxOutline.profile_tick, 1.1, BLACK, () {
               startScreenF(context, const OffertaScreen());
             }),
-            _buildOption("Ilova haqida", Assets.profileInfoSquare2x, 2, COLOR_PRIMARY, () {
+            _buildOption("Ilova haqida", IconsaxOutline.information, 2, BLACK, () {
               Navigator.push(context, MaterialPageRoute(builder: (_) => const AboutAppScreen()));
             }),
-            _buildOption("Ilovani ulashing", Assets.profileShare, 1.1, COLOR_PRIMARY, () {
+            _buildOption("Ilovani ulashing", IconsaxOutline.share, 1.1, BLACK, () {
               Share.share('https://play.google.com/store/apps/details?id=${_packageInfo?.packageName}');
             }),
-            _buildOption("Biz bilan bog'laning", Assets.profileCall, 1.5, COLOR_PRIMARY, () {
+            _buildOption("Biz bilan bog'laning", IconsaxOutline.call, 1.5, BLACK, () {
               showDialog<String>(
                   context: context,
                   barrierDismissible: true,
@@ -176,7 +178,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             if (PrefUtils.getToken() != "")
               Consumer<Providers>(
                 builder: (context, provider, child) {
-                  return _buildOption("Tizimdan chiqish", Assets.profileLogout2x, 2, Colors.red, () {
+                  return _buildOption("Tizimdan chiqish", IconsaxOutline.logout, 2, GREY, () {
                     showExitDialog(context, "Tizimdan chiqishga ishonchingiz komilmi ?",
                         noButton: true, forSingOut: true, pressOk: () {
                       PrefUtils.setToken("");
@@ -197,7 +199,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             if (PrefUtils.getToken() != "" && Platform.isIOS)
               Consumer<Providers>(
                 builder: (context, provider, child) {
-                  return _buildOption("Hisobni o'chirish", Assets.profileTrash, 0.9, Colors.red, () {
+                  return _buildOption("Hisobni o'chirish", IconsaxOutline.profile_delete, 0.9, Colors.red, () {
                     showExitDialog(context, "THisobni o'chirishga ishonchingiz komilmi ?",
                         noButton: true, forSingOut: true, pressOk: () {
                       PrefUtils.setToken("");
@@ -220,20 +222,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildOption(String title, String icon, double scale, Color titleColor, Function onCLick) {
+  Widget _buildOption(String title, IconData icon, double scale, Color titleColor, Function onCLick) {
     return ListTile(
       contentPadding: const EdgeInsets.only(left: 20, right: 16),
-      leading: Image.asset(
+      leading: Icon(
         icon,
-        scale: scale,
         color: COLOR_PRIMARY,
       ),
       title: Text(
         title,
-        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: titleColor),
+        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18, color: titleColor),
       ),
       trailing:
-          Image(image: const AssetImage(Assets.profileArrowRight2x), color: Colors.grey.shade500, width: 20, height: 20),
+          Icon(IconsaxOutline.arrow_right_3),
+          // Image(image: const AssetImage(Assets.profileArrowRight2x), color: Colors.grey.shade500, width: 20, height: 20),
       onTap: () => onCLick(),
     );
   }

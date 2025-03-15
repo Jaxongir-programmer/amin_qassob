@@ -2,6 +2,7 @@ import 'package:amin_qassob/extensions/extensions.dart';
 import 'package:amin_qassob/utils/pref_utils.dart';
 import 'package:amin_qassob/utils/utils.dart';
 import 'package:amin_qassob/view/custom_views.dart';
+import 'package:ficonsax/ficonsax.dart';
 
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -123,11 +124,10 @@ class ProductsItemViewState extends State<ProductsItemView> {
                             onTap: () {
                               provider.addToFavorite(widget.item, provider.isFavorite(widget.item.id));
                             },
-                            child: Image.asset(
-                                provider.isFavorite(widget.item.id) ? Assets.profileHeartFull2x : Assets.profileHeart2x,
-                                color: PRIMARY_COLOR,
-                                width: 24,
-                                height: 24)),
+                            child: Icon(
+                                provider.isFavorite(widget.item.id) ? IconsaxBold.heart : IconsaxOutline.heart,
+                                color: Colors.red,
+                                size: 24,)),
                       ),
                     )
                   ],
@@ -185,7 +185,7 @@ class ProductsItemViewState extends State<ProductsItemView> {
                             style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14),
                           ),
                           Text(
-                            "${" "}/${widget.item.unit}",
+                            "${" "}(${widget.item.unit})",
                             style: const TextStyle(color: Colors.black, fontSize: 13),
                           ),
                         ],

@@ -24,9 +24,9 @@ class CategoryItemView extends StatelessWidget {
             borderRadius: BorderRadius.circular(40),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.4),
-                spreadRadius: 2,
-                blurRadius: 2,
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 1,
+                blurRadius: 1,
                 offset: const Offset(0, 1), // changes position of shadow
               ),
             ],

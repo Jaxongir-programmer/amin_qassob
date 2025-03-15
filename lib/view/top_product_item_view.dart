@@ -1,6 +1,7 @@
 import 'package:amin_qassob/extensions/extensions.dart';
 import 'package:amin_qassob/utils/app_colors.dart';
 import 'package:amin_qassob/utils/utils.dart';
+import 'package:ficonsax/ficonsax.dart';
 // import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../generated/assets.dart';
@@ -97,10 +98,10 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                           onTap: () {
                             provider.addToFavorite(widget.item, provider.isFavorite(widget.item.id));
                           },
-                          child: Image.asset(
-                              provider.isFavorite(widget.item.id) ? Assets.profileHeartFull2x : Assets.profileHeart2x,
-                              width: 22,
-                              height: 22)),
+                          child: Icon(
+                              provider.isFavorite(widget.item.id) ? IconsaxBold.heart : IconsaxOutline.heart,
+                              size: 24,
+                          color: Colors.red)),
                     ),
                   ],
                 ),

@@ -16,11 +16,13 @@ import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../../generated/assets.dart';
+import '../../../../model/address_model.dart';
 import '../../../../model/make_order_model.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/pref_utils.dart';
 import '../../../../view/custom_views.dart';
 import '../../home/hearder.dart';
+import '../map/google_map_screen.dart';
 import 'makeorder_viewmodel.dart';
 
 class MakeOrderScreen extends StatefulWidget {
@@ -40,6 +42,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
   var commentController = TextEditingController();
   var orientrController = TextEditingController();
   var phoneFormatter = MaskTextInputFormatter(mask: '+998 (##) ### ## ##', type: MaskAutoCompletionType.eager);
+
+  AddressModel? selectedAddress;
 
   DateFormat format = DateFormat("dd.MM.yyyy HH:mm");
 
@@ -313,7 +317,13 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
         children: [
           InkWell(
             onTap: () async {
-              addressListDialog(context, provider);
+              var r = await Navigator.push(context, MaterialPageRoute(builder: (_) => const GoogleMapScreen()));
+              if (r is AddressModel) {
+                setState(() {
+                  selectedAddress = r;
+                });
+              }
+              // addressListDialog(context, provider);
             },
             child: Row(
               children: [
@@ -329,7 +339,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                         height: 4,
                       ),
                       Text(
-                        provider.getSelectAdres?.name ?? "Manzil kiritilmagan",
+                        // provider.getSelectAdres?.name ?? "Manzil kiritilmagan",
+                        "${selectedAddress?.lat ?? "Manzil tanlang"}  ${selectedAddress?.long ?? ""}",
                         style: const TextStyle(fontSize: 13),
                       ),
                     ],
@@ -462,7 +473,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                 style: TextStyle(fontSize: 16),
               ),
               Text(
-                "${(Providers().cartSumma).formattedAmountString()} UZS",
+                "${(Providers().cartSumma).formattedAmountString()} ₩",
                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               )
             ],

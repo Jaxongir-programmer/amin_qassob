@@ -6,6 +6,7 @@ import 'package:amin_qassob/screen/main/brands_screen/catalog_scr.dart';
 import 'package:amin_qassob/screen/main/home/home2.dart';
 import 'package:amin_qassob/screen/main/home/home_viewmodel.dart';
 import 'package:amin_qassob/screen/main/profile/profile_screen.dart';
+import 'package:ficonsax/ficonsax.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -105,22 +106,28 @@ class _MainScreenState extends State<MainScreen> {
                   items: [
                     BottomNavigationBarItem(
                       label: "Asosiy",
-                      activeIcon: Image.asset(
-                        Assets.profileHome,
+                      activeIcon: Icon(
+                        IconsaxBold.home,
+                        size: 24,
                         color: PRIMARY_DARK_COLOR,
                       ),
-                      icon: Image.asset(
-                        Assets.profileHome,
+                      icon: Icon(
+                        IconsaxOutline.home,
+                        size: 24,
+                        color: BLACK,
                       ),
                     ),
                     BottomNavigationBarItem(
                       label: "Katalog",
-                      activeIcon: Image.asset(
-                        Assets.profileKatalog,
+                      activeIcon: Icon(
+                        IconsaxBold.category,
+                        size: 24,
                         color: PRIMARY_DARK_COLOR,
                       ),
-                      icon: Image.asset(
-                        Assets.profileKatalog,
+                      icon: Icon(
+                        IconsaxOutline.category,
+                        size: 24,
+                        color: BLACK,
                       ),
                     ),
                     // BottomNavigationBarItem(
@@ -140,8 +147,9 @@ class _MainScreenState extends State<MainScreen> {
                             Text((provider.getCartList.length).toString(), style: const TextStyle(color: Colors.white)),
                         badgeStyle: const badges.BadgeStyle(badgeColor: RED_COLOR, shape: badges.BadgeShape.circle),
                         badgeAnimation: const badges.BadgeAnimation.scale(),
-                        child: Image.asset(
-                          Assets.profileCart,
+                        child: Icon(
+                          IconsaxBold.shopping_cart,
+                          size: 24,
                           color: PRIMARY_DARK_COLOR,
                         ),
                       ),
@@ -151,17 +159,24 @@ class _MainScreenState extends State<MainScreen> {
                             Text((provider.getCartList.length).toString(), style: const TextStyle(color: Colors.white)),
                         badgeStyle: const badges.BadgeStyle(badgeColor: RED_COLOR, shape: badges.BadgeShape.circle),
                         badgeAnimation: const badges.BadgeAnimation.scale(),
-                        child: Image.asset(Assets.profileCart),
+                        child: Icon(
+                          IconsaxOutline.shopping_cart,
+                          size: 24,
+                          color: BLACK,
+                        ),
                       ),
                     ),
                     BottomNavigationBarItem(
                       label: "Profil",
-                      activeIcon: Image.asset(
-                        Assets.profilePerson,
+                      activeIcon: Icon(
+                        IconsaxBold.profile_circle,
+                        size: 24,
                         color: PRIMARY_DARK_COLOR,
                       ),
-                      icon: Image.asset(
-                        Assets.profilePerson,
+                      icon: Icon(
+                        IconsaxOutline.profile_circle,
+                        size: 24,
+                        color: BLACK,
                       ),
                     ),
                   ],
@@ -173,12 +188,14 @@ class _MainScreenState extends State<MainScreen> {
                   selectedLabelStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: PRIMARY_DARK_COLOR,
-                    fontSize: 10,
+                    fontSize: 12,
                   ),
                   showUnselectedLabels: true,
+                  type: BottomNavigationBarType.fixed,
+                  backgroundColor: BACKGROUND_COLOR,
                   unselectedLabelStyle: const TextStyle(
                     fontWeight: FontWeight.normal,
-                    fontSize: 10,
+                    fontSize: 12,
                   ),
                   selectedItemColor: const Color(0xFF212121),
                   unselectedItemColor: const Color(0xFF9E9E9E),

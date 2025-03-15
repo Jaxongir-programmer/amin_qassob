@@ -84,6 +84,9 @@ dependencies:
   carousel_slider:
   as_toast_x:
   jwt_decoder: ^2.0.1
+  geolocator:
+  google_maps_flutter:
+  ficonsax:
 
 dev_dependencies:
   flutter_test:
