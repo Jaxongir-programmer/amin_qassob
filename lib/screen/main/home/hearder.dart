@@ -68,7 +68,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                         children: [
                           Image.asset(
                             Assets.profileLocation2x,
-                            color: PRIMARY_DARK_COLOR,
+                            color: PRIMARY_LIGHT_COLOR,
                             width: 26,
                             height: 26,
                           ),
@@ -292,13 +292,13 @@ Widget _emptyLocationWidget(BuildContext context, Providers provider) {
         margin: const EdgeInsets.only(left: 24, right: 24),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
-          border: Border.all(color: PRIMARY_DARK_COLOR),
+          border: Border.all(color: PRIMARY_LIGHT_COLOR),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
               offset: const Offset(4, 8),
               blurRadius: 20,
-              color: PRIMARY_DARK_COLOR.withOpacity(0.25),
+              color: PRIMARY_LIGHT_COLOR.withOpacity(0.25),
             ),
           ],
         ),

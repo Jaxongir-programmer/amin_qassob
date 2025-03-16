@@ -87,6 +87,8 @@ dependencies:
   geolocator:
   google_maps_flutter:
   ficonsax:
+  image_picker:
+  image_cropper:
 
 dev_dependencies:
   flutter_test:

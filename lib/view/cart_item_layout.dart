@@ -104,7 +104,7 @@ class _CartItemLayoutState extends State<CartItemLayout> {
                         style: TextStyle(color: Colors.black),
                       ),
                       Text(
-                        "${(totalPrice).formattedAmountString()}so'm",
+                        "${(totalPrice).formattedAmountString()}₩",
                         style: const TextStyle(color: PRIMARY_COLOR),
                       )
                     ],

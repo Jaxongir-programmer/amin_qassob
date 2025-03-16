@@ -1,35 +1,26 @@
 import 'dart:async';
 
 import 'package:badges/badges.dart' as badges;
-import 'package:amin_qassob/screen/auth/login_screen.dart';
 import 'package:amin_qassob/screen/main/brands_screen/catalog_scr.dart';
 import 'package:amin_qassob/screen/main/home/home2.dart';
 import 'package:amin_qassob/screen/main/home/home_viewmodel.dart';
 import 'package:amin_qassob/screen/main/profile/profile_screen.dart';
 import 'package:ficonsax/ficonsax.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-// import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar_tab_view.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../generated/assets.dart';
 import '../../model/event_model.dart';
 import '../../provider/providers.dart';
-import '../../service/local_notification_service.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/constants.dart';
 import '../../service/eventbus.dart';
-import '../../utils/pref_utils.dart';
 import '../../utils/size_config.dart';
 import '../../utils/utils.dart';
-import 'brands_screen/brands_screen.dart';
 import 'cart/cart_screen.dart';
-import 'favorites/favorites_screen.dart';
-import 'message/message_screen.dart';
 
 class MainScreen extends StatefulWidget {
   // final int selectedIndex;
@@ -109,7 +100,7 @@ class _MainScreenState extends State<MainScreen> {
                       activeIcon: Icon(
                         IconsaxBold.home,
                         size: 24,
-                        color: PRIMARY_DARK_COLOR,
+                        color: PRIMARY_COLOR,
                       ),
                       icon: Icon(
                         IconsaxOutline.home,
@@ -122,7 +113,7 @@ class _MainScreenState extends State<MainScreen> {
                       activeIcon: Icon(
                         IconsaxBold.category,
                         size: 24,
-                        color: PRIMARY_DARK_COLOR,
+                        color: PRIMARY_COLOR,
                       ),
                       icon: Icon(
                         IconsaxOutline.category,
@@ -150,7 +141,7 @@ class _MainScreenState extends State<MainScreen> {
                         child: Icon(
                           IconsaxBold.shopping_cart,
                           size: 24,
-                          color: PRIMARY_DARK_COLOR,
+                          color: PRIMARY_COLOR,
                         ),
                       ),
                       icon: badges.Badge(
@@ -171,7 +162,7 @@ class _MainScreenState extends State<MainScreen> {
                       activeIcon: Icon(
                         IconsaxBold.profile_circle,
                         size: 24,
-                        color: PRIMARY_DARK_COLOR,
+                        color: PRIMARY_COLOR,
                       ),
                       icon: Icon(
                         IconsaxOutline.profile_circle,
@@ -187,7 +178,7 @@ class _MainScreenState extends State<MainScreen> {
                   currentIndex: provider.getIndex(),
                   selectedLabelStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: PRIMARY_DARK_COLOR,
+                    color: PRIMARY_LIGHT_COLOR,
                     fontSize: 12,
                   ),
                   showUnselectedLabels: true,

@@ -13,6 +13,7 @@ class Assets {
   static const String imagesFavoriteList = 'assets/images/favorite_list.png';
   static const String imagesImg = 'assets/images/img.png';
   static const String imagesLocationIcon = 'assets/images/location_icon.svg';
+  static const String imagesLogoMain = 'assets/images/logo_main.png';
   static const String imagesMyLocation = 'assets/images/my_location.png';
   static const String imagesNoOrder = 'assets/images/no_order.png';
   static const String imagesNorOrder = 'assets/images/nor_order.png';

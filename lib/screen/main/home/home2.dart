@@ -354,7 +354,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
               children: [
                 const Expanded(
                   child: Text('Top Mahsulotlar',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xFF212121))),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PRIMARY_COLOR)),
                 ),
                 // TextButton(
                 //   onPressed: () {},
@@ -418,7 +418,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
               children: [
                 const Expanded(
                   child: Text('Chegirma Mahsulotlar',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xFF212121))),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PRIMARY_COLOR)),
                 ),
                 // TextButton(
                 //   onPressed: () {},
@@ -479,7 +479,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Expanded(
-            child: Text('Kategoriyalar', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xFF212121))),
+            child: Text('Kategoriyalar', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PRIMARY_COLOR)),
           ),
           TextButton(
             onPressed: () {
@@ -513,7 +513,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
               children: [
                 const Expanded(
                   child: Text('Barcha Mahsulotlar',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xFF212121))),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PRIMARY_COLOR)),
                 ),
                 // TextButton(
                 //   onPressed: () {},

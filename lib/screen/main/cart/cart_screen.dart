@@ -201,7 +201,7 @@ class _CartScreenState extends State<CartScreen> {
                   child: CircularProgressIndicator(),
                 )
               : ElevatedButton(
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(PRIMARY_DARK_COLOR)),
+                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(PRIMARY_COLOR)),
                   onPressed: () {
                     PrefUtils.getToken().isNotEmpty
                         ? PrefUtils.getCartList().isEmpty
@@ -254,12 +254,12 @@ class _CartScreenState extends State<CartScreen> {
           margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(16)),
-            color: PRIMARY_DARK_COLOR,
+            color: PRIMARY_COLOR,
             boxShadow: [
               BoxShadow(
                 offset: const Offset(4, 8),
                 blurRadius: 20,
-                color: PRIMARY_DARK_COLOR.withOpacity(0.25),
+                color: PRIMARY_COLOR.withOpacity(0.25),
               ),
             ],
           ),

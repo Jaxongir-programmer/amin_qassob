@@ -28,7 +28,7 @@ Color setColor(String color_name) {
     case "Sariq":
       return YELLOW_COLOR;
     case "Yashil":
-      return PRIMARY_DARK_COLOR;
+      return PRIMARY_LIGHT_COLOR;
     case "Zangori":
       return Colors.orange;
     default:

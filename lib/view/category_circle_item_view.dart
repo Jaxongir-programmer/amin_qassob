@@ -36,7 +36,7 @@ class CategoryItemView extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(40),
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(0.0),
               child: CustomViews.buildNetworkImage(item.cat_image, fit: BoxFit.contain, width: 80, height: 80),
             ),
           ),

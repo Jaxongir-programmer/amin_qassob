@@ -343,6 +343,25 @@ class ApiService {
       final response = await dio.post("v4/order_model/", data: jsonEncode(orderModel));
       final baseData = wrapResponse(response);
       if (!baseData.error) {
+        return baseData.data["id"];
+      } else {
+        errorStream.sink.add(baseData.message ?? "Error");
+      }
+    } on DioError catch (e) {
+      errorStream.sink.add(wrapError(e));
+    }
+    return null;
+  }
+
+    Future<dynamic> payment(String image,int orderId, StreamController<String> errorStream) async {
+    try {
+      final response = await dio.post("v5/payment/", data:
+      FormData.fromMap({
+        "payment_image": await MultipartFile.fromFile(image, filename: image.split('/').last),
+        "order": orderId,
+      }));
+      final baseData = wrapResponse(response);
+      if (!baseData.error) {
         return baseData.data;
       } else {
         errorStream.sink.add(baseData.message ?? "Error");
@@ -444,10 +463,10 @@ class ApiService {
 
   Future<String?> getPublicOffer(StreamController<String> errorStream) async {
     try {
-      final response = await dio.get("clientofferta");
+      final response = await dio.get("v2/offerta/1");
       final baseData = wrapResponse(response);
       if (!baseData.error) {
-        return baseData.data as String;
+        return baseData.data["text"] as String;
       } else {
         errorStream.sink.add(baseData.message ?? "Error");
       }

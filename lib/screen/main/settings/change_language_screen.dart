@@ -136,7 +136,7 @@ class ChangeLanguageScreenState extends State<ChangeLanguageScreen>{
                 // }
               },
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-              color: PRIMARY_DARK_COLOR,
+              color: PRIMARY_LIGHT_COLOR,
               child: const Text(
                 "Davom etish",
                 style: TextStyle(color: Colors.white),

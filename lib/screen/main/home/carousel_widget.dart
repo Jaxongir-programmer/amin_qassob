@@ -1,6 +1,7 @@
 import 'package:amin_qassob/model/offer_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../view/carousel_item_view.dart';
 
@@ -22,7 +23,9 @@ class _CarouselWidgetState extends State<CarouselWidget> {
         // itemCount: 5,
         itemBuilder: (context, index, realIndex) {
           return CarouselItemView(
-            onClick: () {},
+            onClick: () {
+              launchURL(widget.photosList[index].link ?? '');
+            },
             index: index,
             item: widget.photosList[index],
             // item: Constants.photosList[index],
@@ -49,5 +52,13 @@ class _CarouselWidgetState extends State<CarouselWidget> {
                 _currentIndex = v;
               });
             }));
+  }
+  Future<void> launchURL(String link) async {
+    final Uri url = Uri.parse('https://example.com');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Link ochib bo‘lmadi: $url';
+    }
   }
 }

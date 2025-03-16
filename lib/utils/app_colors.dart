@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import '../extensions/extensions.dart';
 
 // class AppColors {
-  const Color PRIMARY_COLOR = Color(0xFFFF9800 );
-  const Color PRIMARY_DARK_COLOR = Color(0xFFF57C00);
+  const Color PRIMARY_COLOR = Color(0xFFf86203);
+  const Color PRIMARY_LIGHT_COLOR = Color(0xFFfde800);
   const Color ACCENT_COLOR = Color(0xFF009688);
   const Color LIGHT_GREEN_COLOR = Color(0xFF81D7BF);
   const Color RED_COLOR = Color(0xFFB41D22);
@@ -26,7 +26,7 @@ import '../extensions/extensions.dart';
    Color STATUS_CANCELED = HexColor.fromHex("#6AD50000");
    Color TRANSPARENT = Color(0x00000000);
 
-const Color COLOR_PRIMARY = Color(0xFFFF9800);
+const Color COLOR_PRIMARY = Color(0xFFf86203);
 const Color COLOR_PRIMARY3 = Color.fromRGBO(37, 41, 46, 1);
 const Color COLOR_PRIMARY2 = Color.fromRGBO(57, 62, 70, 1);
 

@@ -164,7 +164,7 @@ class ProductsItemViewState extends State<ProductsItemView> {
                     //         width: 8,
                     //       ),
                     //       Text(
-                    //         "${widget.item.price.formattedAmountString()} so'm",
+                    //         "${widget.item.price.formattedAmountString()} ₩",
                     //         style: const TextStyle(fontSize: 13, decoration: TextDecoration.lineThrough),
                     //       )
                     //     ],

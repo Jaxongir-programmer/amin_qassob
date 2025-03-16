@@ -111,7 +111,7 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                  color: Color(0xFF212121),
+                  color: PRIMARY_COLOR,
                   fontWeight: FontWeight.w500,
                   fontSize: 13,
                   // maxLines: 2,

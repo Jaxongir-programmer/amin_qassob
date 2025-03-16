@@ -47,11 +47,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
 
   DateFormat format = DateFormat("dd.MM.yyyy HH:mm");
 
-  final List<PaymentModel> paymentTypes = [
-    PaymentModel("click", 1),
-    PaymentModel("terminal", 2),
-    PaymentModel("naqd", 3)
-  ];
+  final List<PaymentModel> paymentTypes = [PaymentModel("click", 1), PaymentModel("terminal", 2), PaymentModel("naqd", 3)];
 
   final List<PaymentModel> genderList = [
     PaymentModel("Erkak kishi", 1),
@@ -127,7 +123,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                                         // if (deliverDate == "") {
                                         //   showWarning(context, "Yetkazib berish vaqtini tanlang !");
                                         // } else
-                                          if (selectedPayment == null) {
+                                        if (selectedPayment == null) {
                                           showWarning(context, "To'lov turini tanlang");
                                         }
                                         // else if (provider.getSelectAdres == null) {
@@ -158,8 +154,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                                       ),
                                       child: const Text(
                                         "Tasdiqlash",
-                                        style:
-                                            TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
                                       ))
                                   : const Center(
                                       child: CircularProgressIndicator(),
@@ -181,7 +176,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
 
             viewModel.makeOrderData.listen((event) {
               PrefUtils.clearCart();
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const SuccessScreen()));
+              startScreenF(context, SuccessScreen(orderId: event));
             });
           },
         );
@@ -212,7 +207,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
             style: TextStyle(color: Colors.white),
           )),
           Text(
-            "${summa.formattedAmountString()} so'm",
+            "${summa.formattedAmountString()} ₩",
             style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           )
         ],
@@ -224,8 +219,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       margin: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey.shade300, width: 2)),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey.shade300, width: 2)),
       child: Column(
         children: [
           Row(
@@ -311,8 +306,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       margin: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey.shade300, width: 2)),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey.shade300, width: 2)),
       child: Column(
         children: [
           InkWell(
@@ -487,8 +482,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       margin: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey.shade300, width: 2)),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey.shade300, width: 2)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -537,7 +532,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                 height: 4,
               ),
               Text(
-                "${widget.orderModel.deliver_summa.formattedAmountString()}so'm",
+                "${widget.orderModel.deliver_summa.formattedAmountString()}₩",
                 style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
             ],
@@ -604,8 +599,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       margin: const EdgeInsets.symmetric(horizontal: 16),
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey.shade300)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey.shade300)),
       child: Row(
         children: [
           CircleAvatar(
@@ -849,8 +843,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
 
     if (today.hour < 20 && today.hour >= 8) {
       for (var i = (today.hour + 1); i < 20; i++) {
-        timeListToday
-            .add(TimeClas("${i.toDouble().toStringAsFixed(2)} - ${(i + 1).toDouble().toStringAsFixed(2)}", i.toInt()));
+        timeListToday.add(TimeClas("${i.toDouble().toStringAsFixed(2)} - ${(i + 1).toDouble().toStringAsFixed(2)}", i.toInt()));
       }
       timeListTomorrow = oclockList.sublist(0, 5);
     } else if (today.hour < 8) {
@@ -895,12 +888,9 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                   thumbColor: Colors.white,
                   groupValue: selectDay,
                   children: {
-                    0: segmentItem(
-                        context: context, title: today.hour >= 19 ? "Ertaga" : "Bugun", groupValue: selectDay == 0),
+                    0: segmentItem(context: context, title: today.hour >= 19 ? "Ertaga" : "Bugun", groupValue: selectDay == 0),
                     1: segmentItem(
-                        context: context,
-                        title: today.hour >= 19 ? "Ertadan keyin" : "Ertaga",
-                        groupValue: selectDay == 1),
+                        context: context, title: today.hour >= 19 ? "Ertadan keyin" : "Ertaga", groupValue: selectDay == 1),
                   },
                   onValueChanged: (value) {
                     setState2(() {
@@ -929,9 +919,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                       item.name,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: item.isSelected ? PRIMARY_COLOR : TEXT_COLOR2),
+                          fontSize: 20, fontWeight: FontWeight.bold, color: item.isSelected ? PRIMARY_COLOR : TEXT_COLOR2),
                     ),
                   );
                 },
@@ -949,12 +937,12 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  color: PRIMARY_DARK_COLOR,
+                  color: PRIMARY_COLOR,
                   boxShadow: [
                     BoxShadow(
                       offset: const Offset(4, 8),
                       blurRadius: 20,
-                      color: PRIMARY_DARK_COLOR.withOpacity(0.25),
+                      color: PRIMARY_COLOR.withOpacity(0.25),
                     ),
                   ],
                 ),

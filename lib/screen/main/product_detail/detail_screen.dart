@@ -232,7 +232,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
           //         width: 16,
           //       ),
           //       Text(
-          //         "${widget.item.price.formattedAmountString()} so'm",
+          //         "${widget.item.price.formattedAmountString()} ₩",
           //         style: const TextStyle(fontSize: 18, color: Colors.redAccent, decoration: TextDecoration.lineThrough),
           //       )
           //     ],
@@ -460,7 +460,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                           children: [
                             if (totalPrice != 0)
                               FittedBox(
-                                child: Text("${totalPrice.formattedAmountString()} so'm",
+                                child: Text("${totalPrice.formattedAmountString()} ₩",
                                     style: const TextStyle(
                                         fontWeight: FontWeight.normal, color: Colors.white, fontSize: 16)),
                               ),

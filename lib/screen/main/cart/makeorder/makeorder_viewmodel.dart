@@ -16,8 +16,15 @@ class MakeOrderViewModel extends BaseViewModel {
   }
 
   final StreamController<dynamic> _makeOrderData = StreamController();
+
   Stream<dynamic> get makeOrderData {
     return _makeOrderData.stream;
+  }
+
+  final StreamController<dynamic> _paymentData = StreamController();
+
+  Stream<dynamic> get paymentData {
+    return _paymentData.stream;
   }
 
   var progressData = false;
@@ -32,6 +39,16 @@ class MakeOrderViewModel extends BaseViewModel {
     final data = await api.makeOrder(orderModel, _errorStream);
     if (data!=null) {
       _makeOrderData.sink.add(data);
+    }
+    progressOrderData = false;
+    notifyListeners();
+  }
+  void payment(String image,int orderId) async {
+    progressOrderData = true;
+    notifyListeners();
+    final data = await api.payment(image,orderId, _errorStream);
+    if (data!=null) {
+      _paymentData.sink.add(data);
     }
     progressOrderData = false;
     notifyListeners();
