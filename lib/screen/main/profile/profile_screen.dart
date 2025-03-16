@@ -99,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _buildOption("Ommaviy Offerta", IconsaxOutline.profile_tick, 1.1, BLACK, () {
               startScreenF(context, const OffertaScreen());
             }),
-            _buildOption("Ilova haqida", IconsaxOutline.information, 2, BLACK, () {
+            _buildOption("Biz haqimizda", IconsaxOutline.information, 2, BLACK, () {
               Navigator.push(context, MaterialPageRoute(builder: (_) => const AboutAppScreen()));
             }),
             _buildOption("Ilovani ulashing", IconsaxOutline.share, 1.1, BLACK, () {

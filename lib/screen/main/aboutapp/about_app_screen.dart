@@ -1,4 +1,5 @@
 // import 'package:easy_localization/easy_localization.dart';
+import 'package:amin_qassob/generated/assets.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import '../../../utils/app_colors.dart';
@@ -34,13 +35,13 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Ilova haqida"),
+        title: const Text("Biz haqimizda"),
       ),
       body: Stack(
         children: [
           Center(
             child: Image.asset(
-              "assets/images/app_logo_png.png",
+              Assets.imagesLogoMain,
               width: 300,
               height: 300,
             ),
@@ -61,10 +62,10 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                         children: [
                           IconButton(
                               onPressed: () async {
-                                // await launchUrl(Uri.parse('https://t.me/AXIRIN007'));
-                                // await launch('https://t.me/Axirinuz');
+                                await UrlLauncher.launchUrl(Uri.parse('https://t.me/Aminqassob'));
+                                // await launch('https://t.me/Aminqassob');
                               },
-                              icon: Icon(Icons.telegram, size: 32, color: ACCENT_COLOR)),
+                              icon: Icon(Icons.telegram, size: 32, color: Colors.blue)),
                           SizedBox(
                             height: 4,
                           ),
@@ -78,10 +79,10 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                         children: [
                           IconButton(
                               onPressed: () async {
-                                // await launchUrl(Uri.parse('https://instagram.com/AXIRIN007'));
-                                // await launch('https://instagram.com/Axirin.uz');
+                                await UrlLauncher.launchUrl(Uri.parse('https://instagram.com/aminqassob'));
+                                // await launch('https://instagram.com/aminqassob');
                               },
-                              icon: Icon(Icons.add_a_photo, size: 32, color: ACCENT_COLOR)),
+                              icon: Icon(Icons.add_a_photo, size: 32, color: Colors.red)),
                           SizedBox(
                             height: 4,
                           ),
@@ -97,10 +98,10 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(
-                              onPressed: () {
-                                // Navigator.push(context, MaterialPageRoute(builder: (_) => QrCodeScreen()));
+                              onPressed: () async {
+                                await UrlLauncher.launchUrl(Uri.parse('https://www.tiktok.com/@aminqassob'));
                               },
-                              icon: Icon(Icons.qr_code, size: 32, color: ACCENT_COLOR)),
+                              icon: Icon(Icons.tiktok, size: 32, color: Colors.black)),
                           SizedBox(
                             height: 4,
                           ),
