@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_tree/flutter_tree.dart';
 import 'package:hive/hive.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 // import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
@@ -95,18 +96,16 @@ class _HomeScreen2State extends State<HomeScreen2> {
           },
           builder: (context, viewModel, child) {
             return Scaffold(
+              backgroundColor: BACKGROUND_COLOR,
               appBar: AppBar(
+                backgroundColor: PRIMARY_COLOR,
                 leading: Padding(
                     padding: EdgeInsets.all(8.0).copyWith(left: 16),
                     child: Image.asset(
                       Assets.imagesAvatar,
                     )),
                 title: Container(
-                  padding: EdgeInsets.only(top: 6),
-                  child: Image.asset(
-                    Assets.imagesAppLogo,
-                    fit: BoxFit.fill,
-                  ),
+                  child: Text("AMIN QASSOB", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,color: WHITE)),
                 ),
                 actions: [
                   InkWell(
@@ -114,24 +113,25 @@ class _HomeScreen2State extends State<HomeScreen2> {
                       startScreenF(context, SearchScreen());
                     },
                     child: CircleAvatar(
-                      backgroundColor: Colors.white,
+                      backgroundColor: PRIMARY_COLOR,
                       child: Icon(
                         IconsaxOutline.search_normal_1,
                         size: 26,
-                        color: BLACK,
+                        color: PRIMARY_LIGHT_COLOR,
                       ),
                     ),
                   ),
+                  SizedBox(width: 4),
                   InkWell(
                     onTap: () {
                       startScreenF(context, FavoritesScreen());
                     },
                     child: CircleAvatar(
-                      backgroundColor: Colors.white,
+                      backgroundColor: PRIMARY_COLOR,
                       child: Icon(
                         IconsaxOutline.heart,
                         size: 26,
-                        color: BLACK,
+                        color: PRIMARY_LIGHT_COLOR,
                       ),
                     ),
                   ),
@@ -168,6 +168,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
                       //   scrolledUnderElevation: 0,
                       // ),
                       if (viewModel.photosList.isNotEmpty) CarouselWidget(photosList: viewModel.photosList),
+                      _connect(context),
                       _buildBody(context, provider, viewModel)
                     ],
                   ),
@@ -235,9 +236,9 @@ class _HomeScreen2State extends State<HomeScreen2> {
     viewModel.getProductList();
     // viewModel.getGroupList();
     // viewModel.getFilterBrands();
-    // if (PrefUtils.getToken().isNotEmpty) {
-    //   viewModel.getUser();
-    // }
+    if (PrefUtils.getToken().isNotEmpty) {
+      viewModel.getUser();
+    }
     print("TAG1: " + "${box.values.toList().length}");
     print("TAG2: " + "${brandsBox.values.toList().length}");
   }
@@ -301,6 +302,154 @@ class _HomeScreen2State extends State<HomeScreen2> {
   //         });
   //       });
   // }
+
+  Widget _connect(BuildContext context){
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                    onPressed: () async {
+                      await UrlLauncher.launchUrl(Uri.parse('https://t.me/Aminqassob'));
+                      // await launch('https://t.me/Aminqassob');
+                    },
+                    icon: Icon(Icons.telegram, size: 32, color: Colors.blue)),
+                SizedBox(
+                  height: 4,
+                ),
+                Text("TELEGRAM", style: TextStyle(fontSize: 14, color: PRIMARY_COLOR))
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                    onPressed: () async {
+                      await UrlLauncher.launchUrl(Uri.parse('https://instagram.com/aminqassob'));
+                      // await launch('https://instagram.com/aminqassob');
+                    },
+                    icon: Icon(Icons.add_a_photo, size: 32, color: Colors.red)),
+                SizedBox(
+                  height: 4,
+                ),
+                Text(
+                  "INSTAGRAM",
+                  style: TextStyle(fontSize: 14, color: PRIMARY_COLOR),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                    onPressed: () async {
+                      await UrlLauncher.launchUrl(Uri.parse('https://www.tiktok.com/@aminqassob'));
+                    },
+                    icon: Icon(Icons.tiktok, size: 32, color: Colors.black)),
+                SizedBox(
+                  height: 4,
+                ),
+                Text("TIK TOK", style: TextStyle(fontSize: 14, color: PRIMARY_COLOR))
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                    onPressed: () async {
+                      showDialog<String>(
+                          context: context,
+                          barrierDismissible: true,
+                          barrierColor: Colors.black.withOpacity(0.75),
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              elevation: 20,
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+                              child: SingleChildScrollView(
+                                // controller: scrollController,
+                                child: Column(
+                                  // mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    dialogRoundedShapeB(),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.only(left: 14),
+                                      alignment: AlignmentDirectional.centerStart,
+                                      child: const Text(
+                                        "Bog'lanish",
+                                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
+                                    ListView.builder(
+                                        padding: const EdgeInsets.only(bottom: 8),
+                                        shrinkWrap: true,
+                                        primary: false,
+                                        itemCount: PrefUtils.getAdminPhones().length,
+                                        itemBuilder: (context, index) {
+                                          var item = PrefUtils.getAdminPhones()[index];
+                                          return InkWell(
+                                            onTap: () {
+                                              UrlLauncher.launch("tel:${item.phone}");
+                                            },
+                                            child: Padding(
+                                              padding:
+                                              const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16),
+                                              child: Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.phone_in_talk_sharp,
+                                                    color: Colors.green,
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text(
+                                                    item.phone,
+                                                    style: const TextStyle(fontSize: 18),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        })
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                    },
+                    icon: Icon(Icons.call, size: 32, color: ACCENT_COLOR)),
+                SizedBox(
+                  height: 4,
+                ),
+                Text("CALL", style: TextStyle(fontSize: 14, color: PRIMARY_COLOR))
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
 
   Widget _buildBody(BuildContext context, Providers provider, HomeViewModel viewModel) {
     return Column(
@@ -490,13 +639,14 @@ class _HomeScreen2State extends State<HomeScreen2> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
-                color: Color(0xFF212121),
+                color: PRIMARY_COLOR,
               ),
             ),
           ),
           const Icon(
-            Icons.expand_more,
+            IconsaxOutline.arrow_right_3,
             size: 20,
+            color: PRIMARY_COLOR,
           )
         ],
       ),
@@ -506,7 +656,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
   Widget _allProductTitle(HomeViewModel viewModel) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: viewModel.skidkaTovarList.isNotEmpty
+      child: viewModel.productList.isNotEmpty
           ? Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,

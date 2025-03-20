@@ -51,6 +51,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
+    // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: PRIMARY_COLOR));
     super.initState();
 
     // FirebaseMessaging.instance.getInitialMessage();
@@ -100,12 +101,12 @@ class _MainScreenState extends State<MainScreen> {
                       activeIcon: Icon(
                         IconsaxBold.home,
                         size: 24,
-                        color: PRIMARY_COLOR,
+                        color: WHITE,
                       ),
                       icon: Icon(
                         IconsaxOutline.home,
                         size: 24,
-                        color: BLACK,
+                        color: PRIMARY_LIGHT_COLOR,
                       ),
                     ),
                     BottomNavigationBarItem(
@@ -113,12 +114,12 @@ class _MainScreenState extends State<MainScreen> {
                       activeIcon: Icon(
                         IconsaxBold.category,
                         size: 24,
-                        color: PRIMARY_COLOR,
+                        color: WHITE,
                       ),
                       icon: Icon(
                         IconsaxOutline.category,
                         size: 24,
-                        color: BLACK,
+                        color: PRIMARY_LIGHT_COLOR,
                       ),
                     ),
                     // BottomNavigationBarItem(
@@ -141,7 +142,7 @@ class _MainScreenState extends State<MainScreen> {
                         child: Icon(
                           IconsaxBold.shopping_cart,
                           size: 24,
-                          color: PRIMARY_COLOR,
+                          color: WHITE,
                         ),
                       ),
                       icon: badges.Badge(
@@ -153,7 +154,7 @@ class _MainScreenState extends State<MainScreen> {
                         child: Icon(
                           IconsaxOutline.shopping_cart,
                           size: 24,
-                          color: BLACK,
+                          color: PRIMARY_LIGHT_COLOR,
                         ),
                       ),
                     ),
@@ -162,12 +163,12 @@ class _MainScreenState extends State<MainScreen> {
                       activeIcon: Icon(
                         IconsaxBold.profile_circle,
                         size: 24,
-                        color: PRIMARY_COLOR,
+                        color: WHITE,
                       ),
                       icon: Icon(
                         IconsaxOutline.profile_circle,
                         size: 24,
-                        color: BLACK,
+                        color: PRIMARY_LIGHT_COLOR,
                       ),
                     ),
                   ],
@@ -183,13 +184,13 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   showUnselectedLabels: true,
                   type: BottomNavigationBarType.fixed,
-                  backgroundColor: BACKGROUND_COLOR,
+                  backgroundColor: PRIMARY_COLOR,
                   unselectedLabelStyle: const TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 12,
                   ),
-                  selectedItemColor: const Color(0xFF212121),
-                  unselectedItemColor: const Color(0xFF9E9E9E),
+                  selectedItemColor: WHITE,
+                  unselectedItemColor: PRIMARY_LIGHT_COLOR,
                 ),
               ),
             ),

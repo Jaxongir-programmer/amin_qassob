@@ -266,10 +266,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundImage: AssetImage(Assets.imagesAvatar),
               ),
               const SizedBox(height: 8),
-              Text(PrefUtils.getUser()?.name ?? "Ma'lumot bo'sh",
+              Text(PrefUtils.getUser()?.first_name ?? "Ma'lumot bo'sh",
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
               const SizedBox(height: 4),
-              Text(PrefUtils.getUser()?.phone ?? "", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+              Text(PrefUtils.getUser()?.phone_number ?? "", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
               const SizedBox(height: 20),
               Container(
                 color: const Color(0xFFEEEEEE),

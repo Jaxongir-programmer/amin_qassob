@@ -32,11 +32,24 @@ class ApiService {
     dio.options.baseUrl = BASE_URL;
     dio.options.headers.addAll({
       'Content-Type': 'application/json',
-      'token': PrefUtils.getToken(),
+      if(PrefUtils.getToken().isNotEmpty)
+      'Authorization': 'Bearer ${PrefUtils.getToken()}',
+      // 'token': PrefUtils.getToken(),
       'device': Platform.operatingSystem,
       'lang': PrefUtils.getLang(),
       'Connection': "close",
     });
+
+    if(PrefUtils.getToken().isNotEmpty) {
+      dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          options.headers['Authorization'] = 'Bearer ${PrefUtils.getToken()}';
+          return handler.next(options);
+        },
+      ),
+    );
+    }
 
     if (kDebugMode) dio.interceptors.add(MyApp.alice.getDioInterceptor());
   }
@@ -110,9 +123,11 @@ class ApiService {
           }));
       final baseData = wrapResponse(response);
       if (!baseData.error) {
-        Map<String, dynamic> decodedToken = JwtDecoder.decode(baseData.data["access_token"]);
-        PrefUtils.setToken(decodedToken['user_id']);
-        return decodedToken['user_id'];
+        // Map<String, dynamic> decodedToken = JwtDecoder.decode(baseData.data["access_token"]);
+        // PrefUtils.setToken(decodedToken['user_id']);
+        // return decodedToken['user_id'];
+        PrefUtils.setToken(baseData.data["access_token"]);
+        return baseData.data["access_token"];
       } else {
         errorStream.sink.add(baseData.message ?? "Error");
       }
@@ -132,9 +147,12 @@ class ApiService {
           }));
       final baseData = wrapResponse(response);
       if (!baseData.error) {
-        Map<String, dynamic> decodedToken = JwtDecoder.decode(baseData.data["access_token"]);
-        PrefUtils.setToken(decodedToken['user_id']);
-        return decodedToken['user_id'];
+        // Map<String, dynamic> decodedToken = JwtDecoder.decode(baseData.data["access_token"]);
+        // PrefUtils.setToken(decodedToken['user_id']);
+        // return decodedToken['user_id'];
+
+        PrefUtils.setToken(baseData.data["access_token"]);
+        return baseData.data["access_token"];
       } else {
         errorStream.sink.add(baseData.message ?? "Error");
       }
@@ -222,7 +240,7 @@ class ApiService {
   Future<List<OrderModel>> getOrderList(StreamController<String> errorStream) async {
     try {
       final response = await dio.get("clientGetOrders",
-          queryParameters: {"user_id": PrefUtils.getUser()?.id, "store_id": PrefUtils.getUser()?.store_id ?? ""});
+          queryParameters: {"user_id": PrefUtils.getUser()?.id});
       final baseData = wrapResponse(response);
       if (!baseData.error) {
         return (baseData.data as List<dynamic>).map((json) => OrderModel.fromJson(json)).toList();
@@ -323,7 +341,7 @@ class ApiService {
 
   Future<UserInfoModel?> getUser(StreamController<String> errorStream, StreamController<int> errorCodeStream) async {
     try {
-      final response = await dio.get("clientGetUser", queryParameters: {"fcm": PrefUtils.getFCMToken()});
+      final response = await dio.get("v3/get_user/", queryParameters: {"fcm": PrefUtils.getFCMToken()});
 
       final baseData = wrapResponse(response);
       if (!baseData.error) {
@@ -377,7 +395,6 @@ class ApiService {
       final response = await dio.get("ClientSverkaList", queryParameters: {
         "bsana": startDate,
         "osana": endDate,
-        "store_id": PrefUtils.getUser()?.store_id ?? "",
         "user_id": PrefUtils.getUser()?.id ?? "",
       });
 
@@ -398,7 +415,6 @@ class ApiService {
       final response = await dio.get("ClientSverkaKashBack", queryParameters: {
         "bsana": startDate,
         "osana": endDate,
-        "store_id": PrefUtils.getUser()?.store_id ?? "",
         "user_id": PrefUtils.getUser()?.id ?? "",
       });
 
@@ -447,7 +463,7 @@ class ApiService {
   Future<List<ProductModel>> getProductsByIds(ProductByIdModel productByIdModel, StreamController<String> errorStream) async {
     try {
       final response = await dio.post("clientgetProductsByIds",
-          queryParameters: {"store_id": PrefUtils.getUser()?.store_id ?? ""}, data: jsonEncode(productByIdModel));
+          queryParameters: {}, data: jsonEncode(productByIdModel));
       final baseData = wrapResponse(response);
       if (!baseData.error) {
         var items = (baseData.data as List<dynamic>).map((json) => ProductModel.fromJson(json)).toList();

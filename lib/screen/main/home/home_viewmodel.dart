@@ -103,8 +103,8 @@ class HomeViewModel extends BaseViewModel {
 
     if (data != null) {
       PrefUtils.setUser(data);
-      getProductList();
-      getCategoryList();
+      // getProductList();
+      // getCategoryList();
       eventBus.fire(EventModel(event: EVENT_UPDATE_MESSAGE_BADGE, data: data.message_count));
     }
   }

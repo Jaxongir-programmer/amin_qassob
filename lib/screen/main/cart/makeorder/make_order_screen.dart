@@ -239,7 +239,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                     Row(
                       children: [
                         Text(
-                          (PrefUtils.getUser()?.phone ?? ""),
+                          (PrefUtils.getUser()?.phone_number ?? ""),
                           style: const TextStyle(fontSize: 13),
                         ),
                         const SizedBox(

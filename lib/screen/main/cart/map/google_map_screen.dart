@@ -35,10 +35,10 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: COLOR_PRIMARY,
-      statusBarBrightness: Brightness.dark,
-    ));
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //   statusBarColor: COLOR_PRIMARY,
+    //   statusBarBrightness: Brightness.dark,
+    // ));
     return SafeArea(
       child: Scaffold(
         body: Container(

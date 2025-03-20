@@ -94,8 +94,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: WHITE,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarColor: PRIMARY_COLOR,
+      statusBarIconBrightness: Brightness.light,
+
+      systemNavigationBarColor: PRIMARY_COLOR,
+      systemNavigationBarIconBrightness: Brightness.light,
     ));
 
     return ChangeNotifierProvider<Providers>(

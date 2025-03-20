@@ -69,7 +69,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                           SizedBox(
                             height: 4,
                           ),
-                          Text("TELEGRAM", style: TextStyle(fontSize: 12, color: Colors.white))
+                          Text("TELEGRAM", style: TextStyle(fontSize: 12, color: PRIMARY_COLOR))
                         ],
                       ),
                     ),
@@ -88,7 +88,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                           ),
                           Text(
                             "INSTAGRAM",
-                            style: TextStyle(fontSize: 12, color: Colors.white),
+                            style: TextStyle(fontSize: 12, color: PRIMARY_COLOR),
                           )
                         ],
                       ),
@@ -105,7 +105,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                           SizedBox(
                             height: 4,
                           ),
-                          Text("QR CODE", style: TextStyle(fontSize: 12, color: Colors.white))
+                          Text("QR CODE", style: TextStyle(fontSize: 12, color: PRIMARY_COLOR))
                         ],
                       ),
                     ),
@@ -189,7 +189,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                           SizedBox(
                             height: 4,
                           ),
-                          Text("CALL", style: TextStyle(fontSize: 12, color: Colors.white))
+                          Text("CALL", style: TextStyle(fontSize: 12, color: PRIMARY_COLOR))
                         ],
                       ),
                     )

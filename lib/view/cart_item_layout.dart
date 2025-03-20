@@ -55,12 +55,8 @@ class _CartItemLayoutState extends State<CartItemLayout> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: CustomViews.buildNetworkImage(
-                widget.item.image,
-                width: 95,
-                height: 110,
-                fit: BoxFit.contain
-              ),
+              child: CustomViews.buildNetworkImage(widget.item.photos.isNotEmpty ? widget.item.photos[0] ?? "" : "",
+                  width: 95, height: 110, fit: BoxFit.contain),
             ),
             const SizedBox(
               width: 8,
@@ -75,9 +71,7 @@ class _CartItemLayoutState extends State<CartItemLayout> {
                         TextSpan(
                           children: [
                             TextSpan(text: widget.item.title, style: const TextStyle(fontSize: 14)),
-                            TextSpan(
-                                text: " ${widget.item.unit}",
-                                style: const TextStyle(color: Colors.grey, fontSize: 14)),
+                            TextSpan(text: " ${widget.item.unit}", style: const TextStyle(color: Colors.grey, fontSize: 14)),
                           ],
                         ),
                         maxLines: 2,
@@ -113,9 +107,9 @@ class _CartItemLayoutState extends State<CartItemLayout> {
                     children: [
                       Expanded(
                           child: Text(
-                            widget.item.cartPrice.formattedAmountString(),
-                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
-                          )),
+                        widget.item.cartPrice.formattedAmountString(),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                      )),
                       Container(
                         decoration: BoxDecoration(
                             color: Colors.grey.shade100,
@@ -126,10 +120,9 @@ class _CartItemLayoutState extends State<CartItemLayout> {
                             InkWell(
                               onTap: () {
                                 setState(() {
-                                  widget.item.cartCount-=addCount;
+                                  widget.item.cartCount -= addCount;
                                   if (widget.item.cartCount > 0) {
-                                    cashback =
-                                        widget.item.cartCount * widget.item.cartPrice;
+                                    cashback = widget.item.cartCount * widget.item.cartPrice;
                                   } else {
                                     widget.item.cartCount = 0.0;
                                   }
@@ -141,8 +134,8 @@ class _CartItemLayoutState extends State<CartItemLayout> {
                                 padding: const EdgeInsets.only(left: 16, right: 16, top: 2, bottom: 2),
                                 decoration: BoxDecoration(
                                   color: Colors.grey.shade100,
-                                  borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
+                                  borderRadius:
+                                      const BorderRadius.only(topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
                                 ),
                                 child: const Center(
                                     child: Text(
@@ -153,7 +146,7 @@ class _CartItemLayoutState extends State<CartItemLayout> {
                             ),
                             Center(
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 8, right: 8),
+                              padding: const EdgeInsets.only(left: 8, right: 8),
                               child: Row(
                                 children: [
                                   Text(
@@ -173,14 +166,13 @@ class _CartItemLayoutState extends State<CartItemLayout> {
                             InkWell(
                               onTap: () {
                                 setState(() {
-                                  widget.item.cartCount+=addCount;
+                                  widget.item.cartCount += addCount;
                                   if (widget.item.cartCount > widget.item.limit) {
                                     showWarning(context,
                                         "${"Ombordagidan mahsulot kam!. Qoldiq"}: ${widget.item.limit.formattedAmountString()} dona");
-                                    widget.item.cartCount-=addCount;
+                                    widget.item.cartCount -= addCount;
                                   } else {
-                                    cashback =
-                                        widget.item.cartCount * widget.item.cartPrice;
+                                    cashback = widget.item.cartCount * widget.item.cartPrice;
                                   }
                                 });
                                 provider.addToCart = widget.item;
@@ -189,8 +181,8 @@ class _CartItemLayoutState extends State<CartItemLayout> {
                                 padding: const EdgeInsets.only(left: 16, right: 16, top: 2, bottom: 2),
                                 decoration: BoxDecoration(
                                   color: Colors.grey.shade100,
-                                  borderRadius: const BorderRadius.only(
-                                      topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
+                                  borderRadius:
+                                      const BorderRadius.only(topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
                                 ),
                                 child: const Center(
                                     child: Text(

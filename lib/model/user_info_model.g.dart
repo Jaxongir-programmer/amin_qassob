@@ -8,11 +8,11 @@ part of 'user_info_model.dart';
 
 UserInfoModel _$UserInfoModelFromJson(Map<String, dynamic> json) =>
     UserInfoModel(
-      json['phone'] as String,
-      json['name'] as String,
       json['id'] as String,
+      json['last_name'] as String,
+      json['first_name'] as String,
+      json['phone_number'] as String,
       (json['message_count'] as num?)?.toInt(),
-      json['store_id'] as String?,
       (json['orderRadius'] as num).toDouble(),
       (json['dostavkaSumma'] as num).toDouble(),
       (json['orderSummaLimit'] as num).toDouble(),
@@ -20,11 +20,11 @@ UserInfoModel _$UserInfoModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$UserInfoModelToJson(UserInfoModel instance) =>
     <String, dynamic>{
-      'phone': instance.phone,
-      'name': instance.name,
       'id': instance.id,
+      'last_name': instance.last_name,
+      'first_name': instance.first_name,
+      'phone_number': instance.phone_number,
       'message_count': instance.message_count,
-      'store_id': instance.store_id,
       'orderRadius': instance.orderRadius,
       'dostavkaSumma': instance.dostavkaSumma,
       'orderSummaLimit': instance.orderSummaLimit,

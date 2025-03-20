@@ -12,11 +12,11 @@ ThemeData appTheme() => ThemeData(
         scrolledUnderElevation: 0,
         iconTheme: IconThemeData(color: COLOR_PRIMARY),
         titleTextStyle: TextStyle(color: COLOR_PRIMARY, fontSize:20, fontWeight: FontWeight.w500 ),
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.white,
-          statusBarIconBrightness: Brightness.dark,
-          statusBarBrightness: Brightness.light,
-        ),
+        // systemOverlayStyle: SystemUiOverlayStyle(
+        //   statusBarColor: Colors.white,
+        //   statusBarIconBrightness: Brightness.dark,
+        //   statusBarBrightness: Brightness.light,
+        // ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: TextButton.styleFrom(
