@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
       create: (context) {
         return Providers();
       },
-      child: GetMaterialApp(
+      child: MaterialApp(
         // localizationsDelegates: context.localizationDelegates,
         // supportedLocales: context.supportedLocales,
         // locale: context.locale,

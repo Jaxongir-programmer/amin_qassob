@@ -1,10 +1,6 @@
 import 'dart:async';
 import 'package:amin_qassob/screen/main/home/carousel_widget.dart';
 import 'package:amin_qassob/screen/main/home/home_viewmodel.dart';
-import 'package:amin_qassob/screen/main/home/search_field.dart';
-import 'package:amin_qassob/screen/main/home/sub_menu_wiget.dart';
-import 'package:amin_qassob/screen/main/orders/orders_screen.dart';
-import 'package:amin_qassob/screen/main/product_list/skidka_product_list_screen.dart';
 import 'package:amin_qassob/screen/main/search/search_screen.dart';
 import 'package:amin_qassob/view/category_circle_item_view.dart';
 import 'package:amin_qassob/view/products_item_view.dart';
@@ -127,11 +123,12 @@ class _HomeScreen2State extends State<HomeScreen2> {
                       startScreenF(context, FavoritesScreen());
                     },
                     child: CircleAvatar(
-                      backgroundColor: PRIMARY_COLOR,
+                      backgroundColor: PRIMARY_LIGHT_COLOR.withAlpha(200),
                       child: Icon(
                         IconsaxOutline.heart,
                         size: 26,
-                        color: PRIMARY_LIGHT_COLOR,
+                        color: PRIMARY_COLOR,
+                        // color: PRIMARY_LIGHT_COLOR,
                       ),
                     ),
                   ),
@@ -318,11 +315,11 @@ class _HomeScreen2State extends State<HomeScreen2> {
                       await UrlLauncher.launchUrl(Uri.parse('https://t.me/Aminqassob'));
                       // await launch('https://t.me/Aminqassob');
                     },
-                    icon: Icon(Icons.telegram, size: 32, color: Colors.blue)),
-                SizedBox(
-                  height: 4,
-                ),
-                Text("TELEGRAM", style: TextStyle(fontSize: 14, color: PRIMARY_COLOR))
+                    icon: Icon(Icons.telegram, size: 28, color: Colors.blue)),
+                // SizedBox(
+                //   height: 4,
+                // ),
+                // Text("TELEGRAM", style: TextStyle(fontSize: 14, color: PRIMARY_COLOR))
               ],
             ),
           ),
@@ -335,14 +332,14 @@ class _HomeScreen2State extends State<HomeScreen2> {
                       await UrlLauncher.launchUrl(Uri.parse('https://instagram.com/aminqassob'));
                       // await launch('https://instagram.com/aminqassob');
                     },
-                    icon: Icon(Icons.add_a_photo, size: 32, color: Colors.red)),
-                SizedBox(
-                  height: 4,
-                ),
-                Text(
-                  "INSTAGRAM",
-                  style: TextStyle(fontSize: 14, color: PRIMARY_COLOR),
-                )
+                    icon: Icon(IconsaxOutline.instagram, size: 28, color: Colors.red)),
+                // SizedBox(
+                //   height: 4,
+                // ),
+                // Text(
+                //   "INSTAGRAM",
+                //   style: TextStyle(fontSize: 14, color: PRIMARY_COLOR),
+                // )
               ],
             ),
           ),
@@ -354,11 +351,11 @@ class _HomeScreen2State extends State<HomeScreen2> {
                     onPressed: () async {
                       await UrlLauncher.launchUrl(Uri.parse('https://www.tiktok.com/@aminqassob'));
                     },
-                    icon: Icon(Icons.tiktok, size: 32, color: Colors.black)),
-                SizedBox(
-                  height: 4,
-                ),
-                Text("TIK TOK", style: TextStyle(fontSize: 14, color: PRIMARY_COLOR))
+                    icon: Icon(Icons.tiktok, size: 28, color: Colors.black)),
+                // SizedBox(
+                //   height: 4,
+                // ),
+                // Text("TIK TOK", style: TextStyle(fontSize: 14, color: PRIMARY_COLOR))
               ],
             ),
           ),
@@ -438,11 +435,11 @@ class _HomeScreen2State extends State<HomeScreen2> {
                             );
                           });
                     },
-                    icon: Icon(Icons.call, size: 32, color: ACCENT_COLOR)),
-                SizedBox(
-                  height: 4,
-                ),
-                Text("CALL", style: TextStyle(fontSize: 14, color: PRIMARY_COLOR))
+                    icon: Icon(IconsaxBold.call, size: 28, color: ACCENT_COLOR)),
+                // SizedBox(
+                //   height: 4,
+                // ),
+                // Text("CALL", style: TextStyle(fontSize: 14, color: PRIMARY_COLOR))
               ],
             ),
           )
@@ -495,7 +492,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
 
   Widget _mostTopTovarTitle(HomeViewModel viewModel) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 8),
       child: viewModel.topTovarList.isNotEmpty
           ? Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

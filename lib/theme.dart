@@ -5,18 +5,24 @@ import 'package:flutter/services.dart';
 ThemeData appTheme() => ThemeData(
       scaffoldBackgroundColor: Colors.white,
       fontFamily: 'Urbanist',
-      appBarTheme:  const AppBarTheme(
+      appBarTheme:  AppBarTheme(
         // color: Colors.white,
         backgroundColor: Colors.white,
         elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(16)),
+        ),
         scrolledUnderElevation: 0,
-        iconTheme: IconThemeData(color: COLOR_PRIMARY),
-        titleTextStyle: TextStyle(color: COLOR_PRIMARY, fontSize:20, fontWeight: FontWeight.w500 ),
-        // systemOverlayStyle: SystemUiOverlayStyle(
-        //   statusBarColor: Colors.white,
-        //   statusBarIconBrightness: Brightness.dark,
-        //   statusBarBrightness: Brightness.light,
-        // ),
+        iconTheme: const IconThemeData(color: COLOR_PRIMARY),
+        titleTextStyle: const TextStyle(color: COLOR_PRIMARY, fontSize:20, fontWeight: FontWeight.w500 ),
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: PRIMARY_COLOR,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarColor: PRIMARY_COLOR,
+          systemNavigationBarIconBrightness: Brightness.light,
+
+          statusBarBrightness: Brightness.light,
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: TextButton.styleFrom(

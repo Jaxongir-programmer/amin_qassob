@@ -1,5 +1,6 @@
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:amin_qassob/generated/assets.dart';
+import 'package:ficonsax/ficonsax.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import '../../../utils/app_colors.dart';
@@ -82,7 +83,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                                 await UrlLauncher.launchUrl(Uri.parse('https://instagram.com/aminqassob'));
                                 // await launch('https://instagram.com/aminqassob');
                               },
-                              icon: Icon(Icons.add_a_photo, size: 32, color: Colors.red)),
+                              icon: Icon(IconsaxOutline.instagram, size: 32, color: Colors.red)),
                           SizedBox(
                             height: 4,
                           ),

@@ -41,28 +41,26 @@ class _TopProductItemViewState extends State<TopProductItemView> {
       return InkWell(
         borderRadius: borderRadius,
         onTap: () {
-          startScreenF(
-              context,
-              ShopDetailScreen(
-                item: widget.item,
-              ));
+          startScreenF(context, ShopDetailScreen(item: widget.item));
         },
         child: Container(
           width: 135,
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
           decoration: BoxDecoration(
+              color: PRIMARY_COLOR,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.7))),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                color: Colors.white,
-                width: 123,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                // width: 123,
                 child: Stack(
                   children: [
-                    asCachedNetworkImage(widget.item.photos.isNotEmpty?widget.item.photos[0]??"":"", fit: BoxFit.contain, width: 123, height: 75),
+                    asCachedNetworkImage(widget.item.photos.isNotEmpty ? widget.item.photos[0] ?? "" : "",
+                        fit: BoxFit.cover, width: 123, height: 75),
                     // if (widget.item.status != "" && widget.item.status != null)
                     //   Positioned(
                     //       bottom: 0,
@@ -83,8 +81,7 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                         width: 123,
                         height: 75,
                         alignment: Alignment.center,
-                        decoration:
-                            BoxDecoration(color: Colors.black.withOpacity(0.4), borderRadius: BorderRadius.circular(6)),
+                        decoration: BoxDecoration(color: Colors.black.withOpacity(0.4), borderRadius: BorderRadius.circular(6)),
                         child: const Text(
                           "Hozirda mavjud emas !",
                           textAlign: TextAlign.center,
@@ -98,10 +95,12 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                           onTap: () {
                             provider.addToFavorite(widget.item, provider.isFavorite(widget.item.id));
                           },
-                          child: Icon(
-                              provider.isFavorite(widget.item.id) ? IconsaxBold.heart : IconsaxOutline.heart,
-                              size: 24,
-                          color: Colors.red)),
+                          child: CircleAvatar(
+                            backgroundColor: WHITE.withAlpha(180),
+                            maxRadius: 15,
+                            child: Icon(provider.isFavorite(widget.item.id) ? IconsaxBold.heart : IconsaxOutline.heart,
+                                size: 20, color: Colors.red),
+                          )),
                     ),
                   ],
                 ),
@@ -111,14 +110,14 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                  color: PRIMARY_COLOR,
+                  color: WHITE,
                   fontWeight: FontWeight.w500,
                   fontSize: 13,
                   // maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Text(widget.item.unit, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+              Text(widget.item.unit, style: const TextStyle(color: WHITE, fontSize: 12)),
               const SizedBox(
                 height: 4,
               ),
@@ -126,17 +125,15 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                 children: [
                   Text(
                     "${widget.item.price.formattedAmountString()} ₩",
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFF212121)),
+                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: WHITE),
                   ),
                   Text(
                     " (${widget.item.unit})",
-                    style: const TextStyle(fontSize: 13, color: Color(0xFF212121)),
+                    style: const TextStyle(fontSize: 13, color: WHITE),
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 4,
-              ),
+              const SizedBox(height: 4),
               InkWell(
                 onTap: () {
                   if (PrefUtils.getToken() == "") {
@@ -146,8 +143,8 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                       widget.item.cartCount += addCount;
 
                       if (widget.item.cartCount > widget.item.limit) {
-                        showWarning(context,
-                            "Omborda mahsulot kam!.\n Qoldiq : ${widget.item.limit.formattedAmountString()} dona");
+                        showWarning(
+                            context, "Omborda mahsulot kam!.\n Qoldiq : ${widget.item.limit.formattedAmountString()} dona");
                         widget.item.cartCount -= addCount;
                       } else {
                         provider.addToCart = widget.item;

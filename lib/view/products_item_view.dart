@@ -66,7 +66,7 @@ class ProductsItemViewState extends State<ProductsItemView> {
                   offset: const Offset(0, 1), // changes position of shadow
                 ),
               ],
-              color: COLOR_PRIMARY,
+              color: PRIMARY_COLOR,
               border: Border.all(color: BACKGROUND_COLOR),
               borderRadius: const BorderRadius.all(Radius.circular(12))),
           child: Column(
@@ -84,7 +84,7 @@ class ProductsItemViewState extends State<ProductsItemView> {
                         child: Stack(
                           children: [
                             CustomViews.buildNetworkImage(widget.item.photos.isNotEmpty?widget.item.photos[0]??"":"",
-                                fit: BoxFit.contain, width: getScreenWidth(context), height: 110),
+                                fit: BoxFit.cover, width: getScreenWidth(context), height: 110),
                             if (widget.item.limit <= 0)
                               Container(
                                 width: getScreenWidth(context),
@@ -124,10 +124,14 @@ class ProductsItemViewState extends State<ProductsItemView> {
                             onTap: () {
                               provider.addToFavorite(widget.item, provider.isFavorite(widget.item.id));
                             },
-                            child: Icon(
-                                provider.isFavorite(widget.item.id) ? IconsaxBold.heart : IconsaxOutline.heart,
-                                color: Colors.red,
-                                size: 24,)),
+                            child: CircleAvatar(
+                              backgroundColor: WHITE.withAlpha(180),
+                              maxRadius: 15,
+                              child: Icon(
+                                  provider.isFavorite(widget.item.id) ? IconsaxBold.heart : IconsaxOutline.heart,
+                                  color: Colors.red,
+                                  size: 20),
+                            )),
                       ),
                     )
                   ],

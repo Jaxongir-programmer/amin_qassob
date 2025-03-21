@@ -1,3 +1,4 @@
+import 'package:ficonsax/ficonsax.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -74,7 +75,7 @@ class _OffertaScreenState extends State<OffertaScreen> {
                       await launchUrl(Uri.parse('https://instagram.com/aminqassob'));
                       // await launch('https://instagram.com/aminqassob');
                     },
-                    icon: Icon(Icons.add_a_photo, size: 32, color: Colors.red)),
+                    icon: Icon(IconsaxOutline.instagram, size: 32, color: Colors.red)),
                 SizedBox(
                   height: 4,
                 ),

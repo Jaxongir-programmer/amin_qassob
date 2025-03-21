@@ -94,103 +94,109 @@ class _MainScreenState extends State<MainScreen> {
             child: SafeArea(
               child: Scaffold(
                 body: IndexedStack(index: provider.getIndex(), children: _screens()),
-                bottomNavigationBar: BottomNavigationBar(
-                  items: [
-                    BottomNavigationBarItem(
-                      label: "Asosiy",
-                      activeIcon: Icon(
-                        IconsaxBold.home,
-                        size: 24,
-                        color: WHITE,
-                      ),
-                      icon: Icon(
-                        IconsaxOutline.home,
-                        size: 24,
-                        color: PRIMARY_LIGHT_COLOR,
-                      ),
-                    ),
-                    BottomNavigationBarItem(
-                      label: "Katalog",
-                      activeIcon: Icon(
-                        IconsaxBold.category,
-                        size: 24,
-                        color: WHITE,
-                      ),
-                      icon: Icon(
-                        IconsaxOutline.category,
-                        size: 24,
-                        color: PRIMARY_LIGHT_COLOR,
-                      ),
-                    ),
-                    // BottomNavigationBarItem(
-                    //   label: "Yoqimlilar",
-                    //   activeIcon: Image.asset(
-                    //     Assets.profileFavorite,
-                    //     color: PRIMARY_DARK_COLOR,
-                    //   ),
-                    //   icon: Image.asset(
-                    //     Assets.profileFavorite,
-                    //   ),
-                    // ),
-                    BottomNavigationBarItem(label: "Savat",
-                      activeIcon: badges.Badge(
-                        showBadge: provider.getCartList.isNotEmpty,
-                        badgeContent:
-                            Text((provider.getCartList.length).toString(), style: const TextStyle(color: Colors.white)),
-                        badgeStyle: const badges.BadgeStyle(badgeColor: RED_COLOR, shape: badges.BadgeShape.circle),
-                        badgeAnimation: const badges.BadgeAnimation.scale(),
-                        child: Icon(
-                          IconsaxBold.shopping_cart,
+                bottomNavigationBar: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                  child: BottomNavigationBar(
+                    items: [
+                      BottomNavigationBarItem(
+                        label: "Asosiy",
+                        activeIcon: Icon(
+                          IconsaxBold.home,
                           size: 24,
                           color: WHITE,
                         ),
-                      ),
-                      icon: badges.Badge(
-                        showBadge: provider.getCartList.isNotEmpty,
-                        badgeContent:
-                            Text((provider.getCartList.length).toString(), style: const TextStyle(color: Colors.white)),
-                        badgeStyle: const badges.BadgeStyle(badgeColor: RED_COLOR, shape: badges.BadgeShape.circle),
-                        badgeAnimation: const badges.BadgeAnimation.scale(),
-                        child: Icon(
-                          IconsaxOutline.shopping_cart,
+                        icon: Icon(
+                          IconsaxOutline.home,
                           size: 24,
                           color: PRIMARY_LIGHT_COLOR,
                         ),
                       ),
-                    ),
-                    BottomNavigationBarItem(
-                      label: "Profil",
-                      activeIcon: Icon(
-                        IconsaxBold.profile_circle,
-                        size: 24,
-                        color: WHITE,
+                      BottomNavigationBarItem(
+                        label: "Katalog",
+                        activeIcon: Icon(
+                          IconsaxBold.category,
+                          size: 24,
+                          color: WHITE,
+                        ),
+                        icon: Icon(
+                          IconsaxOutline.category,
+                          size: 24,
+                          color: PRIMARY_LIGHT_COLOR,
+                        ),
                       ),
-                      icon: Icon(
-                        IconsaxOutline.profile_circle,
-                        size: 24,
-                        color: PRIMARY_LIGHT_COLOR,
+                      // BottomNavigationBarItem(
+                      //   label: "Yoqimlilar",
+                      //   activeIcon: Image.asset(
+                      //     Assets.profileFavorite,
+                      //     color: PRIMARY_DARK_COLOR,
+                      //   ),
+                      //   icon: Image.asset(
+                      //     Assets.profileFavorite,
+                      //   ),
+                      // ),
+                      BottomNavigationBarItem(label: "Savat",
+                        activeIcon: badges.Badge(
+                          showBadge: provider.getCartList.isNotEmpty,
+                          badgeContent:
+                              Text((provider.getCartList.length).toString(), style: const TextStyle(color: Colors.white)),
+                          badgeStyle: const badges.BadgeStyle(badgeColor: RED_COLOR, shape: badges.BadgeShape.circle),
+                          badgeAnimation: const badges.BadgeAnimation.scale(),
+                          child: Icon(
+                            IconsaxBold.shopping_cart,
+                            size: 24,
+                            color: WHITE,
+                          ),
+                        ),
+                        icon: badges.Badge(
+                          showBadge: provider.getCartList.isNotEmpty,
+                          badgeContent:
+                              Text((provider.getCartList.length).toString(), style: const TextStyle(color: Colors.white)),
+                          badgeStyle: const badges.BadgeStyle(badgeColor: RED_COLOR, shape: badges.BadgeShape.circle),
+                          badgeAnimation: const badges.BadgeAnimation.scale(),
+                          child: Icon(
+                            IconsaxOutline.shopping_cart,
+                            size: 24,
+                            color: PRIMARY_LIGHT_COLOR,
+                          ),
+                        ),
                       ),
+                      BottomNavigationBarItem(
+                        label: "Profil",
+                        activeIcon: Icon(
+                          IconsaxBold.profile_circle,
+                          size: 24,
+                          color: WHITE,
+                        ),
+                        icon: Icon(
+                          IconsaxOutline.profile_circle,
+                          size: 24,
+                          color: PRIMARY_LIGHT_COLOR,
+                        ),
+                      ),
+                    ],
+                    onTap: (value) {
+                      // selectedScreenIndex = value;
+                      provider.setIndex(value);
+                    },
+                    currentIndex: provider.getIndex(),
+                    selectedLabelStyle: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: PRIMARY_LIGHT_COLOR,
+                      fontSize: 12,
                     ),
-                  ],
-                  onTap: (value) {
-                    // selectedScreenIndex = value;
-                    provider.setIndex(value);
-                  },
-                  currentIndex: provider.getIndex(),
-                  selectedLabelStyle: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: PRIMARY_LIGHT_COLOR,
-                    fontSize: 12,
+                    showUnselectedLabels: true,
+                    type: BottomNavigationBarType.fixed,
+                    backgroundColor: PRIMARY_COLOR,
+                    unselectedLabelStyle: const TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 12,
+                    ),
+                    selectedItemColor: WHITE,
+                    unselectedItemColor: PRIMARY_LIGHT_COLOR,
                   ),
-                  showUnselectedLabels: true,
-                  type: BottomNavigationBarType.fixed,
-                  backgroundColor: PRIMARY_COLOR,
-                  unselectedLabelStyle: const TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 12,
-                  ),
-                  selectedItemColor: WHITE,
-                  unselectedItemColor: PRIMARY_LIGHT_COLOR,
                 ),
               ),
             ),

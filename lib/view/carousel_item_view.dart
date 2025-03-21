@@ -79,7 +79,7 @@ class _CarouselItemViewState extends State<CarouselItemView> {
               decoration: BoxDecoration(color: BLACK.withOpacity(.5), borderRadius: BorderRadius.circular(6)),
               child: Text(
                 widget.item.title,
-                style: asTextStyle(fontFamily: "p_light", color: Colors.white, size: 12),
+                style: asTextStyle(fontFamily: "p_light", color: Colors.white, size: 14),
               ))
         ],
       ),
