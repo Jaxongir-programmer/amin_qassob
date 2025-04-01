@@ -13,9 +13,9 @@ UserInfoModel _$UserInfoModelFromJson(Map<String, dynamic> json) =>
       json['first_name'] as String,
       json['phone_number'] as String,
       (json['message_count'] as num?)?.toInt(),
-      (json['orderRadius'] as num).toDouble(),
-      (json['dostavkaSumma'] as num).toDouble(),
-      (json['orderSummaLimit'] as num).toDouble(),
+      (json['orderRadius'] as num?)?.toDouble(),
+      (json['deliver_summa'] as num).toDouble(),
+      (json['orderSummaLimit'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$UserInfoModelToJson(UserInfoModel instance) =>
@@ -26,6 +26,6 @@ Map<String, dynamic> _$UserInfoModelToJson(UserInfoModel instance) =>
       'phone_number': instance.phone_number,
       'message_count': instance.message_count,
       'orderRadius': instance.orderRadius,
-      'dostavkaSumma': instance.dostavkaSumma,
+      'deliver_summa': instance.deliver_summa,
       'orderSummaLimit': instance.orderSummaLimit,
     };

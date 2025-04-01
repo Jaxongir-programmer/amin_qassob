@@ -47,7 +47,11 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
 
   DateFormat format = DateFormat("dd.MM.yyyy HH:mm");
 
-  final List<PaymentModel> paymentTypes = [PaymentModel("click", 1), PaymentModel("terminal", 2), PaymentModel("naqd", 3)];
+  final List<PaymentModel> paymentTypes = [
+    // PaymentModel("click", 1),
+    PaymentModel("terminal", 2),
+    // PaymentModel("naqd", 3),
+  ];
 
   final List<PaymentModel> genderList = [
     PaymentModel("Erkak kishi", 1),

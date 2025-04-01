@@ -33,7 +33,7 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   StreamSubscription? _busEventListener;
-  double deliverSumma = PrefUtils.getUser()?.dostavkaSumma ?? 0;
+  double deliverSumma = PrefUtils.getUser()?.deliver_summa ?? 0;
 
   @override
   void dispose() {
@@ -104,7 +104,7 @@ class _CartScreenState extends State<CartScreen> {
           });
 
           viewModel.productsByIdData.listen((event) {
-            double deliverSumma = PrefUtils.getUser()?.dostavkaSumma ?? 0;
+            double deliverSumma = PrefUtils.getUser()?.deliver_summa ?? 0;
 
             var isHave = false;
             for (var product in event) {
@@ -188,7 +188,7 @@ class _CartScreenState extends State<CartScreen> {
                 style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 14),
               )),
               Text(
-                (PrefUtils.getUser()?.dostavkaSumma ?? 0).formattedAmountString(),
+                (PrefUtils.getUser()?.deliver_summa ?? 0).formattedAmountString(),
                 style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               )
             ],
@@ -216,7 +216,7 @@ class _CartScreenState extends State<CartScreen> {
                                       "",
                                       "",
                                       "",
-                                      deliverSumma,
+                                      PrefUtils.getUser()?.deliver_summa ?? 0,
                                       1,
                                       "",
                                       provider.getCartList.map((e) => MakeOrderProduct(e.id, e.cartCount, e.cartPrice)).toList()),

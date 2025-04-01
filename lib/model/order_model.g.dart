@@ -7,11 +7,10 @@ part of 'order_model.dart';
 // **************************************************************************
 
 OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
-      json['id'] as String,
-      json['date'] as String,
+      (json['id'] as num).toInt(),
+      json['created'] as String,
       json['comment'] as String,
-      (json['totalAmount'] as num).toDouble(),
-      (json['Kashback_Itog'] as num).toDouble(),
+      (json['total_price'] as num).toDouble(),
       (json['products'] as List<dynamic>)
           .map((e) => OrderProductModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -21,10 +20,9 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
 Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'date': instance.date,
+      'created': instance.created,
       'comment': instance.comment,
-      'totalAmount': instance.totalAmount,
-      'Kashback_Itog': instance.Kashback_Itog,
+      'total_price': instance.total_price,
       'products': instance.products,
       'status': _$OrderStatusEnumMap[instance.status]!,
     };

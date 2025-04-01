@@ -43,7 +43,7 @@ class _OrderItemViewState extends State<OrderItemView> {
                     "Trek raqami",
                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   )),
-                  Expanded(child: Text(widget.item.id)),
+                  Expanded(child: Text("${widget.item.id}")),
                 ],
               ),
             ),
@@ -59,26 +59,26 @@ class _OrderItemViewState extends State<OrderItemView> {
                   Expanded(child: Text("Umumiy")),
                   Expanded(
                     child: Text(
-                      "${widget.item.totalAmount.formattedAmountString()} UZS",
+                      "${widget.item.total_price.formattedAmountString()} UZS",
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(
-              height: 8,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
-                children: [
-                  const Icon(Icons.card_giftcard, size: 18, color: Colors.grey,),
-                  const SizedBox(width: 8,),
-                  Expanded(child: Text("${"Keshbek"}:")),
-                  Expanded(child: Text("${widget.item.Kashback_Itog} UZS")),
-                ],
-              ),
-            ),
+            // const SizedBox(
+            //   height: 8,
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 8),
+            //   child: Row(
+            //     children: [
+            //       const Icon(Icons.card_giftcard, size: 18, color: Colors.grey,),
+            //       const SizedBox(width: 8,),
+            //       Expanded(child: Text("${"Keshbek"}:")),
+            //       Expanded(child: Text("${widget.item.Kashback_Itog} UZS")),
+            //     ],
+            //   ),
+            // ),
             const SizedBox(
               height: 8,
             ),
@@ -89,7 +89,7 @@ class _OrderItemViewState extends State<OrderItemView> {
                   const Icon(Icons.date_range_outlined, size: 18, color: Colors.grey,),
                   const SizedBox(width: 8,),
                   Expanded(child: Text("${"Vaqti"}:")),
-                  Expanded(child: Text(widget.item.date.substring(0, 16))),
+                  Expanded(child: Text(widget.item.created.substring(0, 16))),
                 ],
               ),
             ),
@@ -136,24 +136,24 @@ class _OrderItemViewState extends State<OrderItemView> {
                     Expanded(child: Text("Umumiy summa")),
                     Expanded(
                       child: Text(
-                        widget.item.totalAmount.formattedAmountString(),
+                        widget.item.total_price.formattedAmountString(),
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 8,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Row(
-                  children: [
-                    Expanded(child: Text("Keshbek")),
-                    Expanded(child: Text("${widget.item.Kashback_Itog}")),
-                  ],
-                ),
-              ),
+              // SizedBox(
+              //   height: 8,
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 8),
+              //   child: Row(
+              //     children: [
+              //       Expanded(child: Text("Keshbek")),
+              //       Expanded(child: Text("${widget.item.Kashback_Itog}")),
+              //     ],
+              //   ),
+              // ),
               SizedBox(
                 height: 8,
               ),
@@ -162,7 +162,7 @@ class _OrderItemViewState extends State<OrderItemView> {
                 child: Row(
                   children: [
                     Expanded(child: Text("date" + ": ")),
-                    Expanded(child: Text("${widget.item.date}")),
+                    Expanded(child: Text("${widget.item.created}")),
                   ],
                 ),
               ),

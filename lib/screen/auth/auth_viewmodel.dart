@@ -30,6 +30,12 @@ class AuthViewModel extends BaseViewModel {
     return _loginResponseStream.stream;
   }
 
+  StreamController<String> registerStream = StreamController();
+
+  Stream<String> get registerData {
+    return registerStream.stream;
+  }
+
   StreamController<String> tokenStream = StreamController();
 
   Stream<String> get tokenData {
@@ -54,7 +60,7 @@ class AuthViewModel extends BaseViewModel {
     progressData = false;
     notifyListeners();
     if (data != null) {
-      tokenStream.sink.add(data);
+      registerStream.sink.add(data);
     }
   }
   void login(String phone, String code) async {

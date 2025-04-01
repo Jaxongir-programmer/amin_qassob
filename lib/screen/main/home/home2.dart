@@ -109,11 +109,11 @@ class _HomeScreen2State extends State<HomeScreen2> {
                       startScreenF(context, SearchScreen());
                     },
                     child: CircleAvatar(
-                      backgroundColor: PRIMARY_COLOR,
+                      backgroundColor: PRIMARY_LIGHT_COLOR.withAlpha(200),
                       child: Icon(
                         IconsaxOutline.search_normal_1,
                         size: 26,
-                        color: PRIMARY_LIGHT_COLOR,
+                        color: PRIMARY_COLOR,
                       ),
                     ),
                   ),

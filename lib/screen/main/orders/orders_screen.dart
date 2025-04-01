@@ -26,6 +26,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
       builder: (context,viewModel, child) {
         return Consumer<Providers>(builder: (context, provider, child) {
           return Scaffold(
+            backgroundColor: BACKGROUND_COLOR,
               appBar: AppBar(
                 title: Text("Buyurtmalar"),
               ),

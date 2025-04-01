@@ -116,7 +116,7 @@ class ApiService {
       final response = await dio.post("v3/register/",
           data: jsonEncode({
             "phone_number": phone,
-            "confirm_code": code,
+            "password": code,
             "first_name": firstName,
             "last_name": lastName,
             "address": address,
@@ -143,7 +143,7 @@ class ApiService {
       final response = await dio.post("v3/login/",
           data: jsonEncode({
             "phone_number": phone,
-            "confirm_code": code,
+            "password": code,
           }));
       final baseData = wrapResponse(response);
       if (!baseData.error) {
@@ -239,7 +239,7 @@ class ApiService {
 
   Future<List<OrderModel>> getOrderList(StreamController<String> errorStream) async {
     try {
-      final response = await dio.get("clientGetOrders",
+      final response = await dio.get("v4/my-orders/",
           queryParameters: {"user_id": PrefUtils.getUser()?.id});
       final baseData = wrapResponse(response);
       if (!baseData.error) {
@@ -483,6 +483,21 @@ class ApiService {
       final baseData = wrapResponse(response);
       if (!baseData.error) {
         return baseData.data["text"] as String;
+      } else {
+        errorStream.sink.add(baseData.message ?? "Error");
+      }
+    } on DioException catch (e) {
+      errorStream.sink.add(wrapError(e));
+    }
+    return null;
+  }
+
+  Future<List<OrderModel>?> getOrders(StreamController<String> errorStream) async {
+    try {
+      final response = await dio.get("v4/my-orders/");
+      final baseData = wrapResponse(response);
+      if (!baseData.error) {
+        return (baseData.data as List<dynamic>).map((json) => OrderModel.fromJson(json)).toList();
       } else {
         errorStream.sink.add(baseData.message ?? "Error");
       }
