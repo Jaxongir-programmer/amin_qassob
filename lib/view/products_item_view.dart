@@ -66,7 +66,7 @@ class ProductsItemViewState extends State<ProductsItemView> {
                   offset: const Offset(0, 1), // changes position of shadow
                 ),
               ],
-              color: PRIMARY_COLOR,
+              color: WHITE,
               border: Border.all(color: BACKGROUND_COLOR),
               borderRadius: const BorderRadius.all(Radius.circular(12))),
           child: Column(
@@ -148,9 +148,9 @@ class ProductsItemViewState extends State<ProductsItemView> {
                         style: const TextStyle(
                           fontSize: 13,
                           overflow: TextOverflow.ellipsis,
-                          color: WHITE
+                          color: PRIMARY_COLOR
                         )),
-                    Text(widget.item.unit, style: const TextStyle(color: WHITE, fontSize: 12)),
+                    Text(widget.item.unit, style: const TextStyle(color: PRIMARY_COLOR, fontSize: 12)),
                     // if (widget.item.skidka != 0 && widget.item.skidka != null)
                     //   Row(
                     //     children: [
@@ -181,18 +181,18 @@ class ProductsItemViewState extends State<ProductsItemView> {
                             Assets.profileWallet2x,
                             width: 20,
                             height: 20,
-                            color: WHITE,
+                            color: PRIMARY_COLOR,
                           ),
                           const SizedBox(
                             width: 4,
                           ),
                           Text(
                             "${widget.item.cartPrice.formattedAmountString()} ₩",
-                            style: const TextStyle(color: WHITE, fontWeight: FontWeight.bold, fontSize: 14),
+                            style: const TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold, fontSize: 14),
                           ),
                           Text(
                             "${" "}(${widget.item.unit})",
-                            style: const TextStyle(color: WHITE, fontSize: 13),
+                            style: const TextStyle(color: PRIMARY_COLOR, fontSize: 13),
                           ),
                         ],
                       ),

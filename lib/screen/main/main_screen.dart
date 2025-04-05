@@ -51,6 +51,10 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: PRIMARY_COLOR,
+      statusBarIconBrightness: Brightness.dark,
+    ));
     // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: PRIMARY_COLOR));
     super.initState();
 

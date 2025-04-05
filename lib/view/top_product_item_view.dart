@@ -47,7 +47,7 @@ class _TopProductItemViewState extends State<TopProductItemView> {
           width: 135,
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
           decoration: BoxDecoration(
-              color: PRIMARY_COLOR,
+              color: WHITE,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.7))),
           child: Column(
@@ -110,14 +110,14 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                  color: WHITE,
+                  color: PRIMARY_COLOR,
                   fontWeight: FontWeight.w500,
                   fontSize: 13,
                   // maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Text(widget.item.unit, style: const TextStyle(color: WHITE, fontSize: 12)),
+              Text(widget.item.unit, style: const TextStyle(color: PRIMARY_COLOR, fontSize: 12)),
               const SizedBox(
                 height: 4,
               ),
@@ -125,11 +125,11 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                 children: [
                   Text(
                     "${widget.item.price.formattedAmountString()} ₩",
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: WHITE),
+                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: PRIMARY_COLOR),
                   ),
                   Text(
                     " (${widget.item.unit})",
-                    style: const TextStyle(fontSize: 13, color: WHITE),
+                    style: const TextStyle(fontSize: 13, color: PRIMARY_COLOR),
                   ),
                 ],
               ),

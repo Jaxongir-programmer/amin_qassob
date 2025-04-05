@@ -111,7 +111,7 @@ class _MyAppState extends State<MyApp> {
         // locale: context.locale,
         debugShowCheckedModeBanner: false,
         navigatorKey: MyApp.navigatorKey,
-        title: 'amin_qassob Yetkazamiz!',
+        title: 'AMIN QASSOB',
         theme: appTheme(),
         home: const SplashScreen(),
         builder: (context, child) {

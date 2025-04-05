@@ -19,8 +19,9 @@ import '../../../main_screen.dart';
 
 class SuccessScreen extends StatefulWidget {
   int orderId;
+  double total_pay;
 
-  SuccessScreen({Key? key, required this.orderId}) : super(key: key);
+  SuccessScreen({Key? key, required this.orderId, required this.total_pay}) : super(key: key);
 
   @override
   State<SuccessScreen> createState() => _SuccessScreenState();
@@ -89,14 +90,17 @@ class _SuccessScreenState extends State<SuccessScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Text("Jami to'lov: ${widget.total_pay} ₩",
+                                  style: asTextStyle(fontFamily: "p_reg", color: BLACK, size: 18, fontWeight: FontWeight.w600)),
                               Text("Korea post bank\nUchekuk bank\n우체국 은행  ( 071)",
                                   style: asTextStyle(fontFamily: "p_reg", color: WHITE, size: 18, fontWeight: FontWeight.w600)),
                               Row(
                                 children: [
                                   Text(cardNumber,
-                                      style: asTextStyle(fontFamily: "p_reg", color: BLACK, size: 18, fontWeight: FontWeight.bold)),
+                                      style: asTextStyle(
+                                          fontFamily: "p_reg", color: BLACK, size: 18, fontWeight: FontWeight.bold)),
                                   IconButton(
-                                    icon: Icon(Icons.copy,color: BLACK),
+                                    icon: Icon(Icons.copy, color: BLACK),
                                     onPressed: () {
                                       Clipboard.setData(ClipboardData(text: cardNumber));
                                       ScaffoldMessenger.of(context).showSnackBar(
@@ -106,7 +110,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
                                   ),
                                 ],
                               ),
-                              Text("Ismi  이은호\nTolov  chekini tashlab qóyin. Haridingiz uchun Tashakkur.",
+                              Text("Ismi  이은호\nTolov chekini tashlab qóyin. Haridingiz uchun Tashakkur.",
                                   style: asTextStyle(fontFamily: "p_reg", color: WHITE, size: 18, fontWeight: FontWeight.w600)),
                             ],
                           ),
@@ -133,17 +137,17 @@ class _SuccessScreenState extends State<SuccessScreen> {
                             ),
                             child: imagePath == ""
                                 ? Icon(
-                                    Icons.photo_camera,
-                                    color: WHITE,
-                                  )
+                              Icons.photo_camera,
+                              color: WHITE,
+                            )
                                 : ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.file(
-                                      File(imagePath),
-                                      height: 81,
-                                      width: 81,
-                                      fit: BoxFit.cover,
-                                    )),
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.file(
+                                  File(imagePath),
+                                  height: 81,
+                                  width: 81,
+                                  fit: BoxFit.cover,
+                                )),
                           ),
                         ),
                         // const Text(
@@ -165,7 +169,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
                             margin: const EdgeInsets.only(top: 0, left: 12, right: 12, bottom: 8),
                             padding: const EdgeInsets.all(6),
                             decoration:
-                                const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(6)), color: COLOR_PRIMARY),
+                            const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(6)), color: COLOR_PRIMARY),
                             child: const Text(
                               "YUBORISH",
                               style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
@@ -184,13 +188,13 @@ class _SuccessScreenState extends State<SuccessScreen> {
               });
 
               viewModel.paymentData.listen(
-                (event) {
+                    (event) {
                   showSuccess(context, "Muvaffaqiyatli!");
                   provider.setIndex(0);
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (ctx) => MainScreen()),
-                    (route) => false,
+                        (route) => false,
                   );
                 },
               );
@@ -336,7 +340,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
             onPressed: () async {
               Navigator.pop(context);
               XFile? image =
-                  await picker.pickImage(source: ImageSource.camera, imageQuality: 70, maxWidth: 1800, maxHeight: 1800);
+              await picker.pickImage(source: ImageSource.camera, imageQuality: 70, maxWidth: 1800, maxHeight: 1800);
               if (image != null) {
                 var croppedFile = await ImageCropper().cropImage(
                   sourcePath: image.path,
@@ -378,7 +382,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
             onPressed: () async {
               Navigator.pop(context);
               XFile? image =
-                  await picker.pickImage(source: ImageSource.gallery, imageQuality: 60, maxHeight: 1000, maxWidth: 1000);
+              await picker.pickImage(source: ImageSource.gallery, imageQuality: 60, maxHeight: 1000, maxWidth: 1000);
               if (image != null) {
                 var croppedFile = await ImageCropper().cropImage(
                   sourcePath: image.path,
@@ -425,7 +429,11 @@ class _SuccessScreenState extends State<SuccessScreen> {
       return;
     }
 
-    if (await Permission.photos.request().isGranted || await Permission.storage.request().isGranted) {
+    if (await Permission.photos
+        .request()
+        .isGranted || await Permission.storage
+        .request()
+        .isGranted) {
       print("Permission granted");
     } else {
       print("Permission denied");

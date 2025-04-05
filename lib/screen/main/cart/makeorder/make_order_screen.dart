@@ -179,8 +179,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
             });
 
             viewModel.makeOrderData.listen((event) {
+              startScreenF(context, SuccessScreen(orderId: event, total_pay: (Providers().cartSumma+ widget.orderModel.deliver_summa)));
               PrefUtils.clearCart();
-              startScreenF(context, SuccessScreen(orderId: event));
             });
           },
         );
@@ -368,7 +368,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Mo'ljal",
+                        "To‘liq uy manzil va xona raqami",
                         style: TextStyle(fontSize: 16),
                       ),
                       const SizedBox(
@@ -472,7 +472,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                 style: TextStyle(fontSize: 16),
               ),
               Text(
-                "${(Providers().cartSumma).formattedAmountString()} ₩",
+                "${(Providers().cartSumma + widget.orderModel.deliver_summa).formattedAmountString()} ₩",
                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               )
             ],
@@ -653,7 +653,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Text(
-                        "Mo'ljal",
+                        "Manzil:",
                         style: TextStyle(fontSize: 24.0),
                       ),
                     ],
@@ -665,7 +665,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                     controller: orientrController,
                     autofocus: true,
                     decoration: const InputDecoration(
-                      hintText: "Mo'ljal",
+                      hintText: "To‘liq uy manzil va xona raqami",
                       contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
                       border: InputBorder.none,
                     ),
