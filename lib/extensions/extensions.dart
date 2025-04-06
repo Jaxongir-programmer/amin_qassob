@@ -6,6 +6,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../utils/enum.dart';
+
 extension HexColor on Color {
   /// String is in the format "aabbcc" or "ffaabbcc" with an optional leading "#".
   static Color fromHex(String hexString) {
@@ -70,5 +72,20 @@ extension CustomStringToDouble on String {
     var item = double.parse(value.isEmpty ? "0" : value);
 
     return item;
+  }
+}
+
+extension CustomLanguage on EnumLanguages {
+  String get language {
+    switch (this) {
+      case EnumLanguages.en:
+        return "English";
+      case EnumLanguages.uz:
+        return "O‘zbekcha";
+      case EnumLanguages.ru:
+        return "Русский";
+      case EnumLanguages.ko:
+        return "한국어";
+    }
   }
 }

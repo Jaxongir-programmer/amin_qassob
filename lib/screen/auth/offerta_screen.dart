@@ -1,3 +1,5 @@
+import 'package:amin_qassob/lang.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ficonsax/ficonsax.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,11 +18,10 @@ class OffertaScreen extends StatefulWidget {
 class _OffertaScreenState extends State<OffertaScreen> {
   @override
   Widget build(BuildContext context) {
-    print("OfferScreen");
     return Stack(
       children: [
         Scaffold(
-            appBar: AppBar(title: Text("Ommaviy Offerta")),
+            appBar: AppBar(title: Text(LocaleKeys.offerta.tr())),
             body: Column(
               children: [
                 Expanded(

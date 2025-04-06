@@ -1,12 +1,14 @@
 import 'package:amin_qassob/extensions/extensions.dart';
 import 'package:amin_qassob/utils/app_colors.dart';
 import 'package:amin_qassob/utils/utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ficonsax/ficonsax.dart';
 // import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../lang.g.dart';
 import '../model/product_model.dart';
 import '../provider/providers.dart';
 import '../screen/auth/login_screen.dart';
@@ -160,8 +162,8 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.8))),
                   child: (provider.productCount(widget.item.id) == 0)
-                      ? const Text(
-                          "Savatga qo'shish",
+                      ? Text(
+                    LocaleKeys.add_2_cart.tr(),
                           style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
                         )
                       : Row(

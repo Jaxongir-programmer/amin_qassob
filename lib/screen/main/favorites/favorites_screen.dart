@@ -1,3 +1,5 @@
+import 'package:amin_qassob/lang.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../generated/assets.dart';
@@ -20,8 +22,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     return Consumer<Providers>(builder: (context, provider, child) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Yoqimli mahsulotlar',
+          title: Text(
+            LocaleKeys.favourites.tr(),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           scrolledUnderElevation: 0,
@@ -53,10 +55,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                     const SizedBox(
                       height: 12,
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24.0),
                       child: Text(
-                        "Sizda hozircha tanlanganlar mavjud emas !",
+                        LocaleKeys.no_favorites.tr(),
                         style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.w500, fontSize: 18),
                         textAlign: TextAlign.center,
                       ),

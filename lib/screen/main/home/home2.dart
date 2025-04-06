@@ -6,6 +6,7 @@ import 'package:amin_qassob/view/category_circle_item_view.dart';
 import 'package:amin_qassob/view/products_item_view.dart';
 import 'package:amin_qassob/view/top_product_item_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ficonsax/ficonsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -18,6 +19,7 @@ import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../generated/assets.dart';
+import '../../../lang.g.dart';
 import '../../../model/brand_model.dart';
 import '../../../model/event_model.dart';
 import '../../../model/filter_brand_model.dart';
@@ -498,8 +500,8 @@ class _HomeScreen2State extends State<HomeScreen2> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Expanded(
-                  child: Text('Top Mahsulotlar',
+                Expanded(
+                  child: Text(LocaleKeys.top_products.tr(),
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PRIMARY_COLOR)),
                 ),
                 // TextButton(
@@ -624,15 +626,15 @@ class _HomeScreen2State extends State<HomeScreen2> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Expanded(
-            child: Text('Kategoriyalar', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PRIMARY_COLOR)),
+          Expanded(
+            child: Text(LocaleKeys.categories.tr(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PRIMARY_COLOR)),
           ),
           TextButton(
             onPressed: () {
             //
             },
-            child: const Text(
-              "Ko'proq ",
+            child: Text(
+              LocaleKeys.more.tr(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
@@ -658,8 +660,8 @@ class _HomeScreen2State extends State<HomeScreen2> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Expanded(
-                  child: Text('Barcha Mahsulotlar',
+                Expanded(
+                  child: Text(LocaleKeys.all_products.tr(),
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PRIMARY_COLOR)),
                 ),
                 // TextButton(

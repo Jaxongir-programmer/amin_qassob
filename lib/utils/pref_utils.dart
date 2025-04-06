@@ -16,6 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../model/bdm_items_model.dart';
 import '../model/event_model.dart';
 import 'constants.dart';
+import 'enum.dart';
 
 class PrefUtils {
 
@@ -37,6 +38,7 @@ class PrefUtils {
   static const PREF_FILTER = "PREF_FILTER";
   static const PREF_LOCATION = "location";
   static const FIRST_RUN = "FIRST_RUN";
+  static const PREF_LANGUAGE = "language";
 
   static SharedPreferences? _singleton;
 
@@ -281,12 +283,16 @@ class PrefUtils {
 
 
   //----------------------------------------------------------------------------------//
-  static String getLang() {
-    return _singleton?.getString(PREF_LANG) ?? DEFAULT_LANG_KEY;
+  static EnumLanguages getLanguage() {
+    if (_singleton?.getString(PREF_LANGUAGE) == null) {
+      return EnumLanguages.uz;
+    } else {
+      return EnumLanguages.fromJson(jsonDecode(_singleton?.getString(PREF_LANGUAGE) ?? ""));
+    }
   }
 
-  static Future<bool> setLang(String value) async {
-    return _singleton!.setString(PREF_LANG, value);
+  static Future<bool> setLanguage(EnumLanguages value) async {
+    return _singleton!.setString(PREF_LANGUAGE, jsonEncode(value.toJson()));
   }
 
   static Future<bool> setFirstRun(bool value) async{

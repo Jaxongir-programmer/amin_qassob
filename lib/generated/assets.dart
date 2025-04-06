@@ -12,6 +12,10 @@ class Assets {
   static const String imagesEmptyCart = 'assets/images/empty_cart.png';
   static const String imagesFavoriteList = 'assets/images/favorite_list.png';
   static const String imagesImg = 'assets/images/img.png';
+  static const String imagesImgEng = 'assets/images/imgEng.png';
+  static const String imagesImgKorea = 'assets/images/imgKorea.png';
+  static const String imagesImgRus = 'assets/images/imgRus.png';
+  static const String imagesImgUzb = 'assets/images/imgUzb.png';
   static const String imagesLocationIcon = 'assets/images/location_icon.svg';
   static const String imagesLogoMain = 'assets/images/logo_main.png';
   static const String imagesMyLocation = 'assets/images/my_location.png';
@@ -23,6 +27,8 @@ class Assets {
   static const String imagesSuccesOrder = 'assets/images/succes_order.png';
   static const String imagesSuccess = 'assets/images/success.json';
   static const String imagesUzbek = 'assets/images/uzbek.png';
+  static const String langEn = 'assets/lang/en.json';
+  static const String langKo = 'assets/lang/ko.json';
   static const String langRu = 'assets/lang/ru.json';
   static const String langUz = 'assets/lang/uz.json';
   static const String profileArrowRight2x = 'assets/profile/arrow_right@2x.png';

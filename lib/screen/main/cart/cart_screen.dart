@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:amin_qassob/extensions/extensions.dart';
+import 'package:amin_qassob/lang.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 
@@ -64,10 +66,10 @@ class _CartScreenState extends State<CartScreen> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      const Padding(
+                                      Padding(
                                         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
                                         child: Text(
-                                          'Savatdagi tovarlar',
+                                          LocaleKeys.cart.tr(),
                                           textAlign: TextAlign.start,
                                           style: TextStyle(color: COLOR_PRIMARY, fontSize: 20, fontWeight: FontWeight.w500),
                                         ),
@@ -169,9 +171,9 @@ class _CartScreenState extends State<CartScreen> {
           ),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                   child: Text(
-                "${"Umumiy hisob"}:",
+                "${LocaleKeys.total_amount.tr()}:",
                 style: TextStyle(color: BLACK_COLOR, fontWeight: FontWeight.bold, fontSize: 14),
               )),
               Text(
@@ -182,9 +184,9 @@ class _CartScreenState extends State<CartScreen> {
           ),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                   child: Text(
-                "Yetkazib berish narxi ",
+                LocaleKeys.delivery_price.tr(),
                 style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 14),
               )),
               Text(
@@ -227,7 +229,7 @@ class _CartScreenState extends State<CartScreen> {
                     //     ProductByIdModel(PrefUtils.getCartList().map((e) => ProductIdModel(e.id)).toList()));
                   },
                   child: Text(
-                    "${"Tasdiqlash"} (${provider.getCartList.length})",
+                    "${LocaleKeys.continue_.tr().toUpperCase()} (${provider.getCartList.length})",
                     style: const TextStyle(color: Colors.white),
                   )),
         ],
@@ -240,13 +242,13 @@ class _CartScreenState extends State<CartScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
+        Padding(
           padding: EdgeInsets.only(left: 24.0, bottom: 10),
-          child: Text("Hisobingizga kiring", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+          child: Text(LocaleKeys.login_account.tr(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
-          child: Text("Ilovaning barcha imoniyatlaridan foydalanish uchun tizimga kirishingiz talab qilinadi !",
+          child: Text(LocaleKeys.login_access.tr(),
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
         ),
         Container(
@@ -270,11 +272,11 @@ class _CartScreenState extends State<CartScreen> {
               onTap: () {
                 startScreenF(context, LoginScreen());
               },
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Tizimga kirish',
+                    LocaleKeys.enter_to_system.tr().toUpperCase(),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,

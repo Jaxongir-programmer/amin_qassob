@@ -1,6 +1,7 @@
-
 import 'package:amin_qassob/screen/main/message/message_screen.dart';
 import 'package:amin_qassob/theme.dart';
+import 'package:amin_qassob/utils/constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // import 'package:firebase_core/firebase_core.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
@@ -41,7 +42,7 @@ GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await EasyLocalization.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await PrefUtils.initInstance();
   // eventBusProvider();
   // await LocalNotificationService.checkNotificationPermission();
@@ -68,7 +69,15 @@ Future<void> main() async {
   // });
 
   // Initialize hive
-  runApp(MyApp());
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale(uzLangKey), Locale(ruLangKey), Locale(uzEnLangKey), Locale(koLangKey)],
+      fallbackLocale: const Locale(defaultLangKey),
+      startLocale: const Locale(defaultLangKey),
+      path: "assets/lang",
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -96,7 +105,6 @@ class _MyAppState extends State<MyApp> {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: PRIMARY_COLOR,
       statusBarIconBrightness: Brightness.light,
-
       systemNavigationBarColor: PRIMARY_COLOR,
       systemNavigationBarIconBrightness: Brightness.light,
     ));
@@ -106,9 +114,9 @@ class _MyAppState extends State<MyApp> {
         return Providers();
       },
       child: MaterialApp(
-        // localizationsDelegates: context.localizationDelegates,
-        // supportedLocales: context.supportedLocales,
-        // locale: context.locale,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         debugShowCheckedModeBanner: false,
         navigatorKey: MyApp.navigatorKey,
         title: 'AMIN QASSOB',

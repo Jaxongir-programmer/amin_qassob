@@ -1,9 +1,11 @@
 import 'package:amin_qassob/extensions/extensions.dart';
 import 'package:amin_qassob/generated/assets.dart';
+import 'package:amin_qassob/lang.g.dart';
 import 'package:amin_qassob/model/product_model.dart';
 import 'package:amin_qassob/provider/providers.dart';
 import 'package:amin_qassob/screen/auth/login_screen.dart';
 import 'package:amin_qassob/utils/utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
@@ -272,7 +274,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Mahsulot tavsifi', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text(LocaleKeys.product_description.tr(), style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             ExpandableText(
               widget.item.description,
@@ -292,12 +294,12 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: (viewModel.productList.length > 1)
-          ? const Row(
+          ? Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  child: Text("O'xshash Mahsulotlar",
+                  child: Text(LocaleKeys.similar_products.tr(),
                       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF212121))),
                 ),
                 Icon(
@@ -464,8 +466,8 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                     style: const TextStyle(
                                         fontWeight: FontWeight.normal, color: Colors.white, fontSize: 16)),
                               ),
-                            const Text(
-                              "Qo'shish",
+                            Text(
+                              LocaleKeys.add_2_cart.tr(),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,

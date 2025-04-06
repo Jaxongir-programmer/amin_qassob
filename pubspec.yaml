@@ -48,7 +48,7 @@ dependencies:
   flutter_tree:
   extended_masked_text:
   cupertino_icons:
-  #  easy_localization: ^3.0.0
+  easy_localization:
   sizer:
   event_bus:
   get_it:

@@ -1,4 +1,6 @@
+import 'package:amin_qassob/lang.g.dart';
 import 'package:badges/badges.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:event_bus/event_bus.dart';
@@ -57,7 +59,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     setData(viewModel, keyword);
                   },
                   decoration: InputDecoration(
-                    hintText: "AMIN QASSOBdan izlang...",
+                    hintText: LocaleKeys.search_products.tr(),
                     prefixIcon: Image.asset(
                       Assets.profileSearch,
                       color: PRIMARY_COLOR,

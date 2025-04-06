@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:amin_qassob/lang.g.dart';
 import 'package:amin_qassob/screen/main/home/home_viewmodel.dart';
 import 'package:amin_qassob/utils/constants.dart';
 import 'package:amin_qassob/view/shimmers.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tree/flutter_tree.dart';
@@ -55,7 +57,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
           builder: (context, viewModel, child) {
             return Scaffold(
               appBar: AppBar(
-                title: Text("Katalog"),
+                title: Text(LocaleKeys.catalog.tr()),
               ),
               body: Column(
                 children: [

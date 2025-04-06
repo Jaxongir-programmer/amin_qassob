@@ -36,7 +36,7 @@ class ApiService {
       'Authorization': 'Bearer ${PrefUtils.getToken()}',
       // 'token': PrefUtils.getToken(),
       'device': Platform.operatingSystem,
-      'lang': PrefUtils.getLang(),
+      'lang': PrefUtils.getLanguage(),
       'Connection': "close",
     });
 
@@ -50,6 +50,15 @@ class ApiService {
       ),
     );
     }
+
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          options.headers['Accept-Language'] = PrefUtils.getLanguage().value;
+          return handler.next(options);
+        },
+      ),
+    );
 
     if (kDebugMode) dio.interceptors.add(MyApp.alice.getDioInterceptor());
   }

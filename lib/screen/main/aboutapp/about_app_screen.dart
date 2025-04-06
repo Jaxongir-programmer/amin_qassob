@@ -1,5 +1,7 @@
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:amin_qassob/generated/assets.dart';
+import 'package:amin_qassob/lang.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ficonsax/ficonsax.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
@@ -36,7 +38,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Biz haqimizda"),
+        title: Text(LocaleKeys.about_us.tr()),
       ),
       body: Stack(
         children: [

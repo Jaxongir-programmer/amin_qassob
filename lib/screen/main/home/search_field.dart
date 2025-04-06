@@ -2,10 +2,12 @@ import 'dart:core';
 import 'dart:developer';
 
 import 'package:amin_qassob/utils/app_colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../generated/assets.dart';
+import '../../../lang.g.dart';
 import '../../../utils/utils.dart';
 
 class SearchField extends StatelessWidget {
@@ -32,7 +34,7 @@ class SearchField extends StatelessWidget {
                 enabled: false,
                 onChanged: (value) => log(value),
                 decoration: InputDecoration(
-                  hintText: "AMIN QASSOB dan izlang...",
+                  hintText: LocaleKeys.search_products.tr(),
                   prefixIcon: Image.asset(
                     Assets.profileSearch,
                     color: PRIMARY_COLOR,

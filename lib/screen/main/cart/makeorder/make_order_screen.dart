@@ -1,7 +1,9 @@
 import 'package:amin_qassob/extensions/extensions.dart';
+import 'package:amin_qassob/lang.g.dart';
 import 'package:amin_qassob/provider/providers.dart';
 import 'package:amin_qassob/screen/main/cart/makeorder/success/success_screen.dart';
 import 'package:amin_qassob/utils/utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -49,7 +51,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
 
   final List<PaymentModel> paymentTypes = [
     // PaymentModel("click", 1),
-    PaymentModel("terminal", 2),
+    PaymentModel(LocaleKeys.card.tr(), 2),
     // PaymentModel("naqd", 3),
   ];
 
@@ -79,7 +81,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
               child: Scaffold(
                 backgroundColor: Colors.white,
                 appBar: AppBar(
-                  title: const Text("Tasdiqlash"),
+                  title: Text(LocaleKeys.confirm.tr()),
                 ),
                 body: Stack(
                   children: [
@@ -128,7 +130,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                                         //   showWarning(context, "Yetkazib berish vaqtini tanlang !");
                                         // } else
                                         if (selectedPayment == null) {
-                                          showWarning(context, "To'lov turini tanlang");
+                                          showWarning(context, LocaleKeys.choose_payment.tr());
                                         }
                                         // else if (provider.getSelectAdres == null) {
                                         //   showWarning(context, "Yetkazib berish manzilini tanlang !");
@@ -156,8 +158,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                                         elevation: 3,
                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                                       ),
-                                      child: const Text(
-                                        "Tasdiqlash",
+                                      child: Text(
+                                        LocaleKeys.confirm.tr().toUpperCase(),
                                         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
                                       ))
                                   : const Center(
@@ -179,7 +181,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
             });
 
             viewModel.makeOrderData.listen((event) {
-              startScreenF(context, SuccessScreen(orderId: event, total_pay: (Providers().cartSumma+ widget.orderModel.deliver_summa)));
+              startScreenF(
+                  context, SuccessScreen(orderId: event, total_pay: (Providers().cartSumma + widget.orderModel.deliver_summa)));
               PrefUtils.clearCart();
             });
           },
@@ -233,8 +236,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Telefon raqam",
+                    Text(
+                      LocaleKeys.phone_number.tr(),
                       style: TextStyle(fontSize: 16),
                     ),
                     const SizedBox(
@@ -367,8 +370,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "To‘liq uy manzil va xona raqami",
+                      Text(
+                        LocaleKeys.orientr.tr(),
                         style: TextStyle(fontSize: 16),
                       ),
                       const SizedBox(
@@ -403,8 +406,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "To'lov usuli",
+                Text(
+                  LocaleKeys.select_payment_type.tr(),
                   style: TextStyle(fontSize: 13),
                 ),
                 const SizedBox(
@@ -426,8 +429,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                         isEmpty: selectedPayment == '',
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton<String>(
-                            hint: const Text(
-                              "To'lov usuli",
+                            hint: Text(
+                              LocaleKeys.select_payment_type.tr(),
                               style: TextStyle(fontSize: 12),
                             ),
                             value: selectedPayment,
@@ -467,8 +470,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Text(
-                "To'lovga",
+              Text(
+                LocaleKeys.total_amount.tr(),
                 style: TextStyle(fontSize: 16),
               ),
               Text(
@@ -499,15 +502,15 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Izoh",
+                      Text(
+                        LocaleKeys.comment.tr(),
                         style: TextStyle(fontSize: 16),
                       ),
                       const SizedBox(
                         height: 4,
                       ),
                       Text(
-                        commentController.text == "" ? "Izoh kiritilmagan" : commentController.text,
+                        commentController.text == "" ? LocaleKeys.no_comment.tr() : commentController.text,
                         style: const TextStyle(fontSize: 13),
                       ),
                     ],
@@ -528,8 +531,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Yetkazib berish narxi",
+              Text(
+                LocaleKeys.delivery_price.tr(),
                 style: TextStyle(fontSize: 16),
               ),
               const SizedBox(
@@ -664,8 +667,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                   TextField(
                     controller: orientrController,
                     autofocus: true,
-                    decoration: const InputDecoration(
-                      hintText: "To‘liq uy manzil va xona raqami",
+                    decoration: InputDecoration(
+                      hintText: LocaleKeys.orientr.tr(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
                       border: InputBorder.none,
                     ),
@@ -684,8 +687,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                         color: PRIMARY_COLOR,
                         borderRadius: BorderRadius.all(Radius.circular(12)),
                       ),
-                      child: const Text(
-                        "Saqlash",
+                      child: Text(
+                        LocaleKeys.save.tr(),
                         style: TextStyle(color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
@@ -749,8 +752,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                         color: PRIMARY_COLOR,
                         borderRadius: BorderRadius.all(Radius.circular(12)),
                       ),
-                      child: const Text(
-                        "Saqlash",
+                      child: Text(
+                        LocaleKeys.save.tr(),
                         style: TextStyle(color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
@@ -808,8 +811,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                         color: PRIMARY_COLOR,
                         borderRadius: BorderRadius.all(Radius.circular(12)),
                       ),
-                      child: const Text(
-                        "Saqlash",
+                      child: Text(
+                        LocaleKeys.save.tr(),
                         style: TextStyle(color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
@@ -963,11 +966,11 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                         finish(context);
                       });
                     },
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Saqlash',
+                          LocaleKeys.save.tr(),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:amin_qassob/screen/auth/offerta_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:pinput/pinput.dart';
 import 'package:stacked/stacked.dart';
 import '../../generated/assets.dart';
+import '../../lang.g.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/utils.dart';
 import '../main/main_screen.dart';
@@ -94,10 +96,10 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
       onSaved: (value) {
         userNameController.text = value!;
       },
-      decoration: const InputDecoration(
-        hintText: 'Ismingiz',
-        hintStyle: TextStyle(color: Colors.grey),
-        prefixIcon: Icon(Icons.person),
+      decoration: InputDecoration(
+        hintText: LocaleKeys.name.tr(),
+        hintStyle: const TextStyle(color: Colors.grey),
+        prefixIcon: const Icon(Icons.person),
       ),
     );
 
@@ -109,8 +111,8 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
       onSaved: (value) {
         lastNameController.text = value!;
       },
-      decoration: const InputDecoration(
-        hintText: 'Familiyangiz',
+      decoration: InputDecoration(
+        hintText: LocaleKeys.lastname.tr(),
         hintStyle: TextStyle(color: Colors.grey),
         prefixIcon: Icon(Icons.person),
       ),
@@ -124,8 +126,8 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
       onSaved: (value) {
         addresController.text = value!;
       },
-      decoration: const InputDecoration(
-        hintText: 'Manzilingiz',
+      decoration: InputDecoration(
+        hintText: LocaleKeys.address.tr(),
         hintStyle: TextStyle(color: Colors.grey),
         prefixIcon: Icon(Icons.location_city),
       ),
@@ -139,8 +141,8 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
       onSaved: (value) {
         passwordController.text = value!;
       },
-      decoration: const InputDecoration(
-        hintText: 'Parol...',
+      decoration: InputDecoration(
+        hintText: LocaleKeys.password.tr(),
         hintStyle: TextStyle(color: Colors.grey),
         prefixIcon: Icon(Icons.password),
       ),
@@ -350,8 +352,8 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                   children: [
-                                                    const Text(
-                                                      "Parolni kiriting",
+                                                    Text(
+                                                      LocaleKeys.enter_passpowd.tr(),
                                                       style: TextStyle(
                                                         color: TEXT_COLOR2,
                                                         fontSize: 24,
@@ -359,7 +361,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                                       ),
                                                     ),
                                                     Text(
-                                                      "Telefon raqam: ${phoneController.text}",
+                                                      "${LocaleKeys.phone_number.tr()}: ${phoneController.text}",
                                                       style: const TextStyle(
                                                           fontWeight: FontWeight.w500, fontSize: 16, fontFamily: "regular"),
                                                     ),
@@ -488,7 +490,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                     ),
                           if (state == AuthState.phone)
                             Padding(
-                              padding: const EdgeInsets.only(top: 16, left: 24),
+                              padding: EdgeInsets.only(top: 16, left: 24),
                               child: Row(
                                 children: [
                                   IconButton(
@@ -506,15 +508,15 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                   RichText(
                                       text: TextSpan(style: const TextStyle(color: GREY), children: <TextSpan>[
                                     TextSpan(
-                                        text: "Foydalanish Shartlari",
+                                        text: LocaleKeys.i_have_read_offer.tr(),
                                         style: const TextStyle(color: Colors.green, fontWeight: FontWeight.w500),
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {
                                             // _isActiveButton = _getActiveButton();
                                             Navigator.push(context, MaterialPageRoute(builder: (context) => OffertaScreen()));
                                           }),
-                                    const TextSpan(
-                                        text: "  bilan tanishib chiqdim", style: TextStyle(fontWeight: FontWeight.w500)),
+                                    TextSpan(
+                                        text: LocaleKeys.i_have_read_offer_2.tr(), style: TextStyle(fontWeight: FontWeight.w500)),
                                   ])),
                                 ],
                               ),
@@ -560,16 +562,15 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                 } else {
                                   if (passwordController.text == "") {
                                     Fluttertoast.showToast(
-                                        msg: "Parolni kiriting !",
+                                        msg: LocaleKeys.enter_passpowd.tr(),
                                         toastLength: Toast.LENGTH_SHORT,
                                         backgroundColor: ACCENT,
                                         textColor: Colors.white);
-                                    print("HATOLIK");
                                   } else {
                                     if (userNameController.text == "" ||
                                         lastNameController.text == "" ||
                                         addresController.text == "") {
-                                      Fluttertoast.showToast(msg: "Kerakli maydonlarni to'ldiring");
+                                      Fluttertoast.showToast(msg: LocaleKeys.fill_feilds.tr());
                                       return;
                                     }
                                     viewModel.registration(
@@ -584,10 +585,10 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                               },
                               child: Text(
                                 state == AuthState.phone
-                                    ? "Tekshirish"
+                                    ? LocaleKeys.check.tr()
                                     : state == AuthState.sms_code
                                         ? "SMS code olish"
-                                        : "Tasdiqlash",
+                                        : LocaleKeys.confirm.tr(),
                                 style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -595,16 +596,16 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                           const SizedBox(
                             height: 20,
                           ),
-                          if (state == AuthState.phone)
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 30.0),
-                              child: Text("Tizimga kirish uchun telefon raqam bilan tasdiqlash talab qilinadi",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: COLOR_BDM_DARK,
-                                  )),
-                            ),
+                          // if (state == AuthState.phone)
+                          //   const Padding(
+                          //     padding: EdgeInsets.symmetric(horizontal: 30.0),
+                          //     child: Text("Tizimga kirish uchun telefon raqam bilan tasdiqlash talab qilinadi",
+                          //         textAlign: TextAlign.center,
+                          //         style: TextStyle(
+                          //           fontSize: 16,
+                          //           color: COLOR_BDM_DARK,
+                          //         )),
+                          //   ),
                         ],
                       ))
                 ],
@@ -631,7 +632,6 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
             (_) => false,
           );
         });
-
 
         viewModel.tokenData.listen((event) async {
           Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(

@@ -1,4 +1,6 @@
+import 'package:amin_qassob/lang.g.dart';
 import 'package:amin_qassob/utils/utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 // import 'package:easy_localization/easy_localization.dart';
 
 import '../extensions/extensions.dart';
@@ -93,8 +95,8 @@ class _CartItemLayoutState extends State<CartItemLayout> {
                   ),
                   Row(
                     children: [
-                      const Text(
-                        "Jami: ",
+                      Text(
+                        LocaleKeys.total.tr(),
                         style: TextStyle(color: Colors.black),
                       ),
                       Text(

@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:amin_qassob/lang.g.dart';
 import 'package:amin_qassob/screen/auth/offerta_screen.dart';
+import 'package:amin_qassob/screen/language/language_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ficonsax/ficonsax.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -96,85 +99,88 @@ class _ProfileScreenState extends State<ProfileScreen> {
             //                   reportType: REPORT_LIST,
             //                 )));
             //   }),
-            _buildOption("Ommaviy Offerta", IconsaxOutline.profile_tick, 1.1, BLACK, () {
+            _buildOption(LocaleKeys.change_language.tr(), IconsaxOutline.language_circle, 1.1, BLACK, () {
+              startScreenF(context, const LanguageScreen(first: false));
+            }),
+            _buildOption(LocaleKeys.offerta.tr(), IconsaxOutline.profile_tick, 1.1, BLACK, () {
               startScreenF(context, const OffertaScreen());
             }),
-            _buildOption("Biz haqimizda", IconsaxOutline.information, 2, BLACK, () {
+            _buildOption(LocaleKeys.about_us.tr(), IconsaxOutline.information, 2, BLACK, () {
               Navigator.push(context, MaterialPageRoute(builder: (_) => const AboutAppScreen()));
             }),
-            _buildOption("Ilovani ulashing", IconsaxOutline.share, 1.1, BLACK, () {
+            _buildOption(LocaleKeys.share_app.tr(), IconsaxOutline.share, 1.1, BLACK, () {
               Share.share('https://play.google.com/store/apps/details?id=${_packageInfo?.packageName}');
             }),
-            _buildOption("Biz bilan bog'laning", IconsaxOutline.call, 1.5, BLACK, () {
-              showDialog<String>(
-                  context: context,
-                  barrierDismissible: true,
-                  barrierColor: Colors.black.withOpacity(0.75),
-                  builder: (BuildContext context) {
-                    return Dialog(
-                      elevation: 20,
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-                      child: SingleChildScrollView(
-                        // controller: scrollController,
-                        child: Column(
-                          // mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            dialogRoundedShapeB(),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              padding: const EdgeInsets.only(left: 14),
-                              alignment: AlignmentDirectional.centerStart,
-                              child: const Text(
-                                "Raqamni tanlang",
-                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            ListView.builder(
-                                padding: const EdgeInsets.only(bottom: 8),
-                                shrinkWrap: true,
-                                primary: false,
-                                itemCount: PrefUtils.getAdminPhones().length,
-                                itemBuilder: (context, index) {
-                                  var item = PrefUtils.getAdminPhones()[index];
-                                  return InkWell(
-                                    onTap: () {
-                                      UrlLauncher.launch("tel:${item.phone}");
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16),
-                                      child: Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.phone_in_talk_sharp,
-                                            color: Colors.green,
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            item.phone,
-                                            style: const TextStyle(fontSize: 18),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                })
-                          ],
-                        ),
-                      ),
-                    );
-                  });
-            }),
+            // _buildOption("Biz bilan bog'laning", IconsaxOutline.call, 1.5, BLACK, () {
+            //   showDialog<String>(
+            //       context: context,
+            //       barrierDismissible: true,
+            //       barrierColor: Colors.black.withOpacity(0.75),
+            //       builder: (BuildContext context) {
+            //         return Dialog(
+            //           elevation: 20,
+            //           backgroundColor: Colors.white,
+            //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+            //           child: SingleChildScrollView(
+            //             // controller: scrollController,
+            //             child: Column(
+            //               // mainAxisSize: MainAxisSize.min,
+            //               children: <Widget>[
+            //                 const SizedBox(
+            //                   height: 10,
+            //                 ),
+            //                 dialogRoundedShapeB(),
+            //                 const SizedBox(
+            //                   height: 10,
+            //                 ),
+            //                 Container(
+            //                   padding: const EdgeInsets.only(left: 14),
+            //                   alignment: AlignmentDirectional.centerStart,
+            //                   child: const Text(
+            //                     "Raqamni tanlang",
+            //                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            //                   ),
+            //                 ),
+            //                 const SizedBox(
+            //                   height: 12,
+            //                 ),
+            //                 ListView.builder(
+            //                     padding: const EdgeInsets.only(bottom: 8),
+            //                     shrinkWrap: true,
+            //                     primary: false,
+            //                     itemCount: PrefUtils.getAdminPhones().length,
+            //                     itemBuilder: (context, index) {
+            //                       var item = PrefUtils.getAdminPhones()[index];
+            //                       return InkWell(
+            //                         onTap: () {
+            //                           UrlLauncher.launch("tel:${item.phone}");
+            //                         },
+            //                         child: Padding(
+            //                           padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16),
+            //                           child: Row(
+            //                             children: [
+            //                               const Icon(
+            //                                 Icons.phone_in_talk_sharp,
+            //                                 color: Colors.green,
+            //                               ),
+            //                               const SizedBox(
+            //                                 width: 10,
+            //                               ),
+            //                               Text(
+            //                                 item.phone,
+            //                                 style: const TextStyle(fontSize: 18),
+            //                               )
+            //                             ],
+            //                           ),
+            //                         ),
+            //                       );
+            //                     })
+            //               ],
+            //             ),
+            //           ),
+            //         );
+            //       });
+            // }),
             if (PrefUtils.getToken() != "")
               Consumer<Providers>(
                 builder: (context, provider, child) {
@@ -280,13 +286,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           )
         : Column(
             children: [
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Text("Hisobingizga kiring", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+                child: Text(LocaleKeys.login_account.tr(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.0),
-                child: Text("Ilovaning barcha imoniyatlaridan foydalanish uchun tizimga kirishingiz talab qilinadi !",
+                child: Text(LocaleKeys.login_access.tr(),
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
               ),
               Container(
@@ -310,11 +316,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onTap: () {
                       startScreenF(context, LoginScreen());
                     },
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Tizimga kirish',
+                          LocaleKeys.enter_to_system.tr().toUpperCase(),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,

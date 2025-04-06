@@ -1,7 +1,9 @@
 import 'package:amin_qassob/extensions/extensions.dart';
+import 'package:amin_qassob/lang.g.dart';
 import 'package:amin_qassob/utils/pref_utils.dart';
 import 'package:amin_qassob/utils/utils.dart';
 import 'package:amin_qassob/view/custom_views.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ficonsax/ficonsax.dart';
 
 // import 'package:easy_localization/easy_localization.dart';
@@ -229,8 +231,8 @@ class ProductsItemViewState extends State<ProductsItemView> {
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.8))),
                     child: (provider.productCount(widget.item.id) == 0)
-                        ? const Text(
-                            "Savatga qo'shish",
+                        ? Text(
+                            LocaleKeys.add_2_cart.tr(),
                             style: TextStyle(
                               fontWeight: FontWeight.w400,
                             ),

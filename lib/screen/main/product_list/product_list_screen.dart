@@ -4,6 +4,7 @@ import 'package:amin_qassob/model/size_model.dart';
 import 'package:amin_qassob/screen/main/product_list/search_viewmodel.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:amin_qassob/view/empty_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:event_bus/event_bus.dart';
@@ -15,6 +16,7 @@ import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../generated/assets.dart';
+import '../../../lang.g.dart';
 import '../../../model/brand_model.dart';
 import '../../../model/filter_brand_model.dart';
 import '../../../model/product_model.dart';
@@ -168,7 +170,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 setData(viewModel, keyword);
               },
               decoration: InputDecoration(
-                hintText: "AMIN QASSOB dan izlang...",
+                hintText: LocaleKeys.search_products.tr(),
                 prefixIcon: Image.asset(
                   Assets.profileSearch,
                   color: PRIMARY_COLOR,

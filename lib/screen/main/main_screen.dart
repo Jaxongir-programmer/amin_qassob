@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:amin_qassob/lang.g.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:amin_qassob/screen/main/brands_screen/catalog_scr.dart';
 import 'package:amin_qassob/screen/main/home/home2.dart';
 import 'package:amin_qassob/screen/main/home/home_viewmodel.dart';
 import 'package:amin_qassob/screen/main/profile/profile_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ficonsax/ficonsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -53,7 +55,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: PRIMARY_COLOR,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.light,
     ));
     // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: PRIMARY_COLOR));
     super.initState();
@@ -106,7 +108,7 @@ class _MainScreenState extends State<MainScreen> {
                   child: BottomNavigationBar(
                     items: [
                       BottomNavigationBarItem(
-                        label: "Asosiy",
+                        label: LocaleKeys.main.tr(),
                         activeIcon: Icon(
                           IconsaxBold.home,
                           size: 24,
@@ -119,7 +121,7 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ),
                       BottomNavigationBarItem(
-                        label: "Katalog",
+                        label: LocaleKeys.catalog.tr(),
                         activeIcon: Icon(
                           IconsaxBold.category,
                           size: 24,
@@ -141,7 +143,7 @@ class _MainScreenState extends State<MainScreen> {
                       //     Assets.profileFavorite,
                       //   ),
                       // ),
-                      BottomNavigationBarItem(label: "Savat",
+                      BottomNavigationBarItem(label: LocaleKeys.cart.tr(),
                         activeIcon: badges.Badge(
                           showBadge: provider.getCartList.isNotEmpty,
                           badgeContent:
@@ -168,7 +170,7 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ),
                       BottomNavigationBarItem(
-                        label: "Profil",
+                        label: LocaleKeys.profil.tr(),
                         activeIcon: Icon(
                           IconsaxBold.profile_circle,
                           size: 24,

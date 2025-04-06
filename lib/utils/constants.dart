@@ -22,10 +22,11 @@ const APP_TYPE = "client";
 const BASE_URL = "https://onstudy.uz/api/";
 const BASE_IMAGE_URL = "https://onstudy.uz/";
 
-// const UZ_LANG_KEY = "en";
-const UZ_LANG_KEY = "uz";
-const RU_LANG_KEY = "ru";
-const DEFAULT_LANG_KEY = UZ_LANG_KEY;
+const uzEnLangKey = "en";
+const ruLangKey = "ru";
+const uzLangKey = "uz";
+const koLangKey = "ko";
+const defaultLangKey = uzLangKey;
 
 // const defaultLocationYandex = Point(latitude: 40.538809199846185, longitude: 70.93768802572866);
 const String noSelected = "Tanlanmagan";
