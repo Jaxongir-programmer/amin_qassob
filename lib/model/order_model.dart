@@ -12,8 +12,9 @@ class OrderModel{
   final double total_price;
   final List<OrderProductModel> products;
   final OrderStatus status;
+  final bool paid;
 
-  OrderModel(this.id, this.created, this.comment, this.total_price, this.products, this.status);
+  OrderModel(this.id, this.created, this.comment, this.total_price, this.products, this.status, this.paid);
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => _$OrderModelFromJson(json);
 

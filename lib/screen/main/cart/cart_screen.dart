@@ -207,7 +207,7 @@ class _CartScreenState extends State<CartScreen> {
                   onPressed: () {
                     PrefUtils.getToken().isNotEmpty
                         ? PrefUtils.getCartList().isEmpty
-                            ? showWarning(context, "${"Savat boʻsh"}!")
+                            ? showWarning(context, "${LocaleKeys.cart_empty.tr()}!")
                             : startScreenF(
                                 context,
                                 MakeOrderScreen(
@@ -307,10 +307,10 @@ class _CartScreenState extends State<CartScreen> {
           const SizedBox(
             height: 12,
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.0),
             child: Text(
-              "Savat boʻsh",
+              LocaleKeys.cart_empty.tr(),
               style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.w500, fontSize: 18),
               textAlign: TextAlign.center,
             ),

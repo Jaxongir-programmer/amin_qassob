@@ -1,8 +1,15 @@
 // import 'package:easy_localization/easy_localization.dart';
 
+import 'package:amin_qassob/lang.g.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import '../extensions/extensions.dart';
 import '../model/order_model.dart';
+import '../provider/providers.dart';
+import '../screen/main/cart/makeorder/success/success_screen.dart';
 import '../utils/app_colors.dart';
+import '../utils/pref_utils.dart';
 import '../utils/utils.dart';
 import '../view/order_product_item_view.dart';
 import 'package:flutter/material.dart';
@@ -36,8 +43,14 @@ class _OrderItemViewState extends State<OrderItemView> {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
                 children: [
-                  const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey,),
-                  const SizedBox(width: 8,),
+                  const Icon(
+                    Icons.shopping_bag_outlined,
+                    size: 18,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
                   Expanded(
                       child: Text(
                     "Trek raqami",
@@ -54,12 +67,18 @@ class _OrderItemViewState extends State<OrderItemView> {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
                 children: [
-                  const Icon(Icons.monetization_on_outlined, size: 18, color: Colors.grey,),
-                  const SizedBox(width: 8,),
-                  Expanded(child: Text("Umumiy")),
+                  const Icon(
+                    Icons.monetization_on_outlined,
+                    size: 18,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(child: Text(LocaleKeys.total_amount.tr())),
                   Expanded(
                     child: Text(
-                      "${widget.item.total_price.formattedAmountString()} UZS",
+                      "${widget.item.total_price.formattedAmountString()} ₩",
                     ),
                   ),
                 ],
@@ -86,14 +105,44 @@ class _OrderItemViewState extends State<OrderItemView> {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
                 children: [
-                  const Icon(Icons.date_range_outlined, size: 18, color: Colors.grey,),
-                  const SizedBox(width: 8,),
+                  const Icon(
+                    Icons.date_range_outlined,
+                    size: 18,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
                   Expanded(child: Text("${"Vaqti"}:")),
                   Expanded(child: Text(widget.item.created.substring(0, 16))),
                 ],
               ),
             ),
             const SizedBox(height: 8),
+            ElevatedButton(
+                onPressed: () {
+                  if (!widget.item.paid) {
+                    startScreenF(
+                        context,
+                        SuccessScreen(
+                          orderId: widget.item.id,
+                          total_pay: widget.item.total_price + PrefUtils.getUser()!.deliver_summa,
+                        ));
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: PRIMARY_COLOR,
+                  backgroundColor: widget.item.paid ? Colors.green : PRIMARY_COLOR,
+                  shadowColor: PRIMARY_COLOR,
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                ),
+                child: Text(
+                  widget.item.paid
+                      ? "To'lov qilingan".toUpperCase()
+                      : "To'lov qilinmagan".toUpperCase(),
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+                ))
           ],
         ),
       ),

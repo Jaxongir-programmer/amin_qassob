@@ -1,5 +1,7 @@
 import 'package:amin_qassob/generated/assets.dart';
+import 'package:amin_qassob/lang.g.dart';
 import 'package:amin_qassob/utils/pref_utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/app_colors.dart';
@@ -97,8 +99,8 @@ class _SubMenuWigetState extends State<SubMenuWiget> {
                     const SizedBox(
                       height: 8,
                     ),
-                    const Text(
-                      "Buyurtmalar",
+                    Text(
+                      LocaleKeys.orders.tr(),
                       style: TextStyle(fontWeight: FontWeight.w500),
                     )
                   ],

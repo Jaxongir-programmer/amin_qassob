@@ -64,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           SliverList.list(children: [
             if (PrefUtils.getToken() != "")
-              _buildOption("Buyurtmalar", IconsaxOutline.bag_2, 1.1, BLACK, () {
+              _buildOption(LocaleKeys.orders.tr(), IconsaxOutline.bag_2, 1.1, BLACK, () {
                 startScreenF(context, const OrdersScreen());
               }),
             // if (PrefUtils.getToken() != "")
@@ -184,8 +184,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             if (PrefUtils.getToken() != "")
               Consumer<Providers>(
                 builder: (context, provider, child) {
-                  return _buildOption("Tizimdan chiqish", IconsaxOutline.logout, 2, GREY, () {
-                    showExitDialog(context, "Tizimdan chiqishga ishonchingiz komilmi ?",
+                  return _buildOption(LocaleKeys.logout.tr(), IconsaxOutline.logout, 2, GREY, () {
+                    showExitDialog(context, LocaleKeys.want_to_logout,
                         noButton: true, forSingOut: true, pressOk: () {
                       PrefUtils.setToken("");
                       PrefUtils.clearAll();
@@ -206,7 +206,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Consumer<Providers>(
                 builder: (context, provider, child) {
                   return _buildOption("Hisobni o'chirish", IconsaxOutline.profile_delete, 0.9, Colors.red, () {
-                    showExitDialog(context, "THisobni o'chirishga ishonchingiz komilmi ?",
+                    showExitDialog(context, "Hisobni o'chirishga ishonchingiz komilmi ?",
                         noButton: true, forSingOut: true, pressOk: () {
                       PrefUtils.setToken("");
                       PrefUtils.clearAll();

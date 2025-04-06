@@ -1,5 +1,7 @@
+import 'package:amin_qassob/lang.g.dart';
 import 'package:amin_qassob/utils/utils.dart';
 import 'package:amin_qassob/view/shimmers.dart';
+import 'package:easy_localization/easy_localization.dart';
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +30,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
           return Scaffold(
             backgroundColor: BACKGROUND_COLOR,
               appBar: AppBar(
-                title: Text("Buyurtmalar"),
+                title: Text(LocaleKeys.orders.tr()),
               ),
               body: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {

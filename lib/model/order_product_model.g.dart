@@ -9,7 +9,7 @@ part of 'order_product_model.dart';
 OrderProductModel _$OrderProductModelFromJson(Map<String, dynamic> json) =>
     OrderProductModel(
       (json['id'] as num).toInt(),
-      json['name'] as String?,
+      json['product_title'] as String?,
       (json['count'] as num).toDouble(),
       (json['price'] as num).toDouble(),
     );
@@ -17,7 +17,7 @@ OrderProductModel _$OrderProductModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$OrderProductModelToJson(OrderProductModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'name': instance.name,
+      'product_title': instance.product_title,
       'count': instance.count,
       'price': instance.price,
     };

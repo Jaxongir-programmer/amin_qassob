@@ -15,6 +15,7 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
           .map((e) => OrderProductModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       $enumDecode(_$OrderStatusEnumMap, json['status']),
+      json['paid'] as bool,
     );
 
 Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
@@ -25,6 +26,7 @@ Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
       'total_price': instance.total_price,
       'products': instance.products,
       'status': _$OrderStatusEnumMap[instance.status]!,
+      'paid': instance.paid,
     };
 
 const _$OrderStatusEnumMap = {
