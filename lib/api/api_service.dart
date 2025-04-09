@@ -36,7 +36,7 @@ class ApiService {
       'Authorization': 'Bearer ${PrefUtils.getToken()}',
       // 'token': PrefUtils.getToken(),
       'device': Platform.operatingSystem,
-      'lang': PrefUtils.getLanguage(),
+      // 'lang': PrefUtils.getLanguage(),
       'Connection': "close",
     });
 
