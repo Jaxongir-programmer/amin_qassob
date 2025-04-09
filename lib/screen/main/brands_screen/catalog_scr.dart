@@ -57,7 +57,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
           builder: (context, viewModel, child) {
             return Scaffold(
               appBar: AppBar(
-                title: Text(LocaleKeys.catalog.tr()),
+                title: Text(LocaleKeys.catalog.tr(), style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600)),
               ),
               body: Column(
                 children: [

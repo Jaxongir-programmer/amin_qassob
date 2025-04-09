@@ -17,7 +17,7 @@ ThemeData appTheme() => ThemeData(
         titleTextStyle: const TextStyle(color: COLOR_PRIMARY, fontSize:20, fontWeight: FontWeight.w500 ),
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: PRIMARY_COLOR,
-          statusBarIconBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.dark,
           systemNavigationBarColor: PRIMARY_COLOR,
           systemNavigationBarIconBrightness: Brightness.light,
 

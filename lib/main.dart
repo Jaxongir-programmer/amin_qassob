@@ -104,7 +104,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: PRIMARY_COLOR,
-      statusBarIconBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
       systemNavigationBarColor: PRIMARY_COLOR,
       systemNavigationBarIconBrightness: Brightness.light,
     ));
@@ -131,7 +131,7 @@ class _MyAppState extends State<MyApp> {
               child: Stack(
                 children: [
                   child!,
-                  if (kDebugMode)
+                  if (kDebugMode && false)
                     Positioned(
                       left: _offset.dx,
                       top: _offset.dy,

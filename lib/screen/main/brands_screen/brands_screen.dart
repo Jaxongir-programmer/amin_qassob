@@ -1,4 +1,5 @@
 import 'package:amin_qassob/screen/main/home/home_viewmodel.dart';
+import 'package:amin_qassob/utils/app_colors.dart';
 import 'package:amin_qassob/utils/utils.dart';
 
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class BrandsScreenState extends State<BrandsScreen> {
                       //   },
                       // ),
                       SizedBox(
-                        height: 48,
+                        height: 42,
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                           scrollDirection: Axis.horizontal,
@@ -72,12 +73,12 @@ class BrandsScreenState extends State<BrandsScreen> {
                                 child: Container(
                                     alignment: Alignment.center,
                                     margin: EdgeInsets.symmetric(horizontal: 4),
-                                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
                                     decoration: BoxDecoration(
                                         color: Colors.grey.shade200,
                                         borderRadius: BorderRadius.circular(12),
                                         border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.8))),
-                                    child: Text(item.title)));
+                                    child: Text(item.title,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600,color: PRIMARY_COLOR))));
                           },
                         ),
                       ),

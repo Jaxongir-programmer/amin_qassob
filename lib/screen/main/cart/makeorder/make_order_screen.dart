@@ -182,7 +182,9 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
 
             viewModel.makeOrderData.listen((event) {
               startScreenF(
-                  context, SuccessScreen(orderId: event, total_pay: (Providers().cartSumma + widget.orderModel.deliver_summa)));
+                  context,
+                  SuccessScreen(
+                      orderId: event, total_pay: (Providers().cartSumma + widget.orderModel.deliver_summa), back: false));
               PrefUtils.clearCart();
             });
           },

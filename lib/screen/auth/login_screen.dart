@@ -190,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                     alignment: Alignment.center,
                     padding: const EdgeInsets.only(top: 100, left: 30, right: 30),
                     child: Image.asset(
-                      Assets.imagesAppLogo,
+                      Assets.imagesLogoMain,
                       height: 160,
                     ),
                   ),

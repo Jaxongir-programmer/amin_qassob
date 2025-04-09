@@ -52,6 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Profil', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600))),
       body: CustomScrollView(
         slivers: [
           SliverList(
@@ -185,7 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Consumer<Providers>(
                 builder: (context, provider, child) {
                   return _buildOption(LocaleKeys.logout.tr(), IconsaxOutline.logout, 2, GREY, () {
-                    showExitDialog(context, LocaleKeys.want_to_logout,
+                    showExitDialog(context, LocaleKeys.want_to_logout.tr(),
                         noButton: true, forSingOut: true, pressOk: () {
                       PrefUtils.setToken("");
                       PrefUtils.clearAll();
@@ -250,23 +251,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return (PrefUtils.getToken() != "")
         ? Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Row(
-                  children: [
-                    // Image.asset(
-                    //   Assets.imagesAppLogo,
-                    //   width: 30,
-                    //   height: 30,
-                    // ),
-                    const SizedBox(width: 8),
-                    const Expanded(
-                      child: Text('Profil', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 24),
+              //   child: Row(
+              //     children: [
+              //       // Image.asset(
+              //       //   Assets.imagesAppLogo,
+              //       //   width: 30,
+              //       //   height: 30,
+              //       // ),
+              //       const SizedBox(width: 8),
+              //       const Expanded(
+              //         child: Text('Profil', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // const SizedBox(height: 20),
               const CircleAvatar(
                 radius: 60,
                 backgroundImage: AssetImage(Assets.imagesAvatar),

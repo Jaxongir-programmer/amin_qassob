@@ -35,114 +35,138 @@ class _OrderItemViewState extends State<OrderItemView> {
         color: Colors.white,
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Stack(
           children: [
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.shopping_bag_outlined,
-                    size: 18,
-                    color: Colors.grey,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.shopping_bag_outlined,
+                        size: 18,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Expanded(
+                          child: Text(
+                        "Buyurtma raqami",
+                      )),
+                      Expanded(child: Text("№ ${widget.item.id}",
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+                    ],
                   ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Expanded(
-                      child: Text(
-                    "Trek raqami",
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  )),
-                  Expanded(child: Text("${widget.item.id}")),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.monetization_on_outlined,
-                    size: 18,
-                    color: Colors.grey,
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Expanded(child: Text(LocaleKeys.total_amount.tr())),
-                  Expanded(
-                    child: Text(
-                      "${widget.item.total_price.formattedAmountString()} ₩",
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            // const SizedBox(
-            //   height: 8,
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 8),
-            //   child: Row(
-            //     children: [
-            //       const Icon(Icons.card_giftcard, size: 18, color: Colors.grey,),
-            //       const SizedBox(width: 8,),
-            //       Expanded(child: Text("${"Keshbek"}:")),
-            //       Expanded(child: Text("${widget.item.Kashback_Itog} UZS")),
-            //     ],
-            //   ),
-            // ),
-            const SizedBox(
-              height: 8,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.date_range_outlined,
-                    size: 18,
-                    color: Colors.grey,
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Expanded(child: Text("${"Vaqti"}:")),
-                  Expanded(child: Text(widget.item.created.substring(0, 16))),
-                ],
-              ),
-            ),
-            const SizedBox(height: 8),
-            ElevatedButton(
-                onPressed: () {
-                  if (!widget.item.paid) {
-                    startScreenF(
-                        context,
-                        SuccessScreen(
-                          orderId: widget.item.id,
-                          total_pay: widget.item.total_price + PrefUtils.getUser()!.deliver_summa,
-                        ));
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: PRIMARY_COLOR,
-                  backgroundColor: widget.item.paid ? Colors.green : PRIMARY_COLOR,
-                  shadowColor: PRIMARY_COLOR,
-                  elevation: 3,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                 ),
-                child: Text(
-                  widget.item.paid
-                      ? "To'lov qilingan".toUpperCase()
-                      : "To'lov qilinmagan".toUpperCase(),
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
-                ))
+                const SizedBox(
+                  height: 8,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.monetization_on_outlined,
+                        size: 18,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Expanded(child: Text(LocaleKeys.total_amount.tr())),
+                      Expanded(
+                        child: Text(
+                          "${widget.item.total_price.formattedAmountString()} ₩",
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // const SizedBox(
+                //   height: 8,
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 8),
+                //   child: Row(
+                //     children: [
+                //       const Icon(Icons.card_giftcard, size: 18, color: Colors.grey,),
+                //       const SizedBox(width: 8,),
+                //       Expanded(child: Text("${"Keshbek"}:")),
+                //       Expanded(child: Text("${widget.item.Kashback_Itog} UZS")),
+                //     ],
+                //   ),
+                // ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.date_range_outlined,
+                        size: 18,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Expanded(child: Text("${"Vaqti"}:")),
+                      Expanded(child: Text(widget.item.created.substring(0, 16))),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        if (!widget.item.paid) {
+                          startScreenF(
+                              context,
+                              SuccessScreen(
+                                orderId: widget.item.id,
+                                total_pay: widget.item.total_price + PrefUtils.getUser()!.deliver_summa,
+                                back: true,
+                              ));
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: PRIMARY_COLOR,
+                        backgroundColor: widget.item.paid ? Colors.green : PRIMARY_COLOR.withOpacity(.8),
+                        shadowColor: PRIMARY_COLOR,
+                        elevation: 3,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                      ),
+                      child: Text(
+                        widget.item.paid
+                            ? "To'lov qilingan".toUpperCase()
+                            : "To'lov qilinmagan".toUpperCase(),
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+                      )),
+                )
+              ],
+            ),
+            Positioned(
+              right: 0,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: getPrioritetColor(widget.item.status),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Text(getStatusTitle(widget.item.status),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+            ),
           ],
         ),
       ),
@@ -168,10 +192,10 @@ class _OrderItemViewState extends State<OrderItemView> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Trek raqami",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      "Buyurtma raqami",
                     )),
-                    Expanded(child: Text("${widget.item.id}")),
+                    Expanded(child: Text("№ ${widget.item.id}",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
                   ],
                 ),
               ),

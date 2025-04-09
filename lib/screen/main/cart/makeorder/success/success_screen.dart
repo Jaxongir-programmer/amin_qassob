@@ -20,8 +20,9 @@ import '../../../main_screen.dart';
 class SuccessScreen extends StatefulWidget {
   int orderId;
   double total_pay;
+  bool back;
 
-  SuccessScreen({Key? key, required this.orderId, required this.total_pay}) : super(key: key);
+  SuccessScreen({Key? key, required this.orderId, required this.total_pay, required this.back}) : super(key: key);
 
   @override
   State<SuccessScreen> createState() => _SuccessScreenState();
@@ -43,7 +44,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
       builder: (context, provider, child) {
         return WillPopScope(
           onWillPop: () async {
-            return false;
+            return widget.back;
           },
           child: ViewModelBuilder.reactive(
             viewModelBuilder: () => MakeOrderViewModel(),
