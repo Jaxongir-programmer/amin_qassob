@@ -97,12 +97,13 @@ class _HomeScreen2State extends State<HomeScreen2> {
               backgroundColor: BACKGROUND_COLOR,
               appBar: AppBar(
                 backgroundColor: PRIMARY_COLOR,
-                leading: Padding(
-                    padding: EdgeInsets.all(8.0).copyWith(left: 16),
-                    child: Image.asset(
-                      Assets.imagesAvatar,
-                    )),
+                // leading: Padding(
+                //     padding: EdgeInsets.all(8.0).copyWith(left: 16),
+                //     child: Image.asset(
+                //       Assets.imagesAvatar,
+                //     )),
                 title: Container(
+                  padding: EdgeInsets.only(left: 16),
                   child: Text("AMIN QASSOB", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,color: WHITE)),
                 ),
                 actions: [

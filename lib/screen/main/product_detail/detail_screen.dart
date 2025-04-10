@@ -242,25 +242,33 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
           const SizedBox(
             height: 6,
           ),
-          Row(
-            children: [
-              Image.asset(
-                Assets.profileWallet2x,
-                width: 24,
-                height: 24,
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              Text(
-                widget.item.cartPrice.formattedAmountString(),
-                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-              Text(
-                "${" "}/${widget.item.unit}",
-                style: const TextStyle(color: Colors.black, fontSize: 18),
-              ),
-            ],
+          Container(
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+                color: PRIMARY_COLOR.withAlpha(200),
+                borderRadius:  BorderRadius.circular(6)
+            ),
+            child: Row(
+              children: [
+                Image.asset(
+                  Assets.profileWallet2x,
+                  width: 24,
+                  height: 24,
+                  color: WHITE,
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  widget.item.cartPrice.formattedAmountString(),
+                  style: const TextStyle(color: WHITE, fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                Text(
+                  "(${widget.item.unit})",
+                  style: const TextStyle(color: GREY_LIGHT_COLOR, fontSize: 18),
+                ),
+              ],
+            ),
           ),
         ],
       ),

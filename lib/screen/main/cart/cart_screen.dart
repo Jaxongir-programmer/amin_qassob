@@ -52,6 +52,13 @@ class _CartScreenState extends State<CartScreen> {
         },
         builder: (context, viewModel, child) {
           return Scaffold(
+            appBar: AppBar(
+              title: Text(
+                LocaleKeys.cart.tr(),
+                style: TextStyle(color: COLOR_PRIMARY,fontSize: 24, fontWeight: FontWeight.w600),
+              ),
+              iconTheme: IconThemeData(color: COLOR_PRIMARY),
+            ),
             body: Stack(
               children: [
                 (PrefUtils.getToken() == "")
@@ -66,14 +73,6 @@ class _CartScreenState extends State<CartScreen> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-                                        child: Text(
-                                          LocaleKeys.cart.tr(),
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(color: COLOR_PRIMARY, fontSize: 20, fontWeight: FontWeight.w500),
-                                        ),
-                                      ),
                                       ListView.builder(
                                           itemCount: provider.getCartList.length,
                                           primary: false,

@@ -46,7 +46,7 @@ class _TopProductItemViewState extends State<TopProductItemView> {
           startScreenF(context, ShopDetailScreen(item: widget.item));
         },
         child: Container(
-          width: 135,
+          width: 145,
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
           decoration: BoxDecoration(
               color: WHITE,
@@ -62,7 +62,7 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                 child: Stack(
                   children: [
                     asCachedNetworkImage(widget.item.photos.isNotEmpty ? widget.item.photos[0] ?? "" : "",
-                        fit: BoxFit.cover, width: 123, height: 75),
+                        fit: BoxFit.cover, width: 133, height: 80),
                     // if (widget.item.status != "" && widget.item.status != null)
                     //   Positioned(
                     //       bottom: 0,
@@ -80,8 +80,8 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                     if (widget.item.limit <= 0)
                       Positioned(
                           child: Container(
-                        width: 123,
-                        height: 75,
+                        width: 133,
+                        height: 80,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(color: Colors.black.withOpacity(0.4), borderRadius: BorderRadius.circular(6)),
                         child: const Text(
@@ -108,34 +108,50 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                 ),
               ),
               Text(
-                widget.item.title,
+                "${widget.item.title}",
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                  color: PRIMARY_COLOR,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 13,
+                  color: BLACK,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
                   // maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Text(widget.item.unit, style: const TextStyle(color: PRIMARY_COLOR, fontSize: 12)),
-              const SizedBox(
-                height: 4,
-              ),
-              Row(
-                children: [
-                  Text(
-                    "${widget.item.price.formattedAmountString()} ₩",
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: PRIMARY_COLOR),
+              // Text(widget.item.unit, style: const TextStyle(color: PRIMARY_COLOR, fontSize: 12)),
+              // const SizedBox(
+              //   height: 4,
+              // ),
+              Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: PRIMARY_COLOR.withAlpha(200),
+                  borderRadius:  BorderRadius.circular(6)
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                    Assets.profileWallet2x,
+                    width: 20,
+                    height: 20,
+                    color: WHITE,
                   ),
-                  Text(
-                    " (${widget.item.unit})",
-                    style: const TextStyle(fontSize: 13, color: PRIMARY_COLOR),
-                  ),
-                ],
+                    const SizedBox(
+                      width: 2,
+                    ),
+                    Text(
+                      "${widget.item.price.formattedAmountString()}₩",
+                      style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: WHITE),
+                    ),
+                    Text(
+                      " (${widget.item.unit})",
+                      style: const TextStyle(fontSize: 13, color: GREY_LIGHT_COLOR),
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 4),
+              // const SizedBox(height: 4),
               InkWell(
                 onTap: () {
                   if (PrefUtils.getToken() == "") {
@@ -155,6 +171,7 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                   }
                 },
                 child: Container(
+                  height: 30,
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(vertical: 3),
                   decoration: BoxDecoration(
@@ -164,7 +181,7 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                   child: (provider.productCount(widget.item.id) == 0)
                       ? Text(
                     LocaleKeys.add_2_cart.tr(),
-                          style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
+                          style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
                         )
                       : Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -227,7 +244,7 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                                 )),
                           ],
                         ),
-                ),
+                      ),
               )
             ],
           ),

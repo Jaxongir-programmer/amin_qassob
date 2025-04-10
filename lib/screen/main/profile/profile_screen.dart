@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Profil', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600))),
+      appBar: AppBar(title: Text(LocaleKeys.profil.tr(), style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600))),
       body: CustomScrollView(
         slivers: [
           SliverList(

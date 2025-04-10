@@ -86,7 +86,7 @@ class ProductsItemViewState extends State<ProductsItemView> {
                         child: Stack(
                           children: [
                             CustomViews.buildNetworkImage(widget.item.photos.isNotEmpty?widget.item.photos[0]??"":"",
-                                fit: BoxFit.cover, width: getScreenWidth(context), height: 110),
+                                fit: BoxFit.cover, width: getScreenWidth(context), height: 120),
                             if (widget.item.limit <= 0)
                               Container(
                                 width: getScreenWidth(context),
@@ -148,11 +148,12 @@ class ProductsItemViewState extends State<ProductsItemView> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                          fontSize: 13,
+                          fontSize: 14,
+                            fontWeight: FontWeight.w600,
                           overflow: TextOverflow.ellipsis,
-                          color: PRIMARY_COLOR
+                          color: BLACK
                         )),
-                    Text(widget.item.unit, style: const TextStyle(color: PRIMARY_COLOR, fontSize: 12)),
+                    // Text(widget.item.unit, style: const TextStyle(color: PRIMARY_COLOR, fontSize: 12)),
                     // if (widget.item.skidka != 0 && widget.item.skidka != null)
                     //   Row(
                     //     children: [
@@ -176,25 +177,30 @@ class ProductsItemViewState extends State<ProductsItemView> {
                     //       )
                     //     ],
                     //   ),
-                    FittedBox(
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                          color: PRIMARY_COLOR.withAlpha(200),
+                          borderRadius:  BorderRadius.circular(6)
+                      ),
                       child: Row(
                         children: [
                           Image.asset(
                             Assets.profileWallet2x,
                             width: 20,
                             height: 20,
-                            color: PRIMARY_COLOR,
+                            color: WHITE,
                           ),
                           const SizedBox(
                             width: 4,
                           ),
                           Text(
                             "${widget.item.cartPrice.formattedAmountString()} ₩",
-                            style: const TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold, fontSize: 14),
+                            style: const TextStyle(color: WHITE, fontWeight: FontWeight.bold, fontSize: 14),
                           ),
                           Text(
                             "${" "}(${widget.item.unit})",
-                            style: const TextStyle(color: PRIMARY_COLOR, fontSize: 13),
+                            style: const TextStyle(color: GREY_LIGHT_COLOR, fontSize: 13),
                           ),
                         ],
                       ),
