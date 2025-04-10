@@ -630,24 +630,24 @@ class _HomeScreen2State extends State<HomeScreen2> {
           Expanded(
             child: Text(LocaleKeys.categories.tr(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PRIMARY_COLOR)),
           ),
-          TextButton(
-            onPressed: () {
-            //
-            },
-            child: Text(
-              LocaleKeys.more.tr(),
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: PRIMARY_COLOR,
-              ),
-            ),
-          ),
-          const Icon(
-            IconsaxOutline.arrow_right_3,
-            size: 20,
-            color: PRIMARY_COLOR,
-          )
+          // TextButton(
+          //   onPressed: () {
+          //   //
+          //   },
+          //   child: Text(
+          //     LocaleKeys.more.tr(),
+          //     style: TextStyle(
+          //       fontWeight: FontWeight.bold,
+          //       fontSize: 16,
+          //       color: PRIMARY_COLOR,
+          //     ),
+          //   ),
+          // ),
+          // const Icon(
+          //   IconsaxOutline.arrow_right_3,
+          //   size: 20,
+          //   color: PRIMARY_COLOR,
+          // )
         ],
       ),
     );
