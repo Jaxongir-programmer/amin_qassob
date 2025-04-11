@@ -28,6 +28,17 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSCameraUsageDescription</key>
+    <string>Bu ilova kameraga kirishni talab qiladi. Ushbu ruxsat bilan siz profilingiz avatarini o&apos;zgartirishingiz mumkin.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Bunda doim locatsiyadan foylanish yoki ilavadalik paytda ishlatishga ruhsat beradi</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Sizning aniq manzilingizni aniqlash uchun joylashuvga ruxsatnoma talab qilinadi.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Sizning aniq manzilingizni aniqlash uchun joylashuvga ruxsatnoma talab qilinadi.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Bu ilova kameraga kirishni talab qiladi. Ushbu ruxsat bilan siz profilingiz avatarini o&apos;zgartirishingiz mumkin.</string>
+
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

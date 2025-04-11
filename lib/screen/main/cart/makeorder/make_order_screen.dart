@@ -77,101 +77,99 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
             return MakeOrderViewModel();
           },
           builder: (BuildContext context, MakeOrderViewModel viewModel, Widget? child) {
-            return SafeArea(
-              child: Scaffold(
-                backgroundColor: Colors.white,
-                appBar: AppBar(
-                  title: Text(LocaleKeys.confirm.tr()),
-                ),
-                body: Stack(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                // if (provider.cartSumma <= (PrefUtils.getUser()?.orderSummaLimit ?? 0))
-                                //   infowDeliverSummaWidget(provider),
-                                phoneAndTimeWidget(),
-                                // const SizedBox(
-                                //   height: 20,
-                                // ),
-                                // cashBackWidget(),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                addressWidget(provider),
-                                // const SizedBox(
-                                //   height: 20,
-                                // ),
-                                // genderWidget(),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                commentWidget(),
-                              ],
-                            ),
+            return Scaffold(
+              backgroundColor: Colors.white,
+              appBar: AppBar(
+                title: Text(LocaleKeys.confirm.tr()),
+              ),
+              body: Stack(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              // if (provider.cartSumma <= (PrefUtils.getUser()?.orderSummaLimit ?? 0))
+                              //   infowDeliverSummaWidget(provider),
+                              phoneAndTimeWidget(),
+                              // const SizedBox(
+                              //   height: 20,
+                              // ),
+                              // cashBackWidget(),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              addressWidget(provider),
+                              // const SizedBox(
+                              //   height: 20,
+                              // ),
+                              // genderWidget(),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              commentWidget(),
+                            ],
                           ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            const Divider(),
-                            payTypeWidget(),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16.0, right: 16, top: 4, bottom: 8),
-                              child: !viewModel.progressOrderData
-                                  ? ElevatedButton(
-                                      onPressed: () {
-                                        // if (deliverDate == "") {
-                                        //   showWarning(context, "Yetkazib berish vaqtini tanlang !");
-                                        // } else
-                                        if (selectedPayment == null) {
-                                          showWarning(context, LocaleKeys.choose_payment.tr());
-                                        }
-                                        // else if (provider.getSelectAdres == null) {
-                                        //   showWarning(context, "Yetkazib berish manzilini tanlang !");
-                                        // }
-                                        else {
-                                          widget.orderModel.phone2 = extraPhoneController.text
-                                              .replaceAll(" ", "")
-                                              .replaceAll("(", "")
-                                              .replaceAll(")", "");
-                                          widget.orderModel.comment = commentController.text;
-                                          // widget.orderModel.order_time = (format.parse(deliverDate).millisecondsSinceEpoch/1000).toString();
-                                          widget.orderModel.order_time = "";
-                                          // widget.orderModel.order_time = "2025-03-09T12:00:00Z";
-                                          widget.orderModel.lat = provider.getSelectAdres?.lat.toString() ?? "41.2995";
-                                          widget.orderModel.lon = provider.getSelectAdres?.long.toString() ?? "69.2401";
-                                          widget.orderModel.address = orientrController.text;
-                                          widget.orderModel.payment_type = paymentId ?? 3;
-                                          viewModel.makeOrder(widget.orderModel);
-                                        }
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        foregroundColor: PRIMARY_COLOR,
-                                        backgroundColor: PRIMARY_COLOR,
-                                        shadowColor: PRIMARY_COLOR,
-                                        elevation: 3,
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                                      ),
-                                      child: Text(
-                                        LocaleKeys.confirm.tr().toUpperCase(),
-                                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
-                                      ))
-                                  : const Center(
-                                      child: CircularProgressIndicator(),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const Divider(),
+                          payTypeWidget(),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16.0, right: 16, top: 4, bottom: 8),
+                            child: !viewModel.progressOrderData
+                                ? ElevatedButton(
+                                    onPressed: () {
+                                      // if (deliverDate == "") {
+                                      //   showWarning(context, "Yetkazib berish vaqtini tanlang !");
+                                      // } else
+                                      if (selectedPayment == null) {
+                                        showWarning(context, LocaleKeys.choose_payment.tr());
+                                      }
+                                      // else if (provider.getSelectAdres == null) {
+                                      //   showWarning(context, "Yetkazib berish manzilini tanlang !");
+                                      // }
+                                      else {
+                                        widget.orderModel.phone2 = extraPhoneController.text
+                                            .replaceAll(" ", "")
+                                            .replaceAll("(", "")
+                                            .replaceAll(")", "");
+                                        widget.orderModel.comment = commentController.text;
+                                        // widget.orderModel.order_time = (format.parse(deliverDate).millisecondsSinceEpoch/1000).toString();
+                                        widget.orderModel.order_time = "";
+                                        // widget.orderModel.order_time = "2025-03-09T12:00:00Z";
+                                        widget.orderModel.lat = provider.getSelectAdres?.lat.toString() ?? "41.2995";
+                                        widget.orderModel.lon = provider.getSelectAdres?.long.toString() ?? "69.2401";
+                                        widget.orderModel.address = orientrController.text;
+                                        widget.orderModel.payment_type = paymentId ?? 3;
+                                        viewModel.makeOrder(widget.orderModel);
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      foregroundColor: PRIMARY_COLOR,
+                                      backgroundColor: PRIMARY_COLOR,
+                                      shadowColor: PRIMARY_COLOR,
+                                      elevation: 3,
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                                     ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                                    child: Text(
+                                      LocaleKeys.confirm.tr().toUpperCase(),
+                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                                    ))
+                                : const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
               ),
             );
           },
