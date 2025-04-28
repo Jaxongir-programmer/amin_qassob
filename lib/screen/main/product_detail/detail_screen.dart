@@ -4,7 +4,9 @@ import 'package:amin_qassob/lang.g.dart';
 import 'package:amin_qassob/model/product_model.dart';
 import 'package:amin_qassob/provider/providers.dart';
 import 'package:amin_qassob/screen/auth/login_screen.dart';
+import 'package:amin_qassob/utils/constants.dart';
 import 'package:amin_qassob/utils/utils.dart';
+import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:expandable_text/expandable_text.dart';
@@ -95,24 +97,47 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                       controller: controller,
                                       itemBuilder: (context, index) {
                                         var item = widget.item.photos[index];
-                                        return CustomViews.buildNetworkImage(item, fit: BoxFit.contain);
+                                        return InkWell(
+                                            onTap: () {
+                                              final imageProvider = Image.network(
+                                                BASE_IMAGE_URL + widget.item.image.toString(),
+                                                errorBuilder: (context, error, stackTrace) {
+                                                  return Image.asset(
+                                                    "assets/images/logo_main.png",
+                                                    width: 50,
+                                                    height: 50,
+                                                  );
+                                                },
+                                              ).image;
+                                              showImageViewer(
+                                                  swipeDismissible: true,
+                                                  doubleTapZoomable: true,
+                                                  useSafeArea: true,
+                                                  immersive: false,
+                                                  backgroundColor: Colors.black,
+                                                  context,
+                                                  imageProvider, onViewerDismissed: () {
+                                                //
+                                              });
+                                            },
+                                            child: CustomViews.buildNetworkImage(item, fit: BoxFit.contain));
                                       },
                                     ),
                                   ),
-                                  if(widget.item.photos.isNotEmpty)
-                                  Positioned(
-                                    right: 10,
-                                    left: 10,
-                                    bottom: 10,
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        for (int i = 0; i < widget.item.photos.length; i++)
-                                          if (i == currentPageValue) ...[IndicatorBar(true)] else IndicatorBar(false),
-                                      ],
-                                    ),
-                                  )
+                                  if (widget.item.photos.isNotEmpty)
+                                    Positioned(
+                                      right: 10,
+                                      left: 10,
+                                      bottom: 10,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          for (int i = 0; i < widget.item.photos.length; i++)
+                                            if (i == currentPageValue) ...[IndicatorBar(true)] else IndicatorBar(false),
+                                        ],
+                                      ),
+                                    )
                                 ],
                               ),
                             ),
@@ -176,8 +201,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                   child: Text.rich(
                     TextSpan(
                       children: [
-                        TextSpan(
-                            text: widget.item.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                        TextSpan(text: widget.item.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                         TextSpan(
                             text: "  ${widget.item.unit}",
                             style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 18)),
@@ -244,10 +268,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
           ),
           Container(
             padding: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-                color: PRIMARY_COLOR.withAlpha(200),
-                borderRadius:  BorderRadius.circular(6)
-            ),
+            decoration: BoxDecoration(color: PRIMARY_COLOR.withAlpha(200), borderRadius: BorderRadius.circular(6)),
             child: Row(
               children: [
                 Image.asset(
@@ -286,8 +307,8 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
             const SizedBox(height: 8),
             ExpandableText(
               widget.item.description,
-              expandText: "ko'proq ko'rish",
-              collapseText: "kamroq ko'rsatish",
+              expandText: LocaleKeys.see_more.tr(),
+              collapseText: LocaleKeys.show_less.tr(),
               linkStyle: const TextStyle(color: Color(0xFF424242), fontWeight: FontWeight.bold),
             ),
           ],
@@ -471,8 +492,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                             if (totalPrice != 0)
                               FittedBox(
                                 child: Text("${totalPrice.formattedAmountString()} ₩",
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.normal, color: Colors.white, fontSize: 16)),
+                                    style: const TextStyle(fontWeight: FontWeight.normal, color: Colors.white, fontSize: 16)),
                               ),
                             Text(
                               LocaleKeys.add_2_cart.tr(),
@@ -504,7 +524,7 @@ Widget IndicatorBar(bool isActive) {
     margin: const EdgeInsets.symmetric(horizontal: 8),
     height: isActive ? 8 : 8,
     width: isActive ? 24 : 8,
-    decoration: BoxDecoration(
-        color: isActive ? ACCENT_COLOR : Colors.grey, borderRadius: const BorderRadius.all(Radius.circular(12))),
+    decoration:
+        BoxDecoration(color: isActive ? ACCENT_COLOR : Colors.grey, borderRadius: const BorderRadius.all(Radius.circular(12))),
   );
 }

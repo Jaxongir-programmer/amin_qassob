@@ -93,11 +93,13 @@ abstract class  LocaleKeys {
   static const save = 'save';
   static const search = 'search';
   static const search_products = 'search_products';
+  static const see_more = 'see_more';
   static const select = 'select';
   static const select_address = 'select_address';
   static const select_lang = 'select_lang';
   static const select_payment_type = 'select_payment_type';
   static const share_app = 'share_app';
+  static const show_less = 'show_less';
   static const signin = 'signin';
   static const similar_products = 'similar_products';
   static const sms = 'sms';

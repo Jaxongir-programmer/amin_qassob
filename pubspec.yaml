@@ -89,6 +89,7 @@ dependencies:
   ficonsax:
   image_picker:
   image_cropper:
+  easy_image_viewer:
 
 dev_dependencies:
   flutter_test:
