@@ -559,15 +559,15 @@ class _HomeScreen2State extends State<HomeScreen2> {
 
   Widget _discountProductsTitle(HomeViewModel viewModel) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 8),
       child: viewModel.skidkaTovarList.isNotEmpty
           ? Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Expanded(
-                  child: Text('Chegirma Mahsulotlar',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PRIMARY_COLOR)),
+                Expanded(
+                  child: Text(LocaleKeys.discount_product.tr(),
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PRIMARY_COLOR)),
                 ),
                 // TextButton(
                 //   onPressed: () {},

@@ -15,16 +15,16 @@ import '../screen/auth/login_screen.dart';
 import '../screen/main/product_detail/detail_screen.dart';
 import '../utils/pref_utils.dart';
 
-class TopProductItemView extends StatefulWidget {
+class DiscountProductItemView extends StatefulWidget {
   ProductModel item;
 
-  TopProductItemView({Key? key, required this.item}) : super(key: key);
+  DiscountProductItemView({Key? key, required this.item}) : super(key: key);
 
   @override
-  State<TopProductItemView> createState() => _TopProductItemViewState();
+  State<DiscountProductItemView> createState() => _TopProductItemViewState();
 }
 
-class _TopProductItemViewState extends State<TopProductItemView> {
+class _TopProductItemViewState extends State<DiscountProductItemView> {
   var borderRadius = const BorderRadius.all(Radius.circular(8));
   double addCount = 0;
 
@@ -104,23 +104,12 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                                 size: 20, color: Colors.red),
                           )),
                     ),
-                    if (widget.item.discount != null && widget.item.discount != 0)
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      child: CircleAvatar(
-                        backgroundColor: WHITE.withAlpha(180),
-                        maxRadius: 15,
-                        child: Icon(IconsaxOutline.discount_circle,
-                            size: 20, color: Colors.red),
-                      ),
-                    ),
                   ],
                 ),
               ),
               Text(
-                "${widget.item.title}\n",
-                maxLines: (widget.item.discount != null && widget.item.discount != 0)?1:2,
+                "${widget.item.title}",
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: BLACK,
@@ -134,26 +123,18 @@ class _TopProductItemViewState extends State<TopProductItemView> {
               // const SizedBox(
               //   height: 4,
               // ),
-              if (widget.item.discount != null && widget.item.discount != 0)
-              Text(
-                "${widget.item.discount?.formattedAmountString()}₩",
-                style: const TextStyle(
-                    fontSize: 14, fontWeight: FontWeight.w600, color: RED, decoration: TextDecoration.lineThrough, decorationColor: GREY),
-              ),
+
               Container(
                 padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: PRIMARY_COLOR.withAlpha(200),
-                  borderRadius:  BorderRadius.circular(6)
-                ),
+                decoration: BoxDecoration(color: PRIMARY_COLOR.withAlpha(200), borderRadius: BorderRadius.circular(6)),
                 child: Row(
                   children: [
                     Image.asset(
-                    Assets.profileWallet2x,
-                    width: 20,
-                    height: 20,
-                    color: WHITE,
-                  ),
+                      Assets.profileWallet2x,
+                      width: 20,
+                      height: 20,
+                      color: WHITE,
+                    ),
                     const SizedBox(
                       width: 2,
                     ),
@@ -197,7 +178,7 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                       border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.8))),
                   child: (provider.productCount(widget.item.id) == 0)
                       ? Text(
-                    LocaleKeys.add_2_cart.tr(),
+                          LocaleKeys.add_2_cart.tr(),
                           style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
                         )
                       : Row(
@@ -261,7 +242,7 @@ class _TopProductItemViewState extends State<TopProductItemView> {
                                 )),
                           ],
                         ),
-                      ),
+                ),
               )
             ],
           ),

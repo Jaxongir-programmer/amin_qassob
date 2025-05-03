@@ -615,7 +615,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
         );
       },
       onViewModelReady: (viewModel) {
-        viewModel.getPublicOffer();
+        // viewModel.getPublicOffer();
 
         viewModel.errorData.listen((event) {
           showError(context, event);

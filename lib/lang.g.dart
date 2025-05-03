@@ -40,6 +40,7 @@ abstract class  LocaleKeys {
   static const date = 'date';
   static const delete_account = 'delete_account';
   static const delivery_price = 'delivery_price';
+  static const discount_product = 'discount_product';
   static const end_time = 'end_time';
   static const enter_passpowd = 'enter_passpowd';
   static const enter_to_system = 'enter_to_system';

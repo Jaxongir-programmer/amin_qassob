@@ -8,6 +8,7 @@ import '../utils/app_colors.dart';
 import '../utils/constants.dart';
 import '../utils/pref_utils.dart';
 import '../utils/utils.dart';
+import 'custom_views.dart';
 
 class CarouselItemView extends StatefulWidget {
   final Function onClick;
@@ -48,11 +49,10 @@ class _CarouselItemViewState extends State<CarouselItemView> {
                   foregroundDecoration: BoxDecoration(color: WHITE.withOpacity(0.0)),
                   child:
                       // Image.asset(Assets.imagesLogoMain,width:getScreenWidth(context),fit: BoxFit.contain,)
-                      CachedNetworkImage(
+                  CustomViews.buildNetworkImage(
+                      widget.item.image,
                           height: double.maxFinite,
                           width: double.maxFinite,
-                          // imageUrl:  widget.item.image ?? "",
-                          imageUrl: BASE_IMAGE_URL + widget.item.image ?? "",
                           fit: BoxFit.cover)
 
 

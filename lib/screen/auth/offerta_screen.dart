@@ -1,7 +1,9 @@
 import 'package:amin_qassob/lang.g.dart';
+import 'package:amin_qassob/screen/auth/auth_viewmodel.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ficonsax/ficonsax.dart';
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../utils/app_colors.dart';
@@ -18,30 +20,36 @@ class OffertaScreen extends StatefulWidget {
 class _OffertaScreenState extends State<OffertaScreen> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Scaffold(
-            appBar: AppBar(title: Text(LocaleKeys.offerta.tr())),
-            body: Column(
-              children: [
-                Expanded(
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        child: Text(PrefUtils.getPublicOffer(), style: TextStyle(fontSize: 16)),
-                      ),
-                    ],
+    return ViewModelBuilder<AuthViewModel>.reactive(viewModelBuilder: () => AuthViewModel(), builder: (context, viewModel, child) {
+      return Stack(
+        children: [
+          Scaffold(
+              appBar: AppBar(title: Text(LocaleKeys.offerta.tr())),
+              body: Column(
+                children: [
+                  Expanded(
+                    child: ListView(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(PrefUtils.getPublicOffer(), style: TextStyle(fontSize: 16)),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                _connect(context),
-                SizedBox(height: 16,)
-              ],
-            ))
-      ],
-    );
+                  _connect(context),
+                  SizedBox(height: 16,)
+                ],
+              )),
+          if (viewModel.progressData) showMyProgress(),
+        ],
+      );
+    },
+    onViewModelReady: (viewModel) {
+      viewModel.getPublicOffer();
+    },);
   }
 
   Widget _connect(BuildContext context){

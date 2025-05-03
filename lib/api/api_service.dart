@@ -5,6 +5,8 @@ import 'dart:io';
 import 'package:amin_qassob/model/brand_model.dart';
 import 'package:amin_qassob/model/phone_number_model.dart';
 import 'package:amin_qassob/utils/constants.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../model/category_model.dart';
@@ -22,6 +24,7 @@ import 'package:flutter/foundation.dart';
 import '../main.dart';
 import '../model/base_model.dart';
 import '../model/offer_model.dart';
+import '../screen/main/main_screen.dart';
 import '../utils/pref_utils.dart';
 
 class ApiService {
@@ -32,23 +35,22 @@ class ApiService {
     dio.options.baseUrl = BASE_URL;
     dio.options.headers.addAll({
       'Content-Type': 'application/json',
-      if(PrefUtils.getToken().isNotEmpty)
-      'Authorization': 'Bearer ${PrefUtils.getToken()}',
+      if (PrefUtils.getToken().isNotEmpty) 'Authorization': 'Bearer ${PrefUtils.getToken()}',
       // 'token': PrefUtils.getToken(),
       'device': Platform.operatingSystem,
       // 'lang': PrefUtils.getLanguage(),
       'Connection': "close",
     });
 
-    if(PrefUtils.getToken().isNotEmpty) {
+    if (PrefUtils.getToken().isNotEmpty) {
       dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) {
-          options.headers['Authorization'] = 'Bearer ${PrefUtils.getToken()}';
-          return handler.next(options);
-        },
-      ),
-    );
+        InterceptorsWrapper(
+          onRequest: (options, handler) {
+            options.headers['Authorization'] = 'Bearer ${PrefUtils.getToken()}';
+            return handler.next(options);
+          },
+        ),
+      );
     }
 
     dio.interceptors.add(
@@ -72,9 +74,20 @@ class ApiService {
         if (data.error_code == 405) {}
       }
       return data;
+    } else if (response.statusCode == 401) {
+      handleUnauthorized();
+      return BaseModel(false, "Unauthorized", 401, null);
     } else {
       return BaseModel(false, response.statusMessage ?? "Unknown error ${response.statusCode}", -1, null);
     }
+  }
+
+  Future<void> handleUnauthorized() async {
+    PrefUtils.clearAll();
+    navigatorKey.currentState?.pushNamedAndRemoveUntil(
+      '/main',
+          (route) => false,
+    );
   }
 
   String wrapError(DioError error) {
@@ -146,8 +159,7 @@ class ApiService {
     return null;
   }
 
-  Future<String?> login(
-      String phone, String code, StreamController<String> errorStream) async {
+  Future<String?> login(String phone, String code, StreamController<String> errorStream) async {
     try {
       final response = await dio.post("v3/login/",
           data: jsonEncode({
@@ -174,6 +186,7 @@ class ApiService {
   Future<List<CategoryModel>> getCategoryList(StreamController<String> errorStream) async {
     try {
       final response = await dio.get("v1/categories");
+      print(response);
       final baseData = wrapResponse(response);
       if (!baseData.error) {
         return (baseData.data as List<dynamic>).map((json) => CategoryModel.fromJson(json)).toList();
@@ -186,7 +199,7 @@ class ApiService {
     return [];
   }
 
-  Future<List<BrandModel>> getBrandList(int catId,StreamController<String> errorStream) async {
+  Future<List<BrandModel>> getBrandList(int catId, StreamController<String> errorStream) async {
     try {
       final response = await dio.get("v1/category/$catId/brends/");
       final baseData = wrapResponse(response);
@@ -248,8 +261,7 @@ class ApiService {
 
   Future<List<OrderModel>> getOrderList(StreamController<String> errorStream) async {
     try {
-      final response = await dio.get("v4/my-orders/",
-          queryParameters: {"user_id": PrefUtils.getUser()?.id});
+      final response = await dio.get("v4/my-orders/", queryParameters: {"user_id": PrefUtils.getUser()?.id});
       final baseData = wrapResponse(response);
       if (!baseData.error) {
         return (baseData.data as List<dynamic>).map((json) => OrderModel.fromJson(json)).toList();
@@ -316,7 +328,7 @@ class ApiService {
     return [];
   }
 
-  Future<List<ProductModel>> getProductByCategory(int catId,StreamController<String> errorStream) async {
+  Future<List<ProductModel>> getProductByCategory(int catId, StreamController<String> errorStream) async {
     try {
       final response = await dio.get("v1/category/${catId}");
       final baseData = wrapResponse(response);
@@ -332,7 +344,7 @@ class ApiService {
     return [];
   }
 
-  Future<List<ProductModel>> getProductByBrand(int catId,int brandId,StreamController<String> errorStream) async {
+  Future<List<ProductModel>> getProductByBrand(int catId, int brandId, StreamController<String> errorStream) async {
     try {
       final response = await dio.get("v1/category/$catId//brend/$brandId/");
       final baseData = wrapResponse(response);
@@ -380,13 +392,13 @@ class ApiService {
     return null;
   }
 
-    Future<dynamic> payment(String image,int orderId, StreamController<String> errorStream) async {
+  Future<dynamic> payment(String image, int orderId, StreamController<String> errorStream) async {
     try {
-      final response = await dio.post("v5/payment/", data:
-      FormData.fromMap({
-        "payment_image": await MultipartFile.fromFile(image, filename: image.split('/').last),
-        "order": orderId,
-      }));
+      final response = await dio.post("v5/payment/",
+          data: FormData.fromMap({
+            "payment_image": await MultipartFile.fromFile(image, filename: image.split('/').last),
+            "order": orderId,
+          }));
       final baseData = wrapResponse(response);
       if (!baseData.error) {
         return baseData.data;
@@ -471,8 +483,7 @@ class ApiService {
 
   Future<List<ProductModel>> getProductsByIds(ProductByIdModel productByIdModel, StreamController<String> errorStream) async {
     try {
-      final response = await dio.post("clientgetProductsByIds",
-          queryParameters: {}, data: jsonEncode(productByIdModel));
+      final response = await dio.post("clientgetProductsByIds", queryParameters: {}, data: jsonEncode(productByIdModel));
       final baseData = wrapResponse(response);
       if (!baseData.error) {
         var items = (baseData.data as List<dynamic>).map((json) => ProductModel.fromJson(json)).toList();

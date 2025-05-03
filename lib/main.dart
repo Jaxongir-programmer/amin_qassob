@@ -1,3 +1,4 @@
+import 'package:amin_qassob/screen/main/main_screen.dart';
 import 'package:amin_qassob/screen/main/message/message_screen.dart';
 import 'package:amin_qassob/theme.dart';
 import 'package:amin_qassob/utils/constants.dart';
@@ -119,6 +120,9 @@ class _MyAppState extends State<MyApp> {
         locale: context.locale,
         debugShowCheckedModeBanner: false,
         // navigatorKey: MyApp.navigatorKey,
+        routes: {
+          '/main': (context) => MainScreen(),
+        },
         title: 'AMIN QASSOB',
         theme: appTheme(),
         home: const SplashScreen(),
