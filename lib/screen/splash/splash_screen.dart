@@ -75,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
               alignment: Alignment.center,
               child: Image(
                 width: getScreenWidth(context),
-                image: const AssetImage(Assets.imagesLogoMain),
+                image: const AssetImage(Assets.imagesAminQassob),
               ),
               onEnd: () async {
                 startScreenR(

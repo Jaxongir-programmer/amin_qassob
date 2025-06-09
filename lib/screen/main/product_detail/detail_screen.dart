@@ -100,7 +100,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                         return InkWell(
                                             onTap: () {
                                               final imageProvider = Image.network(
-                                                BASE_IMAGE_URL + widget.item.image.toString(),
+                                                BASE_IMAGE_URL + widget.item.toString(),
                                                 errorBuilder: (context, error, stackTrace) {
                                                   return Image.asset(
                                                     "assets/images/logo_main.png",
@@ -202,9 +202,6 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                     TextSpan(
                       children: [
                         TextSpan(text: widget.item.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                        TextSpan(
-                            text: "  ${widget.item.unit}",
-                            style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 18)),
                       ],
                     ),
                   ),
@@ -397,6 +394,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
+                    height: 56,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(24)),
                       color: Color(0xFFF3F3F3),
@@ -421,22 +419,11 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                             },
                           ),
                           const SizedBox(width: 20),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(cartCount.formattedAmountString(),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  )),
-                              Text(widget.item.unit,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    color: PRIMARY_COLOR,
-                                    fontSize: 14,
-                                  )),
-                            ],
-                          ),
+                          Text(cartCount.formattedAmountString(),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              )),
                           const SizedBox(width: 20),
                           InkWell(
                             child: const Icon(CupertinoIcons.plus),
@@ -457,9 +444,9 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                       ),
                     ),
                   ),
-                  //---------------------------------------------
+                  SizedBox(width: 8),
                   Container(
-                    height: 58,
+                    height: 56,
                     width: getProportionateScreenWidth(200),
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(29)),

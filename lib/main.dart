@@ -151,7 +151,7 @@ class _MyAppState extends State<MyApp> {
                           backgroundColor: Colors.white.withOpacity(.5),
                           child: const Icon(Icons.http, color: Colors.green, size: 32),
                         ),
-                      ),
+                      ) ,
                     ),
                 ],
               ));

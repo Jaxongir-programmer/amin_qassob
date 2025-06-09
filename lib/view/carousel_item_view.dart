@@ -55,7 +55,6 @@ class _CarouselItemViewState extends State<CarouselItemView> {
                           width: double.maxFinite,
                           fit: BoxFit.cover)
 
-
                   // asCachedNetworkImage(
                   //         widget.item.image,
                   //         width: getScreenWidth(context),

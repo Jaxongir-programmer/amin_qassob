@@ -5,6 +5,7 @@ class Assets {
   static const String fontsSFProTextBold = 'assets/fonts/SF-Pro-Text-Bold.otf';
   static const String fontsSFProTextMedium = 'assets/fonts/SF-Pro-Text-Medium.otf';
   static const String fontsSFProTextRegular = 'assets/fonts/SF-Pro-Text-Regular.otf';
+  static const String imagesAminQassob = 'assets/images/amin_qassob.png';
   static const String imagesAppLogo = 'assets/images/app_logo.png';
   static const String imagesAvatar = 'assets/images/avatar.png';
   static const String imagesChecked = 'assets/images/checked.png';
