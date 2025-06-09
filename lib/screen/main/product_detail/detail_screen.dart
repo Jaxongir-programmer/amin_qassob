@@ -100,7 +100,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                         return InkWell(
                                             onTap: () {
                                               final imageProvider = Image.network(
-                                                BASE_IMAGE_URL + widget.item.toString(),
+                                                BASE_IMAGE_URL + item.toString(),
                                                 errorBuilder: (context, error, stackTrace) {
                                                   return Image.asset(
                                                     "assets/images/logo_main.png",
