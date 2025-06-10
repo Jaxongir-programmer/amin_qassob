@@ -49,7 +49,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.all(32).copyWith(top: 0),
-              child: Image.asset(Assets.imagesLogoMain),
+              child: Image.asset(Assets.imagesAminQassob),
             ),
             Text(LocaleKeys.welcome.tr(),
                 textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
