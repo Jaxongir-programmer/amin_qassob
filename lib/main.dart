@@ -135,7 +135,7 @@ class _MyAppState extends State<MyApp> {
               child: Stack(
                 children: [
                   child!,
-                  if (kDebugMode && false)
+                  if (false)
                     Positioned(
                       left: _offset.dx,
                       top: _offset.dy,

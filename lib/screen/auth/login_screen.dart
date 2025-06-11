@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addresController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  // TextEditingController passwordController = TextEditingController();
 
   final smsController = TextEditingController();
   final focusNode = FocusNode();
@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
   final _formkey = GlobalKey<FormState>();
 
   // var phoneFormatter = MaskTextInputFormatter(mask: '010 (##) ### ## ##', type: MaskAutoCompletionType.eager);
-  var phoneFormatter = MaskTextInputFormatter(mask: '010 #### ####', type: MaskAutoCompletionType.eager);
+  // var phoneFormatter = MaskTextInputFormatter(mask: '010 #### ####', type: MaskAutoCompletionType.eager);
 
   AnimationController? _animationController;
   int levelClock = 180;
@@ -133,34 +133,35 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
       ),
     );
 
-    final passwordField = TextFormField(
-      controller: passwordController,
-      autofocus: false,
-      keyboardType: TextInputType.number,
-      textInputAction: TextInputAction.next,
-      onSaved: (value) {
-        passwordController.text = value!;
-      },
-      decoration: InputDecoration(
-        hintText: LocaleKeys.password.tr(),
-        hintStyle: TextStyle(color: Colors.grey),
-        prefixIcon: Icon(Icons.password),
-      ),
-    );
+    // final passwordField = TextFormField(
+    //   controller: passwordController,
+    //   autofocus: false,
+    //   keyboardType: TextInputType.number,
+    //   textInputAction: TextInputAction.next,
+    //   onSaved: (value) {
+    //     passwordController.text = value!;
+    //   },
+    //   decoration: InputDecoration(
+    //     hintText: LocaleKeys.password.tr(),
+    //     hintStyle: TextStyle(color: Colors.grey),
+    //     prefixIcon: Icon(Icons.password),
+    //   ),
+    // );
 
     final phoneField = TextFormField(
       controller: phoneController,
       autofocus: false,
       keyboardType: TextInputType.phone,
       textInputAction: TextInputAction.next,
-      inputFormatters: [phoneFormatter],
+      // inputFormatters: [phoneFormatter],
       onSaved: (value) {
         phoneController.text = value!;
       },
       decoration: const InputDecoration(
         hintStyle: TextStyle(color: Colors.grey),
         prefixIcon: Icon(Icons.phone),
-        hintText: '010 XXXX XXXX',
+        // hintText: '010 XXXX XXXX',
+        hintText: '',
       ),
     );
 
@@ -220,124 +221,121 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                           padding: const EdgeInsets.only(left: 33, right: 33, bottom: 16),
                                           child: addressField,
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 33, right: 33, bottom: 16),
-                                          child: passwordField,
-                                        ),
-                                        // Container(
-                                        //   alignment: Alignment.center,
+                                        // Padding(
                                         //   padding: const EdgeInsets.only(left: 33, right: 33, bottom: 16),
-                                        //   child: Directionality(
-                                        //     textDirection: TextDirection.ltr,
-                                        //     child: Pinput(
-                                        //       length: 6,
-                                        //       controller: smsController,
-                                        //       focusNode: focusNode,
-                                        //       // androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsUserConsentApi,
-                                        //       // listenForMultipleSmsOnAndroid: true,
-                                        //       defaultPinTheme: defaultPinTheme,
-                                        //       separatorBuilder: (index) => const SizedBox(width: 8),
-                                        //       hapticFeedbackType: HapticFeedbackType.lightImpact,
-                                        //       onCompleted: (pin) {
-                                        //         debugPrint('onCompleted: $pin');
-                                        //       },
-                                        //       onChanged: (value) {
-                                        //         debugPrint('onChanged: $value');
-                                        //       },
-                                        //       cursor: Column(
-                                        //         mainAxisAlignment: MainAxisAlignment.end,
-                                        //         children: [
-                                        //           Container(
-                                        //             margin: const EdgeInsets.only(bottom: 9),
-                                        //             width: 22,
-                                        //             height: 1,
-                                        //             color: focusedBorderColor,
-                                        //           ),
-                                        //         ],
-                                        //       ),
-                                        //       focusedPinTheme: defaultPinTheme.copyWith(
-                                        //         decoration: defaultPinTheme.decoration!.copyWith(
-                                        //           borderRadius: BorderRadius.circular(15),
-                                        //           border: Border.all(color: focusedBorderColor),
-                                        //         ),
-                                        //       ),
-                                        //       submittedPinTheme: defaultPinTheme.copyWith(
-                                        //         decoration: defaultPinTheme.decoration!.copyWith(
-                                        //           color: fillColor,
-                                        //           borderRadius: BorderRadius.circular(8),
-                                        //           border: Border.all(color: focusedBorderColor),
-                                        //         ),
-                                        //       ),
-                                        //       errorPinTheme: defaultPinTheme.copyBorderWith(
-                                        //         border: Border.all(color: Colors.redAccent),
-                                        //       ),
-                                        //     ),
-                                        //   ),
+                                        //   child: passwordField,
                                         // ),
+                                        Container(
+                                          alignment: Alignment.center,
+                                          padding: const EdgeInsets.only(left: 33, right: 33, bottom: 16),
+                                          child: Pinput(
+                                            length: 4,
+                                            controller: smsController,
+                                            focusNode: focusNode,
+                                            // androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsUserConsentApi,
+                                            // listenForMultipleSmsOnAndroid: true,
+                                            defaultPinTheme: defaultPinTheme,
+                                            separatorBuilder: (index) => const SizedBox(width: 8),
+                                            hapticFeedbackType: HapticFeedbackType.lightImpact,
+                                            onCompleted: (pin) {
+                                              debugPrint('onCompleted: $pin');
+                                            },
+                                            onChanged: (value) {
+                                              debugPrint('onChanged: $value');
+                                            },
+                                            cursor: Column(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children: [
+                                                Container(
+                                                  margin: const EdgeInsets.only(bottom: 9),
+                                                  width: 22,
+                                                  height: 1,
+                                                  color: focusedBorderColor,
+                                                ),
+                                              ],
+                                            ),
+                                            focusedPinTheme: defaultPinTheme.copyWith(
+                                              decoration: defaultPinTheme.decoration!.copyWith(
+                                                borderRadius: BorderRadius.circular(15),
+                                                border: Border.all(color: focusedBorderColor),
+                                              ),
+                                            ),
+                                            submittedPinTheme: defaultPinTheme.copyWith(
+                                              decoration: defaultPinTheme.decoration!.copyWith(
+                                                color: fillColor,
+                                                borderRadius: BorderRadius.circular(8),
+                                                border: Border.all(color: focusedBorderColor),
+                                              ),
+                                            ),
+                                            errorPinTheme: defaultPinTheme.copyBorderWith(
+                                              border: Border.all(color: Colors.redAccent),
+                                            ),
+                                          ),
+                                        ),
 
-                                        // Stack(
-                                        //   children: [
-                                        //     if (reSend == false)
-                                        //       Padding(
-                                        //         padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                        //         child: Row(
-                                        //           mainAxisAlignment: MainAxisAlignment.center,
-                                        //           children: [
-                                        //             Countdown(
-                                        //               animation: StepTween(
-                                        //                 begin: levelClock, // THIS IS A USER ENTERED NUMBER
-                                        //                 end: 0,
-                                        //               ).animate(_animationController!),
-                                        //             ),
-                                        //             const Text(" da kodni qayta olish mumkin",
-                                        //                 style: TextStyle(
-                                        //                   fontSize: 16,
-                                        //                   color: COLOR_BDM_DARK,
-                                        //                 )),
-                                        //           ],
-                                        //         ),
-                                        //       ),
-                                        //     if (reSend)
-                                        //       Row(
-                                        //         mainAxisAlignment: MainAxisAlignment.center,
-                                        //         children: [
-                                        //           InkWell(
-                                        //             onTap: () async {
-                                        //               reSend = false;
-                                        //               viewModel.smsCheck(
-                                        //                 phoneController.text
-                                        //                     // .replaceAll("+", "")
-                                        //                     .replaceAll(" ", "")
-                                        //                     .replaceAll("(", "")
-                                        //                     .replaceAll(")", ""),
-                                        //               );
-                                        //               _animationController!.reset();
-                                        //               _animationController!.forward();
-                                        //               _animationController?.addStatusListener((status) {
-                                        //                 if (status == AnimationStatus.completed) {
-                                        //                   setState(() {
-                                        //                     reSend = true;
-                                        //                   });
-                                        //                 }
-                                        //               });
-                                        //             },
-                                        //             child: Padding(
-                                        //               padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                        //               child: Text(
-                                        //                 "Kodni qayta yuborish",
-                                        //                 style: TextStyle(
-                                        //                     fontSize: 18,
-                                        //                     color: Theme.of(context).primaryColor,
-                                        //                     fontFamily: "medium",
-                                        //                     decorationColor: Theme.of(context).primaryColor,
-                                        //                     decoration: TextDecoration.underline),
-                                        //               ),
-                                        //             ),
-                                        //           ),
-                                        //         ],
-                                        //       )
-                                        //   ],
-                                        // ),
+                                        Stack(
+                                          children: [
+                                            if (reSend == false)
+                                              Padding(
+                                                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Countdown(
+                                                      animation: StepTween(
+                                                        begin: levelClock, // THIS IS A USER ENTERED NUMBER
+                                                        end: 0,
+                                                      ).animate(_animationController!),
+                                                    ),
+                                                    const Text(" da kodni qayta olish mumkin",
+                                                        style: TextStyle(
+                                                          fontSize: 16,
+                                                          color: COLOR_BDM_DARK,
+                                                        )),
+                                                  ],
+                                                ),
+                                              ),
+                                            if (reSend)
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () async {
+                                                      reSend = false;
+                                                      viewModel.smsCheck(
+                                                        phoneController.text
+                                                            // .replaceAll("+", "")
+                                                            .replaceAll(" ", "")
+                                                            .replaceAll("(", "")
+                                                            .replaceAll(")", ""),
+                                                      );
+                                                      _animationController!.reset();
+                                                      _animationController!.forward();
+                                                      _animationController?.addStatusListener((status) {
+                                                        if (status == AnimationStatus.completed) {
+                                                          setState(() {
+                                                            reSend = true;
+                                                          });
+                                                        }
+                                                      });
+                                                    },
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                                      child: Text(
+                                                        "Kodni qayta yuborish",
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Theme.of(context).primaryColor,
+                                                            fontFamily: "medium",
+                                                            decorationColor: Theme.of(context).primaryColor,
+                                                            decoration: TextDecoration.underline),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                          ],
+                                        ),
                                       ],
                                     )
                                   : Column(
@@ -371,118 +369,115 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                                   ],
                                                 ),
                                               ),
-                                              passwordField,
-                                              // Container(
-                                              //   alignment: Alignment.center,
-                                              //   padding: const EdgeInsets.only(left: 33, right: 33, bottom: 10),
-                                              //   child: Directionality(
-                                              //     textDirection: TextDirection.ltr,
-                                              //     child: Pinput(
-                                              //       length: 6,
-                                              //       controller: smsController,
-                                              //       focusNode: focusNode,
-                                              //       // androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsUserConsentApi,
-                                              //       // listenForMultipleSmsOnAndroid: true,
-                                              //       defaultPinTheme: defaultPinTheme,
-                                              //       separatorBuilder: (index) => const SizedBox(width: 8),
-                                              //       hapticFeedbackType: HapticFeedbackType.lightImpact,
-                                              //       onCompleted: (pin) {
-                                              //         debugPrint('onCompleted: $pin');
-                                              //       },
-                                              //       onChanged: (value) {
-                                              //         debugPrint('onChanged: $value');
-                                              //       },
-                                              //       cursor: Column(
-                                              //         mainAxisAlignment: MainAxisAlignment.end,
-                                              //         children: [
-                                              //           Container(
-                                              //             margin: const EdgeInsets.only(bottom: 9),
-                                              //             width: 22,
-                                              //             height: 1,
-                                              //             color: focusedBorderColor,
-                                              //           ),
-                                              //         ],
-                                              //       ),
-                                              //       focusedPinTheme: defaultPinTheme.copyWith(
-                                              //         decoration: defaultPinTheme.decoration!.copyWith(
-                                              //           borderRadius: BorderRadius.circular(15),
-                                              //           border: Border.all(color: focusedBorderColor),
-                                              //         ),
-                                              //       ),
-                                              //       submittedPinTheme: defaultPinTheme.copyWith(
-                                              //         decoration: defaultPinTheme.decoration!.copyWith(
-                                              //           color: fillColor,
-                                              //           borderRadius: BorderRadius.circular(8),
-                                              //           border: Border.all(color: focusedBorderColor),
-                                              //         ),
-                                              //       ),
-                                              //       errorPinTheme: defaultPinTheme.copyBorderWith(
-                                              //         border: Border.all(color: Colors.redAccent),
-                                              //       ),
-                                              //     ),
-                                              //   ),
-                                              // ),
-                                              // const SizedBox(
-                                              //   height: 16,
-                                              // ),
-                                              // Stack(
-                                              //   children: [
-                                              //     if (reSend == false)
-                                              //       Row(
-                                              //         mainAxisAlignment: MainAxisAlignment.center,
-                                              //         children: [
-                                              //           Countdown(
-                                              //             animation: StepTween(
-                                              //               begin: levelClock, // THIS IS A USER ENTERED NUMBER
-                                              //               end: 0,
-                                              //             ).animate(_animationController!),
-                                              //           ),
-                                              //           const Text(" da kodni qayta olish mumkin",
-                                              //               style: TextStyle(
-                                              //                 fontSize: 16,
-                                              //                 color: COLOR_BDM_DARK,
-                                              //                 fontFamily: "medium",
-                                              //               )),
-                                              //         ],
-                                              //       ),
-                                              //     if (reSend)
-                                              //       Row(
-                                              //         mainAxisAlignment: MainAxisAlignment.center,
-                                              //         children: [
-                                              //           InkWell(
-                                              //             onTap: () async {
-                                              //               reSend = false;
-                                              //               viewModel.smsCheck(
-                                              //                 phoneController.text
-                                              //                     // .replaceAll("+", "")
-                                              //                     .replaceAll(" ", "")
-                                              //                     .replaceAll("(", "")
-                                              //                     .replaceAll(")", ""),
-                                              //               );
-                                              //               _animationController!.reset();
-                                              //               _animationController!.forward();
-                                              //               _animationController?.addStatusListener((status) {
-                                              //                 if (status == AnimationStatus.completed) {
-                                              //                   setState(() {
-                                              //                     reSend = true;
-                                              //                   });
-                                              //                 }
-                                              //               });
-                                              //             },
-                                              //             child: Text(
-                                              //               "Qayta yuboring",
-                                              //               style: TextStyle(
-                                              //                   fontSize: 18,
-                                              //                   color: Theme.of(context).primaryColor,
-                                              //                   fontFamily: "medium",
-                                              //                   decorationColor: Theme.of(context).primaryColor,
-                                              //                   decoration: TextDecoration.underline),
-                                              //             ),
-                                              //           ),
-                                              //         ],
-                                              //       )
-                                              //   ],
-                                              // ),
+                                              // passwordField,
+                                              Container(
+                                                alignment: Alignment.center,
+                                                padding: const EdgeInsets.only(left: 33, right: 33, bottom: 10),
+                                                child: Pinput(
+                                                  length: 4,
+                                                  controller: smsController,
+                                                  focusNode: focusNode,
+                                                  // androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsUserConsentApi,
+                                                  // listenForMultipleSmsOnAndroid: true,
+                                                  defaultPinTheme: defaultPinTheme,
+                                                  separatorBuilder: (index) => const SizedBox(width: 8),
+                                                  hapticFeedbackType: HapticFeedbackType.lightImpact,
+                                                  onCompleted: (pin) {
+                                                    debugPrint('onCompleted: $pin');
+                                                  },
+                                                  onChanged: (value) {
+                                                    debugPrint('onChanged: $value');
+                                                  },
+                                                  cursor: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.end,
+                                                    children: [
+                                                      Container(
+                                                        margin: const EdgeInsets.only(bottom: 9),
+                                                        width: 22,
+                                                        height: 1,
+                                                        color: focusedBorderColor,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  focusedPinTheme: defaultPinTheme.copyWith(
+                                                    decoration: defaultPinTheme.decoration!.copyWith(
+                                                      borderRadius: BorderRadius.circular(15),
+                                                      border: Border.all(color: focusedBorderColor),
+                                                    ),
+                                                  ),
+                                                  submittedPinTheme: defaultPinTheme.copyWith(
+                                                    decoration: defaultPinTheme.decoration!.copyWith(
+                                                      color: fillColor,
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      border: Border.all(color: focusedBorderColor),
+                                                    ),
+                                                  ),
+                                                  errorPinTheme: defaultPinTheme.copyBorderWith(
+                                                    border: Border.all(color: Colors.redAccent),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 16,
+                                              ),
+                                              Stack(
+                                                children: [
+                                                  if (reSend == false)
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: [
+                                                        Countdown(
+                                                          animation: StepTween(
+                                                            begin: levelClock, // THIS IS A USER ENTERED NUMBER
+                                                            end: 0,
+                                                          ).animate(_animationController!),
+                                                        ),
+                                                        const Text(" da kodni qayta olish mumkin",
+                                                            style: TextStyle(
+                                                              fontSize: 16,
+                                                              color: COLOR_BDM_DARK,
+                                                              fontFamily: "medium",
+                                                            )),
+                                                      ],
+                                                    ),
+                                                  if (reSend)
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: [
+                                                        InkWell(
+                                                          onTap: () async {
+                                                            reSend = false;
+                                                            viewModel.smsCheck(
+                                                              phoneController.text
+                                                                  // .replaceAll("+", "")
+                                                                  .replaceAll(" ", "")
+                                                                  .replaceAll("(", "")
+                                                                  .replaceAll(")", ""),
+                                                            );
+                                                            _animationController!.reset();
+                                                            _animationController!.forward();
+                                                            _animationController?.addStatusListener((status) {
+                                                              if (status == AnimationStatus.completed) {
+                                                                setState(() {
+                                                                  reSend = true;
+                                                                });
+                                                              }
+                                                            });
+                                                          },
+                                                          child: Text(
+                                                            "Qayta yuboring",
+                                                            style: TextStyle(
+                                                                fontSize: 18,
+                                                                color: Theme.of(context).primaryColor,
+                                                                fontFamily: "medium",
+                                                                decorationColor: Theme.of(context).primaryColor,
+                                                                decoration: TextDecoration.underline),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )
+                                                ],
+                                              ),
                                             ],
                                           ),
                                         )
@@ -533,7 +528,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                       RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
                               onPressed: () async {
                                 if (state == AuthState.phone) {
-                                  if (phoneController.text.length < 13 || !_isActiveButton) {
+                                  if (phoneController.text.length < 10 || !_isActiveButton) {
                                     return;
                                   } else {
                                     viewModel.smsCheck(
@@ -557,10 +552,10 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                 } else if (state == AuthState.login) {
                                   viewModel.login(
                                     phoneController.text.replaceAll(" ", "").replaceAll("(", "").replaceAll(")", ""),
-                                    passwordController.text,
+                                    smsController.text,
                                   );
                                 } else {
-                                  if (passwordController.text == "") {
+                                  if (smsController.text == "") {
                                     Fluttertoast.showToast(
                                         msg: LocaleKeys.enter_passpowd.tr(),
                                         toastLength: Toast.LENGTH_SHORT,
@@ -577,7 +572,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                       phoneController.text.replaceAll(" ", "").replaceAll("(", "").replaceAll(")", ""),
                                       userNameController.text,
                                       lastNameController.text,
-                                      passwordController.text,
+                                      smsController.text,
                                       addresController.text,
                                     );
                                   }

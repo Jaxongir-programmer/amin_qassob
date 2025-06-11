@@ -5,12 +5,8 @@ import 'dart:io';
 import 'package:amin_qassob/model/brand_model.dart';
 import 'package:amin_qassob/model/phone_number_model.dart';
 import 'package:amin_qassob/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../model/category_model.dart';
-import '../model/filter_brand_model.dart';
 import '../model/make_order_model.dart';
 import '../model/message_model.dart';
 import '../model/order_model.dart';
@@ -24,7 +20,6 @@ import 'package:flutter/foundation.dart';
 import '../main.dart';
 import '../model/base_model.dart';
 import '../model/offer_model.dart';
-import '../screen/main/main_screen.dart';
 import '../utils/pref_utils.dart';
 
 class ApiService {
@@ -62,7 +57,7 @@ class ApiService {
       ),
     );
 
-    if (kDebugMode) dio.interceptors.add(MyApp.alice.getDioInterceptor());
+    if (false) dio.interceptors.add(MyApp.alice.getDioInterceptor());
   }
 
   BaseModel wrapResponse(Response response) {
@@ -138,7 +133,7 @@ class ApiService {
       final response = await dio.post("v3/register/",
           data: jsonEncode({
             "phone_number": phone,
-            "password": code,
+            "code": code,
             "first_name": firstName,
             "last_name": lastName,
             "address": address,
@@ -164,7 +159,7 @@ class ApiService {
       final response = await dio.post("v3/login/",
           data: jsonEncode({
             "phone_number": phone,
-            "password": code,
+            "code": code,
           }));
       final baseData = wrapResponse(response);
       if (!baseData.error) {
