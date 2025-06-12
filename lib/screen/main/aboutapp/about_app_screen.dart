@@ -44,7 +44,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
         children: [
           Center(
             child: Image.asset(
-              Assets.imagesLogoMain,
+              Assets.imagesAminQassob,
               width: 300,
               height: 300,
             ),

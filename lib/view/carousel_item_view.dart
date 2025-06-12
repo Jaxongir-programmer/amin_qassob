@@ -48,7 +48,7 @@ class _CarouselItemViewState extends State<CarouselItemView> {
               child: Container(
                   foregroundDecoration: BoxDecoration(color: WHITE.withOpacity(0.0)),
                   child:
-                      // Image.asset(Assets.imagesLogoMain,width:getScreenWidth(context),fit: BoxFit.contain,)
+                      // Image.asset(Assets.imagesAminQassob,width:getScreenWidth(context),fit: BoxFit.contain,)
                   CustomViews.buildNetworkImage(
                       widget.item.image,
                           height: double.maxFinite,
