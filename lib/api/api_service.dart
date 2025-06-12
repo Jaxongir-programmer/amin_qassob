@@ -62,7 +62,7 @@ class ApiService {
       ),
     );
 
-    if (false) dio.interceptors.add(MyApp.alice.getDioInterceptor());
+    dio.interceptors.add(MyApp.alice.getDioInterceptor());
   }
 
   BaseModel wrapResponse(Response response) {
@@ -117,11 +117,12 @@ class ApiService {
     return error.message.toString();
   }
 
-  Future<bool?> checkPhone(String phone, StreamController<String> errorStream) async {
+  Future<bool?> checkPhone(String phone,StreamController<String> successStream, StreamController<String> errorStream) async {
     try {
       final response = await dio.post("v3/check-phone/", data: jsonEncode({"phone_number": phone}));
       final baseData = wrapResponse(response);
       if (!baseData.error) {
+        successStream.sink.add(baseData.message ?? "Code sent to your Telegram account");
         return baseData.data["is_register"];
       } else {
         errorStream.sink.add(baseData.message ?? "Error");
@@ -132,11 +133,29 @@ class ApiService {
     return null;
   }
 
-  Future<String?> registration(
+
+  Future<String?> telegramLogin(String phone, StreamController<String> errorStream) async {
+    try {
+      final response = await dio.post("v3/telegram-login/", data: jsonEncode({"phone_number": phone}));
+      final baseData = wrapResponse(response);
+      if (!baseData.error) {
+        return baseData.data["id"];
+      } else {
+        errorStream.sink.add(baseData.message ?? "Error");
+      }
+    } on DioError catch (e) {
+      errorStream.sink.add(wrapError(e));
+    }
+    return null;
+  }
+
+
+  Future<String?> registration(String id,
       String phone, String code, String firstName, String lastName, String address, StreamController<String> errorStream) async {
     try {
       final response = await dio.post("v3/register/",
           data: jsonEncode({
+            "id": id,
             "phone_number": phone,
             "code": code,
             "first_name": firstName,

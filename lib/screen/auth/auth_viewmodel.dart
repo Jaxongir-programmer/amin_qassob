@@ -1,6 +1,5 @@
 import 'dart:async';
 
-
 import 'package:stacked/stacked.dart';
 
 import '../../api/api_service.dart';
@@ -16,12 +15,24 @@ class AuthViewModel extends BaseViewModel {
     return _errorStream.stream;
   }
 
+  StreamController<String> _successStream = StreamController();
+
+  Stream<String> get successData {
+    return _successStream.stream;
+  }
+
   var progressData = false;
 
   StreamController<bool> _smsCheckPhoneStream = StreamController();
 
   Stream<bool> get smsCheckData {
     return _smsCheckPhoneStream.stream;
+  }
+
+  StreamController<String> _telegramLoginStream = StreamController();
+
+  Stream<String> get telegramLoginData {
+    return _telegramLoginStream.stream;
   }
 
   StreamController<LoginResponse> _loginResponseStream = StreamController();
@@ -45,28 +56,41 @@ class AuthViewModel extends BaseViewModel {
   void smsCheck(String phone) async {
     progressData = true;
     notifyListeners();
-    final data = await api.checkPhone(phone, _errorStream);
+    final data = await api.checkPhone(phone, _successStream, _errorStream);
     progressData = false;
     notifyListeners();
     if (data != null) {
+      telegramLogin(phone);
       _smsCheckPhoneStream.sink.add(data);
     }
   }
 
-  void registration(String phone, String name, String surname, String code, String address) async {
+  void telegramLogin(String phone) async {
     progressData = true;
     notifyListeners();
-    final data = await api.registration(phone,code, name, surname, address,  _errorStream);
+    final data = await api.telegramLogin(phone, _errorStream);
+    progressData = false;
+    notifyListeners();
+    if (data != null) {
+      _telegramLoginStream.sink.add(data);
+    }
+  }
+
+  void registration(String id, String phone, String name, String surname, String code, String address) async {
+    progressData = true;
+    notifyListeners();
+    final data = await api.registration(id, phone, code, name, surname, address, _errorStream);
     progressData = false;
     notifyListeners();
     if (data != null) {
       registerStream.sink.add(data);
     }
   }
+
   void login(String phone, String code) async {
     progressData = true;
     notifyListeners();
-    final data = await api.login(phone,code, _errorStream);
+    final data = await api.login(phone, code, _errorStream);
     progressData = false;
     notifyListeners();
     if (data != null) {
@@ -85,4 +109,12 @@ class AuthViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  @override
+  void dispose() {
+    _errorStream.close();
+    _loginResponseStream.close();
+    _smsCheckPhoneStream.close();
+    _telegramLoginStream.close();
+    super.dispose();
+  }
 }

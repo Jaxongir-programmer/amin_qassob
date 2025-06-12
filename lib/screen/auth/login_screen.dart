@@ -30,11 +30,14 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStateMixin {
   var _isActiveButton = false;
   var state = AuthState.phone;
+  var id = "";
+  var successMessage = "";
 
   TextEditingController userNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addresController = TextEditingController();
+
   // TextEditingController passwordController = TextEditingController();
 
   final smsController = TextEditingController();
@@ -207,6 +210,30 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                               : (state == AuthState.registration)
                                   ? Column(
                                       children: [
+                                        Container(
+                                          padding: EdgeInsets.all(12),
+                                          margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+                                          decoration: BoxDecoration(
+                                            color: Colors.green.shade50,
+                                            borderRadius: BorderRadius.circular(12),
+                                            border: Border.all(color: Colors.green.shade200),
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Icon(Icons.check_circle, color: Colors.green),
+                                              SizedBox(width: 8),
+                                              Expanded(
+                                                child: Text(
+                                                  successMessage,
+                                                  style: TextStyle(
+                                                    color: Colors.green.shade800,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                         Padding(
                                           padding: const EdgeInsets.only(left: 33, right: 33, bottom: 16),
                                           child: userNameField,
@@ -350,13 +377,42 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                   children: [
-                                                    Text(
-                                                      LocaleKeys.enter_passpowd.tr(),
-                                                      style: TextStyle(
-                                                        color: TEXT_COLOR2,
-                                                        fontSize: 24,
-                                                        fontFamily: "bold",
+                                                    // Text(
+                                                    //   LocaleKeys.enter_passpowd.tr(),
+                                                    //   style: TextStyle(
+                                                    //     color: TEXT_COLOR2,
+                                                    //     fontSize: 24,
+                                                    //     fontFamily: "bold",
+                                                    //   ),
+                                                    // ),
+                                                    // const SizedBox(
+                                                    //   height: 16,
+                                                    // ),
+                                                    Container(
+                                                      padding: EdgeInsets.all(12),
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.green.shade50,
+                                                        borderRadius: BorderRadius.circular(12),
+                                                        border: Border.all(color: Colors.green.shade200),
                                                       ),
+                                                      child: Row(
+                                                        children: [
+                                                          Icon(Icons.check_circle, color: Colors.green),
+                                                          SizedBox(width: 8),
+                                                          Expanded(
+                                                            child: Text(
+                                                              successMessage,
+                                                              style: TextStyle(
+                                                                color: Colors.green.shade800,
+                                                                fontWeight: FontWeight.w500,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 16,
                                                     ),
                                                     Text(
                                                       "${LocaleKeys.phone_number.tr()}: ${phoneController.text}",
@@ -550,10 +606,13 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                     });
                                   }
                                 } else if (state == AuthState.login) {
-                                  viewModel.login(
-                                    phoneController.text.replaceAll(" ", "").replaceAll("(", "").replaceAll(")", ""),
-                                    smsController.text,
-                                  );
+                                  viewModel.registration(
+                                      id,
+                                      phoneController.text.replaceAll(" ", "").replaceAll("(", "").replaceAll(")", ""),
+                                      "",
+                                      "",
+                                      smsController.text,
+                                      "");
                                 } else {
                                   if (smsController.text == "") {
                                     Fluttertoast.showToast(
@@ -569,6 +628,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                       return;
                                     }
                                     viewModel.registration(
+                                      id,
                                       phoneController.text.replaceAll(" ", "").replaceAll("(", "").replaceAll(")", ""),
                                       userNameController.text,
                                       lastNameController.text,
@@ -616,6 +676,14 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
           showError(context, event);
         });
 
+        viewModel.successData.listen(
+          (event) {
+            setState(() {
+              successMessage = event;
+            });
+          },
+        );
+
         viewModel.registerData.listen((event) async {
           // viewModel.smsCheck(event);
           Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
@@ -640,10 +708,17 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
         });
 
         viewModel.smsCheckData.listen((event) {
+          id = "";
           setState(() {
             state = event ? AuthState.login : AuthState.registration;
           });
         });
+
+        viewModel.telegramLoginData.listen(
+          (event) {
+            id = event;
+          },
+        );
       },
     );
   }
