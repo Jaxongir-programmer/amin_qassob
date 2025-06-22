@@ -52,6 +52,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
         </provider>
+
+        <meta-data
+            android:name="com.google.android.gms.client_id"
+            android:value="web-client-id-here.apps.googleusercontent.com" />
+
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" /><meta-data

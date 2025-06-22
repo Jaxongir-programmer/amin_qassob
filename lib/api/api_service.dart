@@ -5,9 +5,6 @@ import 'dart:io';
 import 'package:amin_qassob/model/brand_model.dart';
 import 'package:amin_qassob/model/phone_number_model.dart';
 import 'package:amin_qassob/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../model/category_model.dart';
 import '../model/filter_brand_model.dart';
@@ -124,6 +121,45 @@ class ApiService {
       if (!baseData.error) {
         successStream.sink.add(baseData.message ?? "Code sent to your Telegram account");
         return baseData.data["is_register"];
+      } else {
+        errorStream.sink.add(baseData.message ?? "Error");
+      }
+    } on DioError catch (e) {
+      errorStream.sink.add(wrapError(e));
+    }
+    return null;
+  }
+
+  Future<bool?> sendEmail(String email,StreamController<String> successStream, StreamController<String> errorStream) async {
+    try {
+      final response = await dio.post("v3/send/code/", data: jsonEncode({"email": email}));
+      final baseData = wrapResponse(response);
+      if (!baseData.error) {
+        successStream.sink.add(baseData.message ?? "Code sent to your Telegram account");
+        return true;
+      } else {
+        errorStream.sink.add(baseData.message ?? "Error");
+      }
+    } on DioError catch (e) {
+      errorStream.sink.add(wrapError(e));
+    }
+    return null;
+  }
+
+  Future<String?> checkEmail(String email,String code, StreamController<String> errorStream) async {
+    try {
+      final response = await dio.post("v3/check/email/",
+          data: jsonEncode({
+            "email": email,
+            "code": code,
+          }));
+      final baseData = wrapResponse(response);
+      if (!baseData.error) {
+        // Map<String, dynamic> decodedToken = JwtDecoder.decode(baseData.data["access_token"]);
+        // PrefUtils.setToken(decodedToken['user_id']);
+        // return decodedToken['user_id'];
+        PrefUtils.setToken(baseData.data["access_token"]);
+        return baseData.data["access_token"];
       } else {
         errorStream.sink.add(baseData.message ?? "Error");
       }

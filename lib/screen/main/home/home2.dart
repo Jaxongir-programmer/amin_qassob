@@ -26,18 +26,12 @@ import '../../../model/filter_brand_model.dart';
 import '../../../model/product_model.dart';
 import '../../../provider/providers.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/constants.dart';
 import '../../../utils/pref_utils.dart';
 import '../../../utils/utils.dart';
-import '../../../service/eventbus.dart';
-import '../../../view/carousel_item_view.dart';
 import '../../../view/shimmers.dart';
 import '../../auth/login_screen.dart';
 import '../brands_screen/brands_screen.dart';
 import '../favorites/favorites_screen.dart';
-import '../message/message_screen.dart';
-import '../product_list/product_list_screen.dart';
-import 'hearder.dart';
 
 class HomeScreen2 extends StatefulWidget {
   const HomeScreen2({super.key});
@@ -55,6 +49,34 @@ class _HomeScreen2State extends State<HomeScreen2> {
   List<TreeNodeData>? treeData;
   List<FilterBrandModel> filterBrandList = [];
 
+  final ScrollController _scrollController = ScrollController();
+  bool _showBackToTop = false;
+  Timer? _debounceTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.offset > 1000) {
+        // Timer orqali kechikib ko‘rsatish
+        _debounceTimer?.cancel();
+        _debounceTimer = Timer(const Duration(milliseconds: 200), () {
+          setState(() {
+            _showBackToTop = true;
+          });
+        });
+      } else {
+        // Pastga tushmagan bo‘lsa, tugmani yashirish
+        _debounceTimer?.cancel();
+        if (_showBackToTop) {
+          setState(() {
+            _showBackToTop = false;
+          });
+        }
+      }
+    });
+  }
+
   @override
   void didChangeDependencies() async {
     if (firstTimeLoad) {
@@ -64,6 +86,21 @@ class _HomeScreen2State extends State<HomeScreen2> {
       groupsBox = Hive.box<BrandModel>('groups_table');
     }
     super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _debounceTimer?.cancel();
+    super.dispose();
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
   }
 
   @override
@@ -104,7 +141,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
                 //     )),
                 title: Container(
                   padding: EdgeInsets.only(left: 16),
-                  child: Text("AMIN QASSOB", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,color: WHITE)),
+                  child: Text("AMIN QASSOB", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: WHITE)),
                 ),
                 actions: [
                   InkWell(
@@ -142,36 +179,49 @@ class _HomeScreen2State extends State<HomeScreen2> {
                 onRefresh: () async {
                   loadData(viewModel);
                 },
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      // const SliverPadding(
-                      //   padding: EdgeInsets.only(top: 10),
-                      //   sliver: SliverAppBar(
-                      //     backgroundColor: WHITE,
-                      //     flexibleSpace: HomeAppBar(),
-                      //     scrolledUnderElevation: 0,
-                      //   ),
-                      // ),
-                      // SliverAppBar(
-                      //   backgroundColor: WHITE,
-                      //   pinned: true,
-                      //   collapsedHeight: 60,
-                      //   flexibleSpace: SearchField(
-                      //     onClickSearch: () {
-                      //       startScreenF(context, const SearchScreen());
-                      //     },
-                      //     onClickFilter: () {
-                      //       showFilterDialog();
-                      //     },
-                      //   ),
-                      //   scrolledUnderElevation: 0,
-                      // ),
-                      if (viewModel.photosList.isNotEmpty) CarouselWidget(photosList: viewModel.photosList),
-                      _connect(context),
-                      _buildBody(context, provider, viewModel)
-                    ],
-                  ),
+                child: Stack(
+                  children: [
+                    CustomScrollView(
+                      controller: _scrollController,
+                      slivers: [
+                        // const SliverPadding(
+                        //   padding: EdgeInsets.only(top: 10),
+                        //   sliver: SliverAppBar(
+                        //     backgroundColor: WHITE,
+                        //     flexibleSpace: HomeAppBar(),
+                        //     scrolledUnderElevation: 0,
+                        //   ),
+                        // ),
+                        // SliverAppBar(
+                        //   backgroundColor: WHITE,
+                        //   pinned: true,
+                        //   collapsedHeight: 60,
+                        //   flexibleSpace: SearchField(
+                        //     onClickSearch: () {
+                        //       startScreenF(context, const SearchScreen());
+                        //     },
+                        //     onClickFilter: () {
+                        //       showFilterDialog();
+                        //     },
+                        //   ),
+                        //   scrolledUnderElevation: 0,
+                        // ),
+                        if (viewModel.photosList.isNotEmpty) SliverToBoxAdapter(child: CarouselWidget(photosList: viewModel.photosList)),
+                        SliverToBoxAdapter(child: _connect(context)),
+                        SliverToBoxAdapter(child: _buildBody(context, provider, viewModel))
+                      ],
+                    ),
+                    if (_showBackToTop)
+                      Positioned(
+                        bottom: 20,
+                        right: 20,
+                        child: FloatingActionButton(
+                          backgroundColor: PRIMARY_LIGHT_COLOR,
+                          onPressed: _scrollToTop,
+                          child: Icon(IconsaxOutline.arrow_up_3),
+                        ),
+                      ),
+                  ],
                 ),
               ),
             );
@@ -303,7 +353,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
   //       });
   // }
 
-  Widget _connect(BuildContext context){
+  Widget _connect(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
       child: Row(
@@ -412,8 +462,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
                                               UrlLauncher.launch("tel:${item.phone}");
                                             },
                                             child: Padding(
-                                              padding:
-                                              const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16),
+                                              padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16),
                                               child: Row(
                                                 children: [
                                                   const Icon(
@@ -628,7 +677,8 @@ class _HomeScreen2State extends State<HomeScreen2> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            child: Text(LocaleKeys.categories.tr(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PRIMARY_COLOR)),
+            child: Text(LocaleKeys.categories.tr(),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PRIMARY_COLOR)),
           ),
           // TextButton(
           //   onPressed: () {
@@ -693,24 +743,24 @@ class _HomeScreen2State extends State<HomeScreen2> {
         ? topProductShimmer(context: context)
         : viewModel.productList.isNotEmpty
             ? GridView.builder(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                itemCount: viewModel.productList.length,
-                shrinkWrap: true,
-                primary: false,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (ctx, index) {
-                  var item = viewModel.productList[index];
-                  return ProductsItemView(
-                    item: item,
-                  );
-                },
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: 0, // horizontal
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.67,
-                    mainAxisSpacing: 4 // vertical
-                    ),
-              )
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              itemCount: viewModel.productList.length,
+              shrinkWrap: true,
+              primary: false,
+              scrollDirection: Axis.vertical,
+              itemBuilder: (ctx, index) {
+                var item = viewModel.productList[index];
+                return ProductsItemView(
+                  item: item,
+                );
+              },
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisSpacing: 0, // horizontal
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.67,
+                  mainAxisSpacing: 4 // vertical
+                  ),
+            )
             : Container(
                 height: 0,
               );

@@ -65,6 +65,17 @@ class AuthViewModel extends BaseViewModel {
     }
   }
 
+  void sendEmail(String email) async {
+    progressData = true;
+    notifyListeners();
+    final data = await api.sendEmail(email, _successStream, _errorStream);
+    progressData = false;
+    notifyListeners();
+    if (data != null) {
+      _smsCheckPhoneStream.sink.add(data);
+    }
+  }
+
   void telegramLogin(String phone) async {
     progressData = true;
     notifyListeners();
@@ -80,6 +91,17 @@ class AuthViewModel extends BaseViewModel {
     progressData = true;
     notifyListeners();
     final data = await api.registration(id, phone, code, name, surname, address, _errorStream);
+    progressData = false;
+    notifyListeners();
+    if (data != null) {
+      registerStream.sink.add(data);
+    }
+  }
+
+  void checkEmail(String email,String code) async {
+    progressData = true;
+    notifyListeners();
+    final data = await api.checkEmail(email, code, _errorStream);
     progressData = false;
     notifyListeners();
     if (data != null) {

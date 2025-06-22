@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:amin_qassob/screen/auth/offerta_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:pinput/pinput.dart';
 import 'package:stacked/stacked.dart';
@@ -36,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
   TextEditingController userNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController addresController = TextEditingController();
 
   // TextEditingController passwordController = TextEditingController();
@@ -51,6 +54,11 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
   AnimationController? _animationController;
   int levelClock = 180;
   bool reSend = false;
+
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: ['email', 'profile'],
+    clientId: 'web-client-id-here.apps.googleusercontent.com',
+  );
 
   @override
   void initState() {
@@ -168,6 +176,32 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
       ),
     );
 
+    final emailField = TextFormField(
+      controller: emailController,
+      autofocus: false,
+      keyboardType: TextInputType.emailAddress,
+      textInputAction: TextInputAction.next,
+      onSaved: (value) {
+        emailController.text = value!;
+      },
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Iltimos, email kiriting';
+        }
+        // Oddiy email tekshirish
+        if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+          return 'To‘g‘ri email kiriting';
+        }
+        return null;
+      },
+      decoration: const InputDecoration(
+        hintText: 'example@email.com',
+        hintStyle: TextStyle(color: Colors.grey),
+        prefixIcon: Icon(Icons.email),
+      ),
+    );
+
+
     return ViewModelBuilder<AuthViewModel>.reactive(
       viewModelBuilder: () {
         return AuthViewModel();
@@ -205,7 +239,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                           (state == AuthState.phone)
                               ? Padding(
                                   padding: const EdgeInsets.only(left: 33, right: 33, bottom: 10),
-                                  child: phoneField,
+                                  child: emailField,
                                 )
                               : (state == AuthState.registration)
                                   ? Column(
@@ -329,13 +363,15 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                                   InkWell(
                                                     onTap: () async {
                                                       reSend = false;
-                                                      viewModel.smsCheck(
-                                                        phoneController.text
-                                                            // .replaceAll("+", "")
-                                                            .replaceAll(" ", "")
-                                                            .replaceAll("(", "")
-                                                            .replaceAll(")", ""),
-                                                      );
+                                                      // viewModel.smsCheck(
+                                                      //   phoneController.text
+                                                      //       // .replaceAll("+", "")
+                                                      //       .replaceAll(" ", "")
+                                                      //       .replaceAll("(", "")
+                                                      //       .replaceAll(")", ""),
+                                                      // );
+                                                      viewModel.sendEmail(emailController.text);
+
                                                       _animationController!.reset();
                                                       _animationController!.forward();
                                                       _animationController?.addStatusListener((status) {
@@ -415,7 +451,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                                       height: 16,
                                                     ),
                                                     Text(
-                                                      "${LocaleKeys.phone_number.tr()}: ${phoneController.text}",
+                                                      "Email: ${emailController.text}",
                                                       style: const TextStyle(
                                                           fontWeight: FontWeight.w500, fontSize: 16, fontFamily: "regular"),
                                                     ),
@@ -503,13 +539,15 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                                         InkWell(
                                                           onTap: () async {
                                                             reSend = false;
-                                                            viewModel.smsCheck(
-                                                              phoneController.text
-                                                                  // .replaceAll("+", "")
-                                                                  .replaceAll(" ", "")
-                                                                  .replaceAll("(", "")
-                                                                  .replaceAll(")", ""),
-                                                            );
+                                                            // viewModel.smsCheck(
+                                                            //   phoneController.text
+                                                            //       // .replaceAll("+", "")
+                                                            //       .replaceAll(" ", "")
+                                                            //       .replaceAll("(", "")
+                                                            //       .replaceAll(")", ""),
+                                                            // );
+                                                            viewModel.sendEmail(emailController.text);
+
                                                             _animationController!.reset();
                                                             _animationController!.forward();
                                                             _animationController?.addStatusListener((status) {
@@ -584,16 +622,18 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                       RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
                               onPressed: () async {
                                 if (state == AuthState.phone) {
-                                  if (phoneController.text.length < 10 || !_isActiveButton) {
+                                  if (emailController.text.length < 7 || !_isActiveButton) {
                                     return;
                                   } else {
-                                    viewModel.smsCheck(
-                                      phoneController.text
-                                          // .replaceAll("+", "")
-                                          .replaceAll(" ", "")
-                                          .replaceAll("(", "")
-                                          .replaceAll(")", ""),
-                                    );
+                                    // viewModel.smsCheck(
+                                    //   phoneController.text
+                                    //       // .replaceAll("+", "")
+                                    //       .replaceAll(" ", "")
+                                    //       .replaceAll("(", "")
+                                    //       .replaceAll(")", ""),
+                                    // );
+
+                                    viewModel.sendEmail(emailController.text);
                                     _animationController =
                                         AnimationController(vsync: this, duration: Duration(seconds: levelClock));
                                     _animationController!.forward();
@@ -606,13 +646,14 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                     });
                                   }
                                 } else if (state == AuthState.login) {
-                                  viewModel.registration(
-                                      id,
-                                      phoneController.text.replaceAll(" ", "").replaceAll("(", "").replaceAll(")", ""),
-                                      "",
-                                      "",
-                                      smsController.text,
-                                      "");
+                                  // viewModel.registration(
+                                  //     id,
+                                  //     phoneController.text.replaceAll(" ", "").replaceAll("(", "").replaceAll(")", ""),
+                                  //     "",
+                                  //     "",
+                                  //     smsController.text,
+                                  //     "");
+                                  viewModel.checkEmail(emailController.text, smsController.text);
                                 } else {
                                   if (smsController.text == "") {
                                     Fluttertoast.showToast(
@@ -622,19 +663,19 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                         textColor: Colors.white);
                                   } else {
                                     if (userNameController.text == "" ||
-                                        lastNameController.text == "" ||
-                                        addresController.text == "") {
+                                        lastNameController.text == "" ) {
                                       Fluttertoast.showToast(msg: LocaleKeys.fill_feilds.tr());
                                       return;
                                     }
-                                    viewModel.registration(
-                                      id,
-                                      phoneController.text.replaceAll(" ", "").replaceAll("(", "").replaceAll(")", ""),
-                                      userNameController.text,
-                                      lastNameController.text,
-                                      smsController.text,
-                                      addresController.text,
-                                    );
+                                    // viewModel.registration(
+                                    //   id,
+                                    //   phoneController.text.replaceAll(" ", "").replaceAll("(", "").replaceAll(")", ""),
+                                    //   userNameController.text,
+                                    //   lastNameController.text,
+                                    //   smsController.text,
+                                    //   addresController.text,
+                                    // );
+                                    viewModel.checkEmail(emailController.text, smsController.text);
                                   }
                                 }
                               },
@@ -651,6 +692,27 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                           const SizedBox(
                             height: 20,
                           ),
+
+                          // ElevatedButton(
+                          //   onPressed: () async {
+                          //     final googleUser = await _googleSignIn.signIn();
+                          //     if (googleUser == null) {
+                          //       print('Foydalanuvchi tanlamadi');
+                          //       return;
+                          //     }
+                          //
+                          //     final googleAuth = await googleUser.authentication;
+                          //     final idToken = googleAuth.idToken;
+                          //
+                          //     if (idToken != null) {
+                          //       print('ID token: $idToken');
+                          //       // BackEndga yuboriladi
+                          //       Fluttertoast.showToast(msg: "BackEndga yuboriladi");
+                          //     }
+                          //   },
+                          //   child: Text('Google orqali kirish'),
+                          // )
+
                           // if (state == AuthState.phone)
                           //   const Padding(
                           //     padding: EdgeInsets.symmetric(horizontal: 30.0),
@@ -721,6 +783,30 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
         );
       },
     );
+  }
+
+  Future<void> handleGoogleLogin() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) {
+        print("Foydalanuvchi tanlamadi");
+        return;
+      }
+
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      final idToken = googleAuth.idToken;
+      final accessToken = googleAuth.accessToken;
+
+      print("idToken: $idToken");
+      print("accessToken: $accessToken");
+
+      // Shu yerda backendga yuboring
+      // await sendTokenToBackend(idToken);
+      Fluttertoast.showToast(msg: "Yuborildi");
+    } catch (error) {
+      print("Google login xatosi: $error");
+    }
   }
 }
 

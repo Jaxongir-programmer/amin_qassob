@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:amin_qassob/extensions/extensions.dart';
 import 'package:amin_qassob/lang.g.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ficonsax/ficonsax.dart';
 
 import 'package:flutter/material.dart';
 
