@@ -75,7 +75,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       SizedBox(
-                        height: 16,
+                        height: 8,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -119,7 +119,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                           const Divider(),
                           payTypeWidget(),
                           Padding(
-                            padding: const EdgeInsets.only(left: 16.0, right: 16, top: 4, bottom: 20),
+                            padding: const EdgeInsets.only(left: 16.0, right: 16, top: 2, bottom: 40),
                             child: !viewModel.progressOrderData
                                 ? ElevatedButton(
                                     onPressed: () {

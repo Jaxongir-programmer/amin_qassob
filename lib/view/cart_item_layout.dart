@@ -57,7 +57,7 @@ class _CartItemLayoutState extends State<CartItemLayout> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: CustomViews.buildNetworkImage(widget.item.photos.isNotEmpty ? widget.item.photos[0] ?? "" : "",
+              child: CustomViews.buildNetworkImage(widget.item.photos.isNotEmpty ? widget.item.photos[0] ?? "" : widget.item.image,
                   width: 95, height: 110, fit: BoxFit.contain),
             ),
             const SizedBox(

@@ -1,4 +1,3 @@
-
 import 'package:amin_qassob/extensions/extensions.dart';
 import 'package:amin_qassob/utils/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -49,13 +48,12 @@ class _LanguageScreenState extends State<LanguageScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.all(32).copyWith(top: 0),
-              child: Image.asset(Assets.imagesAminQassob),
+              child: SizedBox(width: 150,height: 150,child: Image.asset(Assets.imagesAminQassob)),
             ),
             Text(LocaleKeys.welcome.tr(),
                 textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
             const SizedBox(height: 12),
-            Text(LocaleKeys.select_lang.tr(),
-                textAlign: TextAlign.center, style: const TextStyle(fontSize: 16)),
+            Text(LocaleKeys.select_lang.tr(), textAlign: TextAlign.center, style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 24),
             ListView(
               shrinkWrap: true,
@@ -76,7 +74,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
                       children: [
                         Image.asset(Assets.imagesImgEng, width: 24, height: 24),
                         const SizedBox(width: 16),
-                        Expanded(child: Text(EnumLanguages.en.language, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
+                        Expanded(
+                            child: Text(EnumLanguages.en.language,
+                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
                       ],
                     ),
                   ),
@@ -96,7 +96,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
                       children: [
                         Image.asset(Assets.imagesImgRus, width: 24, height: 24),
                         const SizedBox(width: 16),
-                        Expanded(child: Text(EnumLanguages.ru.language, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
+                        Expanded(
+                            child: Text(EnumLanguages.ru.language,
+                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
                       ],
                     ),
                   ),
@@ -116,7 +118,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
                       children: [
                         Image.asset(Assets.imagesImgKorea, width: 24, height: 24),
                         const SizedBox(width: 16),
-                        Expanded(child: Text(EnumLanguages.ko.language, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
+                        Expanded(
+                            child: Text(EnumLanguages.ko.language,
+                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
                       ],
                     ),
                   ),
@@ -136,7 +140,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
                       children: [
                         Image.asset(Assets.imagesImgUzb, width: 24, height: 24),
                         const SizedBox(width: 16),
-                        Expanded(child: Text(EnumLanguages.uz.language, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
+                        Expanded(
+                            child: Text(EnumLanguages.uz.language,
+                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
                       ],
                     ),
                   ),
@@ -151,9 +157,12 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 await PrefUtils.setLanguage(langId);
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const SplashScreen()));
               },
-              child: Text(LocaleKeys.continue_.tr().toUpperCase(),style: const TextStyle(color: WHITE,fontSize: 16,fontWeight: FontWeight.w600)),
+              child: Text(LocaleKeys.continue_.tr().toUpperCase(),
+                  style: const TextStyle(color: WHITE, fontSize: 16, fontWeight: FontWeight.w600)),
             ),
-            SizedBox(height: 16,)
+            SizedBox(
+              height: 16,
+            )
           ],
         ),
       ),

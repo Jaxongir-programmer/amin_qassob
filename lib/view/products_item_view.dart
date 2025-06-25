@@ -85,8 +85,11 @@ class ProductsItemViewState extends State<ProductsItemView> {
                         borderRadius: BorderRadius.circular(12),
                         child: Stack(
                           children: [
-                            CustomViews.buildNetworkImage(widget.item.photos.isNotEmpty?widget.item.photos[0]??"":"",
-                                fit: BoxFit.cover, width: getScreenWidth(context), height: 120),
+                            CustomViews.buildNetworkImage(
+                                widget.item.photos.isNotEmpty ? widget.item.photos[0] ?? "" : widget.item.image,
+                                fit: BoxFit.cover,
+                                width: getScreenWidth(context),
+                                height: 120),
                             if (widget.item.limit <= 0)
                               Container(
                                 width: getScreenWidth(context),
@@ -107,8 +110,7 @@ class ProductsItemViewState extends State<ProductsItemView> {
                                 child: CircleAvatar(
                                   backgroundColor: WHITE.withAlpha(180),
                                   maxRadius: 15,
-                                  child: Icon(IconsaxOutline.discount_circle,
-                                      size: 20, color: Colors.red),
+                                  child: Icon(IconsaxOutline.discount_circle, size: 20, color: Colors.red),
                                 ),
                               ),
                           ],
@@ -140,10 +142,8 @@ class ProductsItemViewState extends State<ProductsItemView> {
                             child: CircleAvatar(
                               backgroundColor: WHITE.withAlpha(180),
                               maxRadius: 15,
-                              child: Icon(
-                                  provider.isFavorite(widget.item.id) ? IconsaxBold.heart : IconsaxOutline.heart,
-                                  color: Colors.red,
-                                  size: 20),
+                              child: Icon(provider.isFavorite(widget.item.id) ? IconsaxBold.heart : IconsaxOutline.heart,
+                                  color: Colors.red, size: 20),
                             )),
                       ),
                     )
@@ -156,14 +156,10 @@ class ProductsItemViewState extends State<ProductsItemView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("${widget.item.title}\n",
-                        maxLines: (widget.item.discount != null && widget.item.discount != 0)?1:2,
+                        maxLines: (widget.item.discount != null && widget.item.discount != 0) ? 1 : 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                          fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          overflow: TextOverflow.ellipsis,
-                          color: BLACK
-                        )),
+                            fontSize: 14, fontWeight: FontWeight.w600, overflow: TextOverflow.ellipsis, color: BLACK)),
                     // Text(widget.item.unit, style: const TextStyle(color: PRIMARY_COLOR, fontSize: 12)),
                     // if (widget.item.skidka != 0 && widget.item.skidka != null)
                     //   Row(
@@ -192,14 +188,15 @@ class ProductsItemViewState extends State<ProductsItemView> {
                       Text(
                         "${widget.item.discount?.formattedAmountString()}₩",
                         style: const TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w600, color: RED, decoration: TextDecoration.lineThrough, decorationColor: GREY),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: RED,
+                            decoration: TextDecoration.lineThrough,
+                            decorationColor: GREY),
                       ),
                     Container(
                       padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                          color: PRIMARY_COLOR.withAlpha(200),
-                          borderRadius:  BorderRadius.circular(6)
-                      ),
+                      decoration: BoxDecoration(color: PRIMARY_COLOR.withAlpha(200), borderRadius: BorderRadius.circular(6)),
                       child: Row(
                         children: [
                           Image.asset(
