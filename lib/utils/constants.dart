@@ -20,7 +20,7 @@ const kAnimationDuration = Duration(milliseconds: 200);
 const SECRET_NAME = "TestGSMMobiles";
 const APP_TYPE = "client";
 const BASE_URL = "https://api.aminqassob.uz/api/";
-const BASE_IMAGE_URL = "https://api.aminqassob.uz/media/media/product_image/";
+const BASE_IMAGE_URL = "https://api.aminqassob.uz";
 
 const uzEnLangKey = "en";
 const ruLangKey = "ru";
