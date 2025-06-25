@@ -218,6 +218,7 @@ class _CartScreenState extends State<CartScreen> {
                                       "",
                                       "",
                                       "",
+                                      "",
                                       PrefUtils.getUser()?.deliver_summa ?? 0,
                                       1,
                                       "",

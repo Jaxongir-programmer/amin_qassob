@@ -130,7 +130,7 @@ class _OrderItemViewState extends State<OrderItemView> {
                               context,
                               SuccessScreen(
                                 orderId: widget.item.id,
-                                total_pay: widget.item.total_price + PrefUtils.getUser()!.deliver_summa,
+                                total_pay: widget.item.total_price + (PrefUtils.getUser()?.deliver_summa??0.0),
                                 back: true,
                               ));
                         }

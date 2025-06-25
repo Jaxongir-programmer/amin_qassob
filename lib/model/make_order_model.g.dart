@@ -9,6 +9,7 @@ part of 'make_order_model.dart';
 MakeOrderModel _$MakeOrderModelFromJson(Map<String, dynamic> json) =>
     MakeOrderModel(
       json['user_id'] as String,
+      json['full_name'] as String,
       json['comment'] as String,
       json['order_time'] as String,
       json['phone2'] as String,
@@ -25,6 +26,7 @@ MakeOrderModel _$MakeOrderModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$MakeOrderModelToJson(MakeOrderModel instance) =>
     <String, dynamic>{
       'user_id': instance.user_id,
+      'full_name': instance.full_name,
       'comment': instance.comment,
       'order_time': instance.order_time,
       'phone2': instance.phone2,

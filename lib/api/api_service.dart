@@ -158,8 +158,8 @@ class ApiService {
         // Map<String, dynamic> decodedToken = JwtDecoder.decode(baseData.data["access_token"]);
         // PrefUtils.setToken(decodedToken['user_id']);
         // return decodedToken['user_id'];
-        PrefUtils.setToken(baseData.data["access_token"]);
-        return baseData.data["access_token"];
+        PrefUtils.setToken(baseData.data["access"]);
+        return baseData.data["access"];
       } else {
         errorStream.sink.add(baseData.message ?? "Error");
       }
