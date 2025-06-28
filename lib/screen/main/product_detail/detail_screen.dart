@@ -70,6 +70,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                   children: [
                     CustomScrollView(
                       slivers: [
+                        if (widget.item.photos.isNotEmpty)
                         SliverAppBar(
                           pinned: true,
                           expandedHeight: getProportionateScreenHeight(400),
@@ -124,7 +125,6 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                       },
                                     ),
                                   ),
-                                  if (widget.item.photos.isNotEmpty)
                                     Positioned(
                                       right: 10,
                                       left: 10,

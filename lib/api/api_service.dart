@@ -59,7 +59,7 @@ class ApiService {
       ),
     );
 
-    dio.interceptors.add(MyApp.alice.getDioInterceptor());
+    // dio.interceptors.add(MyApp.alice.getDioInterceptor());
   }
 
   BaseModel wrapResponse(Response response) {

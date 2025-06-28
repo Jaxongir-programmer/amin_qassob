@@ -90,9 +90,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
       onViewModelReady: (viewModel) {
         viewModel.getOrderList();
 
-        viewModel.errorData.listen((event) {
-          showError(context, event);
-        });
+        // viewModel.errorData.listen((event) {
+        //   showError(context, event);
+        // });
       },
     );
   }

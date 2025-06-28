@@ -119,7 +119,7 @@ class _MyAppState extends State<MyApp> {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         debugShowCheckedModeBanner: false,
-        navigatorKey: MyApp.navigatorKey,
+        // navigatorKey: MyApp.navigatorKey,
         routes: {
           '/main': (context) => MainScreen(),
         },
@@ -135,7 +135,7 @@ class _MyAppState extends State<MyApp> {
               child: Stack(
                 children: [
                   child!,
-                  if (true)
+                  if (false)
                     Positioned(
                       left: _offset.dx,
                       top: _offset.dy,
