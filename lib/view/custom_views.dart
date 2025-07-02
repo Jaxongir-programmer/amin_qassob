@@ -234,7 +234,7 @@ extension CustomViews on Widget {
           controller: controller,
           textInputAction: TextInputAction.next,
           keyboardType: inputType,
-          maxLines: 2,
+          maxLines: 1,
           enabled: enabled,
           inputFormatters: maskTextInputFormatter != null ? [maskTextInputFormatter] : null,
           onChanged: (text) {
@@ -250,14 +250,17 @@ extension CustomViews on Widget {
                     )
                   : null,
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: HexColor.fromHex("#EBF0FF"), width: 1.5),
+                borderSide: BorderSide(color: Colors.grey.shade300, width: 2,),
+                borderRadius: BorderRadius.circular(8),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(8),
               ),
+              disabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey, width: 1.5)),
               filled: true,
               hintStyle: TextStyle(color: Colors.grey),
-              contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               hintText: hint,
               fillColor: Colors.white70),
         )

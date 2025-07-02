@@ -41,10 +41,10 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
   String deliverDate = "";
   String? deliverDateForLabel;
   final fullNameController = TextEditingController();
-  var extraPhoneController = TextEditingController(text: "+82 ");
+  var extraPhoneController = TextEditingController(text: "010 ");
   var commentController = TextEditingController();
   var orientrController = TextEditingController();
-  var phoneFormatter = MaskTextInputFormatter(mask: '+82 ## #### ####', type: MaskAutoCompletionType.eager);
+  var phoneFormatter = MaskTextInputFormatter(mask: '010 #### ####', type: MaskAutoCompletionType.eager);
 
   final List<PaymentModel> paymentTypes = [
     // PaymentModel("click", 1),
@@ -79,7 +79,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: CustomViews.buildTextField(LocaleKeys.name.tr(), LocaleKeys.name.tr(),
+                        child: CustomViews.buildTextField(LocaleKeys.name.tr(), "${LocaleKeys.name.tr()}...",
                             controller: fullNameController,),
                       ),
                       SizedBox(
@@ -127,8 +127,8 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                                         showWarning(context, LocaleKeys.choose_payment.tr());
                                       }
                                       else if (orientrController.text.isEmpty) {
-                                        showWarning(context, "Yetkazib berish manzilini tanlang !");
-                                      } else if (extraPhoneController.text.isEmpty) {
+                                        showWarning(context, "Yetkazib berish manzilini kiriting !");
+                                      } else if (extraPhoneController.text.length< 13) {
                                         showWarning(context, "Nomer kiriting !");
                                       }
                                       else if (fullNameController.text.isEmpty) {
@@ -211,7 +211,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                     height: 4,
                   ),
                   Text(
-                    extraPhoneController.text.length < 12 ? "" : extraPhoneController.text,
+                    extraPhoneController.text.length < 13 ? "" : extraPhoneController.text,
                     style: const TextStyle(fontSize: 12),
                   ),
                 ],
@@ -580,7 +580,7 @@ class _MakeOrderScreenState extends State<MakeOrderScreen> {
                   const SizedBox(
                     height: 5.0,
                   ),
-                  CustomViews.buildMiniTextField("", "+82 xx xxxx xxxx",
+                  CustomViews.buildMiniTextField("", "010 xxxx xxxx",
                       maskTextInputFormatter: phoneFormatter,
                       controller: extraPhoneController,
                       autofocus: true,
